@@ -1,3 +1,14 @@
+---
+title: 6.webpack
+ate: 2019-04-19 11:32:29
+tags:
+    - 项目笔记
+categories:
+    - 项目笔记
+    - 商城项目
+---
+# 学习目标
+
 # 0.学习目标
 
 - 了解vue-router使用

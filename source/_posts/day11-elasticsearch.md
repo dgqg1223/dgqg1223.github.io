@@ -1,3 +1,14 @@
+---
+title: 11.elasticserch
+ate: 2019-04-19 11:32:29
+tags:
+    - 项目笔记
+categories:
+    - 项目笔记
+    - 商城项目
+---
+
+
 # 0.学习目标
 
 - 独立安装Elasticsearch
