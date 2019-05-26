@@ -5,7 +5,7 @@ tags:
     - SpringBoot
 categories:
     - Java
-    - 框架,框架整合
+    - 框架
 ---
 # SpringBoot+MyBatis+FreeMarker整合
 1. pom.xml依赖
