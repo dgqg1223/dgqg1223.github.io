@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.学习目标  独立实现品牌新增 实现图片上传 了解FastDFS的安装 使用FastDFS客户端实现上传  1.品牌的新增 昨天我们完成了品牌的查询，接下来就是新增功能。 1.1.页面实现 1.1.1.初步编写弹窗 当我们点击新增按钮，应该出现一个弹窗，然后在弹窗中出现一个表格，我们就可以填写品牌信息了。 我们查看Vuetify官网，弹窗是如何实现：  另外，我们可以通过文档看到对话框的一些属性">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.品牌管理">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day08-品牌管理/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="0.学习目标  独立实现品牌新增 实现图片上传 了解FastDFS的安装 使用FastDFS客户端实现上传  1.品牌的新增 昨天我们完成了品牌的查询，接下来就是新增功能。 1.1.页面实现 1.1.1.初步编写弹窗 当我们点击新增按钮，应该出现一个弹窗，然后在弹窗中出现一个表格，我们就可以填写品牌信息了。 我们查看Vuetify官网，弹窗是如何实现：  另外，我们可以通过文档看到对话框的一些属性">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526115791468.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526116451280.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526118714621.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526119096686.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526119788914.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526128384960.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526128476264.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526129519056.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526131172190.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526131637045.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526132934902.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526133224362.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/0B26B319.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526133576597.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526136024649.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526137891067.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526138030853.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526138441735.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526138475159.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526139379209.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526140298249.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526180888663.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526180937974.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181889564.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181747560.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526182053758.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526182230872.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181301670.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181331443.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181358204.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181384653.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526181553737.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216993249.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526192299113.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526192347113.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526192931088.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526196967376.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526197027688.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526197060729.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526196446765.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526200471676.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526200606487.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526200927268.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526205318630.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526205664373.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526205705687.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526205975025.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526206304954.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526215187172.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526215257110.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526215940805.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216133300.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216178123.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216272835.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216322359.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526216494380.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526217622765.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526218080029.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526218243761.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526219653994.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526222999115.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526224372366.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526224447288.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526224495244.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526224563838.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526224628514.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:31.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.品牌管理">
+<meta name="twitter:description" content="0.学习目标  独立实现品牌新增 实现图片上传 了解FastDFS的安装 使用FastDFS客户端实现上传  1.品牌的新增 昨天我们完成了品牌的查询，接下来就是新增功能。 1.1.页面实现 1.1.1.初步编写弹窗 当我们点击新增按钮，应该出现一个弹窗，然后在弹窗中出现一个表格，我们就可以填写品牌信息了。 我们查看Vuetify官网，弹窗是如何实现：  另外，我们可以通过文档看到对话框的一些属性">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day08-品牌管理/assets/1526115791468.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day08-品牌管理/">
+
+
+
+
+
+  <title>8.品牌管理 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day08-品牌管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">8.品牌管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:31+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>0.学习目标</h1>
+<ul>
+<li>独立实现品牌新增</li>
+<li>实现图片上传</li>
+<li>了解FastDFS的安装</li>
+<li>使用FastDFS客户端实现上传</li>
+</ul>
+<h1>1.品牌的新增</h1>
+<p>昨天我们完成了品牌的查询，接下来就是新增功能。</p>
+<h2>1.1.页面实现</h2>
+<h3>1.1.1.初步编写弹窗</h3>
+<p>当我们点击新增按钮，应该出现一个弹窗，然后在弹窗中出现一个表格，我们就可以填写品牌信息了。</p>
+<p>我们查看Vuetify官网，弹窗是如何实现：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526115791468.png" alt="1526115791468"></p>
+<p>另外，我们可以通过文档看到对话框的一些属性：</p>
+<ul>
+<li>value：控制窗口的可见性，true可见，false，不可见</li>
+<li>max-width：控制对话框最大宽度</li>
+<li>scrollable ：是否可滚动，要配合v-card来使用，默认是false</li>
+<li>persistent ：点击弹窗以外的地方不会关闭弹窗，默认是false</li>
+</ul>
+<p>现在，我们来使用一下。</p>
+<p>首先，我们在data中定义一个show属性，来控制对话框的显示状态：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526116451280.png" alt="1526116451280"></p>
+<p>然后，在页面添加一个<code>v-dialog</code></p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--弹出的对话框--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">v-dialog</span> <span class="attr">max-width</span>=<span class="string">"500"</span> <span class="attr">v-model</span>=<span class="string">"show"</span> <span class="attr">persistent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-card</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--对话框的标题--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">v-toolbar</span> <span class="attr">dense</span> <span class="attr">dark</span> <span class="attr">color</span>=<span class="string">"primary"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">v-toolbar-title</span>&gt;</span>新增品牌<span class="tag">&lt;/<span class="name">v-toolbar-title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">v-toolbar</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--对话框的内容，表单--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">v-card-text</span> <span class="attr">class</span>=<span class="string">"px-5"</span>&gt;</span></span><br><span class="line">            我是表单</span><br><span class="line">        <span class="tag">&lt;/<span class="name">v-card-text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">v-card</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-dialog</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ul>
+<li>
+<p>我们给dialog指定了3个属性，分别是</p>
+<ul>
+<li>max-width：限制宽度</li>
+<li>v-model：value值双向绑定到show变量，用来控制窗口显示</li>
+<li>persisitent：控制窗口不会被意外关闭</li>
+</ul>
+</li>
+<li>
+<p>因为可滚动需要配合<code>v-card</code>使用，因此我们在对话框中加入了一个<code>v-card</code></p>
+<ul>
+<li>在<code>v-card</code>的头部添加了一个 <code>v-toolbar</code>，作为窗口的头部，并且写了标题为：新增品牌
+<ul>
+<li>dense：紧凑显示</li>
+<li>dark：黑暗主题</li>
+<li>color：颜色，primary就是整个网站的主色调，蓝色</li>
+</ul>
+</li>
+<li>在<code>v-card</code>的内容部分，暂时空置，等会写表单</li>
+</ul>
+</li>
+<li>
+<p><code>class=“px-5&quot;</code>：vuetify的内置样式，含义是padding的x轴设置为5，这样表单内容会缩进一些，而不是顶着边框</p>
+<p>基本语法：<code>{property}{direction}-{size}</code></p>
+<ul>
+<li>property：属性，有两种<code>padding</code>和<code>margin</code>
+<ul>
+<li><code>p</code>：对应<code>padding</code></li>
+<li><code>m</code>：对应<code>margin</code></li>
+</ul>
+</li>
+<li>direction：只padding和margin的作用方向，
+<ul>
+<li><code>t</code> - 对应<code>margin-top</code>或者<code>padding-top</code>属性</li>
+<li><code>b</code> - 对应<code>margin-bottom</code> or <code>padding-bottom</code></li>
+<li><code>l</code> - 对应<code>margin-left</code> or <code>padding-left</code></li>
+<li><code>r</code> - 对应<code>margin-right</code> or <code>padding-right</code></li>
+<li><code>x</code> - 同时对应<code>*-left</code>和<code>*-right</code>属性</li>
+<li><code>y</code> - 同时对应<code>*-top</code>和<code>*-bottom</code>属性</li>
+</ul>
+</li>
+<li>size：控制空间大小，基于<code>$spacer</code>进行倍增，<code>$spacer</code>默认是16px
+<ul>
+<li><code>0</code>：将<code>margin</code>或padding的大小设置为0</li>
+<li><code>1</code> - 将<code>margin</code>或者<code>padding</code>属性设置为<code>$spacer * .25</code></li>
+<li><code>2</code> - 将<code>margin</code>或者<code>padding</code>属性设置为<code>$spacer * .5</code></li>
+<li><code>3</code> - 将<code>margin</code>或者<code>padding</code>属性设置为<code>$spacer</code></li>
+<li><code>4</code> - 将<code>margin</code>或者<code>padding</code>属性设置为<code>$spacer * 1.5</code></li>
+<li><code>5</code> - 将<code>margin</code>或者<code>padding</code>属性设置为<code>$spacer * 3</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.1.2.实现弹窗的可见和关闭</h3>
+<blockquote>
+<p>窗口可见</p>
+</blockquote>
+<p>接下来，我们要在点击新增品牌按钮时，将窗口显示，因此要给新增按钮绑定事件。</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;v-btn color=<span class="string">"primary"</span> @click=<span class="string">"addBrand"</span>&gt;新增品牌&lt;<span class="regexp">/v-btn&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后定义一个addBrand方法：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addBrand()&#123;</span><br><span class="line">    <span class="comment">// 控制弹窗可见：</span></span><br><span class="line">    <span class="keyword">this</span>.show = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526118714621.png" alt="1526118714621"></p>
+<blockquote>
+<p>窗口关闭</p>
+</blockquote>
+<p>现在，悲剧发生了，因为我们设置了persistent属性，窗口无法被关闭了。除非把show属性设置为false</p>
+<p>因此我们需要给窗口添加一个关闭按钮：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--对话框的标题--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">v-toolbar</span> <span class="attr">dense</span> <span class="attr">dark</span> <span class="attr">color</span>=<span class="string">"primary"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-toolbar-title</span>&gt;</span>新增品牌<span class="tag">&lt;/<span class="name">v-toolbar-title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-spacer</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--关闭窗口的按钮--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-btn</span> <span class="attr">icon</span> @<span class="attr">click</span>=<span class="string">"closeWindow"</span>&gt;</span><span class="tag">&lt;<span class="name">v-icon</span>&gt;</span>close<span class="tag">&lt;/<span class="name">v-icon</span>&gt;</span><span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-toolbar</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>并且，我们还给按钮绑定了点击事件，回调函数为closeWindow。</p>
+<p>接下来，编写closeWindow函数：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">closeWindow()&#123;</span><br><span class="line">    <span class="comment">// 关闭窗口</span></span><br><span class="line">    <span class="keyword">this</span>.show = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526119096686.png" alt="1526119096686"></p>
+<h3>1.1.3.新增品牌的表单页</h3>
+<p>接下来就是写表单了。我们有两种选择：</p>
+<ul>
+<li>直接在dialog对话框中编写表单代码</li>
+<li>另外编写一个组件，组件内写表单代码。然后在对话框引用组件</li>
+</ul>
+<p>选第几种？</p>
+<p>我们选第二种方案，优点：</p>
+<ul>
+<li>表单代码独立组件，可拔插，方便后期的维护。</li>
+<li>代码分离，可读性更好。</li>
+</ul>
+<p>我们新建一个<code>MyBrandForm.vue</code>组件：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526119788914.png" alt="1526119788914"></p>
+<p>将MyBrandForm引入到MyBrand中，这里使用局部组件的语法：</p>
+<p>先导入自定义组件：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入自定义的表单组件</span></span><br><span class="line"><span class="keyword">import</span> MyBrandForm <span class="keyword">from</span> <span class="string">'./MyBrandForm'</span></span><br></pre></td></tr></table></figure></p>
+<p>然后通过components属性来指定局部组件：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components:&#123;</span><br><span class="line">    MyBrandForm</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在页面中引用：</p>
+<p>页面效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526128384960.png" alt="1526128384960"></p>
+<h3>1.1.4.编写表单</h3>
+<h4>1.1.4.1.表单</h4>
+<p>查看文档，找到关于表单的部分：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526128476264.png" alt="1526128476264"></p>
+<p><code>v-form</code>，表单组件，内部可以有许多输入项。<code>v-form</code>有下面的属性：</p>
+<ul>
+<li>value：true，代表表单验证通过；false，代表表单验证失败</li>
+</ul>
+<p><code>v-form</code>提供了两个方法：</p>
+<ul>
+<li>reset：重置表单数据</li>
+<li>validate：校验整个表单数据，前提是你写好了校验规则。返回Boolean表示校验成功或失败</li>
+</ul>
+<p>我们在data中定义一个valid属性，跟表单的value进行双向绑定，观察表单是否通过校验，同时把等会要跟表单关联的品牌brand对象声明出来：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"my-brand-form"</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      valid:<span class="literal">false</span>, <span class="comment">// 表单校验结果标记</span></span><br><span class="line">      brand:&#123;</span><br><span class="line">        name:<span class="string">''</span>, <span class="comment">// 品牌名称</span></span><br><span class="line">        letter:<span class="string">''</span>, <span class="comment">// 品牌首字母</span></span><br><span class="line">        image:<span class="string">''</span>,<span class="comment">// 品牌logo</span></span><br><span class="line">        categories:[], <span class="comment">// 品牌所属的商品分类数组</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，在页面先写一个表单：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-form</span> <span class="attr">v-model</span>=<span class="string">"valid"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4>1.1.4.2.文本框</h4>
+<p>我们的品牌总共需要这些字段：</p>
+<ul>
+<li>名称</li>
+<li>首字母</li>
+<li>商品分类，有很多个</li>
+<li>LOGO</li>
+</ul>
+<p>表单项主要包括文本框、密码框、多选框、单选框、文本域、下拉选框、文件上传等。思考下我们的品牌需要哪些？</p>
+<ul>
+<li>文本框：品牌名称、品牌首字母都属于文本框</li>
+<li>文件上传：品牌需要图片，这个是文件上传框</li>
+<li>下拉选框：商品分类提前已经定义好，这里需要通过下拉选框展示，提供给用户选择。</li>
+</ul>
+<p>先看文本框，昨天已经用过的，叫做<code>v-text-field</code>：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526129519056.png" alt="1526129519056"></p>
+<p>查看文档，<code>v-text-field</code>有以下关键属性：</p>
+<ul>
+<li><strong>append-icon</strong>：文本框后追加图标，需要填写图标名称。无默认值</li>
+<li>clearable：是否添加一个清空图标，点击会清空文本框。默认是false</li>
+<li>color：颜色</li>
+<li>counter：是否添加一个文本计数器，在角落显示文本长度，指定true或允许的组大长度。无默认值</li>
+<li>dark：是否应用黑暗色调，默认是false</li>
+<li>disable：是否禁用，默认是false</li>
+<li>flat：是否移除默认的动画效果，默认是false</li>
+<li>full-width：指定宽度为全屏，默认是false</li>
+<li>hide-details：是否因此错误提示，默认是false</li>
+<li>hint：输入框的提示文本</li>
+<li><strong>label</strong>：输入框的标签</li>
+<li><strong>multi-line</strong>：是否转为文本域，默认是false。文本框和文本域可以自由切换</li>
+<li>placeholder：输入框占位符文本，focus后消失</li>
+<li><strong>required</strong>：是否为必填项，如果是，会在label后加*，不具备校验功能。默认是false</li>
+<li><strong>rows</strong>：文本域的行数，<code>multi-line</code>为true时才有效</li>
+<li><strong>rules</strong>：指定校验规则及错误提示信息，数组结构。默认[]</li>
+<li><strong>single-line</strong>：是否单行文本显示，默认是false</li>
+<li><strong>suffix</strong>：显示后缀</li>
+</ul>
+<p>接下来，我们先添加两个字段：品牌名称、品牌的首字母，校验规则暂时不写：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-form</span> <span class="attr">v-model</span>=<span class="string">"valid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">v-model</span>=<span class="string">"brand.name"</span> <span class="attr">label</span>=<span class="string">"请输入品牌名称"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">v-model</span>=<span class="string">"brand.letter"</span> <span class="attr">label</span>=<span class="string">"请输入品牌首字母"</span> <span class="attr">required</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>千万不要忘了通过<code>v-model</code>把表单项与<code>brand</code>的属性关联起来。</li>
+</ul>
+<p>效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526131172190.png" alt="1526131172190"></p>
+<h4>1.1.4.3.级联下拉选框</h4>
+<p>接下来就是商品分类了，按照刚才的分析，商品分类应该是下拉选框。</p>
+<p>但是大家仔细思考，商品分类包含三级。在展示的时候，应该是先由用户选中1级，才显示2级；选择了2级，才显示3级。形成一个多级分类的三级联动效果。</p>
+<p>这个时候，就不是普通的下拉选框，而是三级联动的下拉选框！</p>
+<p>这样的选框，在Vuetify中并没有提供（它提供的是基本的下拉框）。因此我已经给大家编写了一个无限级联动的下拉选框，能够满足我们的需求。</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526131637045.png" alt="1526131637045"></p>
+<p>具体请参考课前资料的《自定义组件用法指南.md》</p>
+<p>我们在代码中使用：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;v-cascader</span><br><span class="line">  url=<span class="string">"/item/category/list"</span></span><br><span class="line">  multiple </span><br><span class="line">  required</span><br><span class="line">  v-model=<span class="string">"brand.categories"</span></span><br><span class="line">  label=<span class="string">"请选择商品分类"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>url：加载商品分类选项的接口路径</li>
+<li>multiple：是否多选，这里设置为true，因为一个品牌可能有多个分类</li>
+<li>requried：是否是必须的，这里为true，会在提示上加*，提醒用户</li>
+<li>v-model：关联我们brand对象的categories属性</li>
+<li>label：文字说明</li>
+</ul>
+<p>效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526132934902.png" alt="1526132934902"></p>
+<p>data中获取的结果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526133224362.png" alt="1526133224362"></p>
+<h4>1.1.4.4.文件上传项</h4>
+<p>在Vuetify中，也没有文件上传的组件。</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/0B26B319.gif" alt="img"></p>
+<p>还好，我已经给大家写好了一个文件上传的组件：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526133576597.png" alt="1526133576597"></p>
+<p>详细用法，参考《自定义组件使用指南.md》</p>
+<p>我们添加上传的组件：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-layout</span> <span class="attr">row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-flex</span> <span class="attr">xs3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"font-size: 16px; color: #444"</span>&gt;</span>品牌LOGO：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">v-flex</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-flex</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">v-upload</span></span></span><br><span class="line"><span class="tag">             <span class="attr">v-model</span>=<span class="string">"brand.image"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">url</span>=<span class="string">"/upload"</span> </span></span><br><span class="line"><span class="tag">             <span class="attr">:multiple</span>=<span class="string">"false"</span> </span></span><br><span class="line"><span class="tag">             <span class="attr">:pic-width</span>=<span class="string">"250"</span> </span></span><br><span class="line"><span class="tag">             <span class="attr">:pic-height</span>=<span class="string">"90"</span></span></span><br><span class="line"><span class="tag">                  /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">v-flex</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-layout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ul>
+<li>文件上传组件本身没有提供文字提示。因此我们需要自己添加一段文字说明</li>
+<li>我们要实现文字和图片组件左右放置，因此这里使用了<code>v-layout</code>布局组件：
+<ul>
+<li>layout添加了row属性，代表这是一行，如果是column，代表是多行</li>
+<li>layout下面有<code>v-flex</code>组件，是这一行的单元，我们有2个单元
+<ul>
+<li><code>&lt;v-flex xs3&gt;</code> ：显示文字说明，xs3是响应式布局，代表占12格中的3格</li>
+<li>剩下的部分就是图片上传组件了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>v-upload</code>：图片上传组件，包含以下属性：
+<ul>
+<li>v-model：将上传的结果绑定到brand的image属性</li>
+<li>url：上传的路径，我们先随便写一个。</li>
+<li>multiple：是否运行多图片上传，这里是false。因为品牌LOGO只有一个</li>
+<li>pic-width和pic-height：可以控制l图片上传后展示的宽高</li>
+</ul>
+</li>
+</ul>
+<p>最终结果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526136024649.png" alt="1526136024649"></p>
+<h4>1.1.4.5.按钮</h4>
+<p>上面已经把所有的表单项写完。最后就差提交和清空的按钮了。</p>
+<p>在表单的最下面添加两个按钮：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-layout</span> <span class="attr">class</span>=<span class="string">"my-4"</span> <span class="attr">row</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-spacer</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-btn</span> @<span class="attr">click</span>=<span class="string">"submit"</span> <span class="attr">color</span>=<span class="string">"primary"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-btn</span> @<span class="attr">click</span>=<span class="string">"clear"</span> &gt;</span>重置<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-layout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>通过layout来进行布局，<code>my-4</code>增大上下边距</li>
+<li><code>v-spacer</code>占用一定空间，将按钮都排挤到页面右侧</li>
+<li>两个按钮分别绑定了submit和clear事件</li>
+</ul>
+<p>我们先将方法定义出来：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">    submit()&#123;</span><br><span class="line">        <span class="comment">// 提交表单</span></span><br><span class="line">    &#125;,</span><br><span class="line">    clear()&#123;</span><br><span class="line">        <span class="comment">// 重置表单</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重置表单相对简单，因为v-form组件已经提供了reset方法，用来清空表单数据。只要我们拿到表单组件对象，就可以调用方法了。</p>
+<p>我们可以通过<code>$refs</code>内置对象来获取表单组件。</p>
+<p>首先，在表单上定义<code>ref</code>属性：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526137891067.png" alt="1526137891067"></p>
+<p>然后，在页面查看<code>this.$refs</code>属性：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526138030853.png" alt="1526138030853"></p>
+<p>看到<code>this.$refs</code>中只有一个属性，就是<code>myBrandForm</code></p>
+<p>我们在clear中来获取表单对象并调用reset方法：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">  submit()&#123;</span><br><span class="line">    <span class="comment">// 提交表单</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="comment">// 重置表单</span></span><br><span class="line">    <span class="keyword">this</span>.$refs.myBrandForm.reset();</span><br><span class="line">    <span class="comment">// 需要手动清空商品分类</span></span><br><span class="line">    <span class="keyword">this</span>.categories = [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意的是，这里我们还手动把this.categories清空了，因为我写的级联选择组件并没有跟表单结合起来。需要手动清空。</p>
+<h3>1.1.5.表单校验</h3>
+<h4>1.1.5.1.校验规则</h4>
+<p>Vuetify的表单校验，是通过rules属性来指定的：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526138441735.png" alt="1526138441735"></p>
+<p>校验规则的写法：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526138475159.png" alt="1526138475159"></p>
+<p>说明：</p>
+<ul>
+<li>规则是一个数组</li>
+<li>数组中的元素是一个函数，该函数接收表单项的值作为参数，函数返回值两种情况：
+<ul>
+<li>返回true，代表成功，</li>
+<li>返回错误提示信息，代表失败</li>
+</ul>
+</li>
+</ul>
+<h4>1.1.5.2.项目中代码</h4>
+<p>我们有四个字段：</p>
+<ul>
+<li>name：做非空校验和长度校验，长度必须大于1</li>
+<li>letter：首字母，校验长度为1，非空。</li>
+<li>image：图片，不做校验，图片可以为空</li>
+<li>categories：非空校验，自定义组件已经帮我们完成，不用写了</li>
+</ul>
+<p>首先，我们定义规则：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nameRules:[</span><br><span class="line">    v =&gt; !!v || <span class="string">"品牌名称不能为空"</span>,</span><br><span class="line">    v =&gt; v.length &gt; <span class="number">1</span> || <span class="string">"品牌名称至少2位"</span></span><br><span class="line">],</span><br><span class="line">letterRules:[</span><br><span class="line">    v =&gt; !!v || <span class="string">"首字母不能为空"</span>,</span><br><span class="line">    v =&gt; <span class="regexp">/^[A-Z]&#123;1&#125;$/</span>.test(v) || <span class="string">"品牌字母只能是A~Z的大写字母"</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>然后，在页面标签中指定：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">v-model</span>=<span class="string">"brand.name"</span> <span class="attr">label</span>=<span class="string">"请输入品牌名称"</span> <span class="attr">required</span> <span class="attr">:rules</span>=<span class="string">"nameRules"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">v-model</span>=<span class="string">"brand.letter"</span> <span class="attr">label</span>=<span class="string">"请输入品牌首字母"</span> <span class="attr">required</span> <span class="attr">:rules</span>=<span class="string">"letterRules"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526139379209.png" alt="1526139379209"></p>
+<h3>1.1.6.表单提交</h3>
+<p>在submit方法中添加表单提交的逻辑：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">submit() &#123;</span><br><span class="line">    <span class="comment">// 1、表单校验</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.$refs.myBrandForm.validate()) &#123;</span><br><span class="line">        <span class="comment">// 2、定义一个请求参数对象，通过解构表达式来获取brand中的属性</span></span><br><span class="line">        <span class="keyword">const</span> &#123;categories ,letter ,...params&#125; = <span class="keyword">this</span>.brand;</span><br><span class="line">        <span class="comment">// 3、数据库中只要保存分类的id即可，因此我们对categories的值进行处理,只保留id，并转为字符串</span></span><br><span class="line">        params.cids = categories.map(<span class="function"><span class="params">c</span> =&gt;</span> c.id).join(<span class="string">","</span>);</span><br><span class="line">        <span class="comment">// 4、将字母都处理为大写</span></span><br><span class="line">        params.letter = letter.toUpperCase();</span><br><span class="line">        <span class="comment">// 5、将数据提交到后台</span></span><br><span class="line">        <span class="keyword">this</span>.$http.post(<span class="string">'/item/brand'</span>, params)</span><br><span class="line">            .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 6、弹出提示</span></span><br><span class="line">            <span class="keyword">this</span>.$message.success(<span class="string">"保存成功！"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">            .catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.$message.error(<span class="string">"保存失败！"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>1、通过<code>this.$refs.myBrandForm</code>选中表单，然后调用表单的<code>validate</code>方法，进行表单校验。返回boolean值，true代表校验通过</p>
+</li>
+<li>
+<p>2、通过解构表达式来获取brand中的值，categories和letter需要处理，单独获取。其它的存入params对象中</p>
+</li>
+<li>
+<p>3、品牌和商品分类的中间表只保存两者的id，而brand.categories中保存的数对象数组，里面有id和name属性，因此这里通过数组的map功能转为id数组，然后通过join方法拼接为字符串</p>
+</li>
+<li>
+<p>4、首字母都处理为大写保存</p>
+</li>
+<li>
+<p>5、发起请求</p>
+</li>
+<li>
+<p>6、弹窗提示成功还是失败，这里用到的是我们的自定义组件功能message组件：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526140298249.png" alt="1526140298249"></p>
+<p>这个插件把<code>$message</code>对象绑定到了Vue的原型上，因此我们可以通过<code>this.$message</code>来直接调用。</p>
+<p>包含以下常用方法：</p>
+<ul>
+<li>info、error、success、warning等，弹出一个带有提示信息的窗口，色调与为普通（灰）、错误（红色）、成功（绿色）和警告（黄色）。使用方法：this.$message.info(&quot;msg&quot;)</li>
+<li>confirm：确认框。用法：<code>this.$message.confirm(&quot;确认框的提示信息&quot;)</code>，返回一个Promise</li>
+</ul>
+</li>
+</ul>
+<h2>1.2.后台实现新增</h2>
+<h3>1.2.1.controller</h3>
+<p>还是一样，先分析四个内容：</p>
+<ul>
+<li>请求方式：刚才看到了是POST</li>
+<li>请求路径：/brand</li>
+<li>请求参数：brand对象，外加商品分类的id数组cids</li>
+<li>返回值：无</li>
+</ul>
+<p>代码：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 新增品牌</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> brand</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Void&gt; <span class="title">saveBrand</span><span class="params">(Brand brand, @RequestParam(<span class="string">"cids"</span>)</span> List&lt;Long&gt; cids) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.brandService.saveBrand(brand, cids);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.CREATED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.2.2.Service</h3>
+<p>这里要注意，我们不仅要新增品牌，还要维护品牌和商品分类的中间表。</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveBrand</span><span class="params">(Brand brand, List&lt;Long&gt; cids)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 新增品牌信息</span></span><br><span class="line">    <span class="keyword">this</span>.brandMapper.insertSelective(brand);</span><br><span class="line">    <span class="comment">// 新增品牌和分类中间表</span></span><br><span class="line">    <span class="keyword">for</span> (Long cid : cids) &#123;</span><br><span class="line">        <span class="keyword">this</span>.brandMapper.insertCategoryBrand(cid, brand.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里调用了brandMapper中的一个自定义方法，来实现中间表的数据新增</p>
+<h3>1.2.3.Mapper</h3>
+<p>通用Mapper只能处理单表，也就是Brand的数据，因此我们手动编写一个方法及sql，实现中间表的新增：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BrandMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Brand</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增商品分类和品牌中间表数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cid 商品分类id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bid 品牌id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Insert</span>(<span class="string">"INSERT INTO tb_category_brand (category_id, brand_id) VALUES (#&#123;cid&#125;,#&#123;bid&#125;)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertCategoryBrand</span><span class="params">(@Param(<span class="string">"cid"</span>)</span> Long cid, @<span class="title">Param</span><span class="params">(<span class="string">"bid"</span>)</span> Long bid)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>1.3.请求参数格式错误</h2>
+<h3>1.3.1.原因分析</h3>
+<p>我们填写表单并提交，发现报错了：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526180888663.png" alt="1526180888663"></p>
+<p>查看控制台的请求详情：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526180937974.png" alt="1526180937974"></p>
+<p>发现请求的数据格式是JSON格式。</p>
+<blockquote>
+<p>原因分析：</p>
+</blockquote>
+<p>axios处理请求体的原则会根据请求数据的格式来定：</p>
+<ul>
+<li>
+<p>如果请求体是对象：会转为json发送</p>
+</li>
+<li>
+<p>如果请求体是String：会作为普通表单请求发送，但需要我们自己保证String的格式是键值对。</p>
+<p>如：name=jack&amp;age=12</p>
+</li>
+</ul>
+<h3>1.3.2.QS工具</h3>
+<p>QS是一个第三方库，我们可以用<code>npm install qs --save</code>来安装。不过我们在项目中已经集成了，大家无需安装：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181889564.png" alt="1526181889564"></p>
+<p>这个工具的名字：QS，即Query String，请求参数字符串。</p>
+<p>什么是请求参数字符串？例如： name=jack&amp;age=21</p>
+<p>QS工具可以便捷的实现 JS的Object与QueryString的转换。</p>
+<p>在我们的项目中，将QS注入到了Vue的原型对象中，我们可以通过<code>this.$qs</code>来获取这个工具：</p>
+<p>我们将<code>this.$qs</code>对象打印到控制台：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">created()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$qs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发现其中有3个方法：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181747560.png" alt="1526181747560"></p>
+<p>这里我们要使用的方法是stringify，它可以把Object转为QueryString。</p>
+<p>测试一下，使用浏览器工具，把qs对象保存为一个临时变量：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526182053758.png" alt="1526182053758"></p>
+<p>然后调用stringify方法：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526182230872.png" alt="1526182230872"></p>
+<p>成功将person对象变成了 name=jack&amp;age=21的字符串了</p>
+<h3>1.3.3.解决问题</h3>
+<p>修改页面，对参数处理后发送：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181301670.png" alt="1526181301670"></p>
+<p>然后再次发起请求：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181331443.png" alt="1526181331443"></p>
+<p>发现请求成功：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181358204.png" alt="1526181358204"></p>
+<p>参数格式：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181384653.png" alt="1526181384653"></p>
+<p>数据库：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526181553737.png" alt="1526181553737"></p>
+<h2>1.4.新增完成后关闭窗口</h2>
+<p>我们发现有一个问题：新增不管成功还是失败，窗口都一致在这里，不会关闭。</p>
+<p>这样很不友好，我们希望如果新增失败，窗口保持；但是新增成功，窗口关闭才对。</p>
+<p>因此，我们需要<strong>在新增的ajax请求完成以后，关闭窗口</strong></p>
+<p>但问题在于，控制窗口是否显示的标记在父组件：MyBrand.vue中。子组件如何才能操作父组件的属性？或者告诉父组件该关闭窗口了？</p>
+<p>之前我们讲过一个父子组件的通信，有印象吗？</p>
+<ul>
+<li>第一步，在父组件中定义一个函数，用来关闭窗口，不过之前已经定义过了，我们优化一下，关闭的同时重新加载数据：</li>
+</ul>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">closeWindow()&#123;</span><br><span class="line">    <span class="comment">// 关闭窗口</span></span><br><span class="line">    <span class="keyword">this</span>.show = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 重新加载数据</span></span><br><span class="line">    <span class="keyword">this</span>.getDataFromServer();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>第二步，父组件在使用子组件时，绑定事件，关联到这个函数：</li>
+</ul>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--对话框的内容，表单--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">v-card-text</span> <span class="attr">class</span>=<span class="string">"px-5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">my-brand-form</span> @<span class="attr">close</span>=<span class="string">"closeWindow"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-card-text</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>第三步，子组件通过<code>this.$emit</code>调用父组件的函数：</li>
+</ul>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216993249.png" alt="1526216993249"></p>
+<p>测试一下</p>
+<h1>2.实现图片上传</h1>
+<p>刚才的新增实现中，我们并没有上传图片，接下来我们一起完成图片上传逻辑。</p>
+<p>文件的上传并不只是在品牌管理中有需求，以后的其它服务也可能需要，因此我们创建一个独立的微服务，专门处理各种上传。</p>
+<h2>2.1.搭建项目</h2>
+<h3>2.1.1.创建module</h3>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526192299113.png" alt="1526192299113"></p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526192347113.png" alt="1526192347113"></p>
+<h3>2.1.2.依赖</h3>
+<p>我们需要EurekaClient和web依赖：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.service<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-upload<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>2.1.3.编写配置</h3>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8082</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">upload-service</span></span><br><span class="line"><span class="attr">  servlet:</span></span><br><span class="line"><span class="attr">    multipart:</span></span><br><span class="line"><span class="attr">      max-file-size:</span> <span class="number">5</span><span class="string">MB</span> <span class="comment"># 限制文件上传的大小</span></span><br><span class="line"><span class="comment"># Eureka</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    lease-renewal-interval-in-seconds:</span> <span class="number">5</span> <span class="comment"># 每隔5秒发送一次心跳</span></span><br><span class="line"><span class="attr">    lease-expiration-duration-in-seconds:</span> <span class="number">10</span> <span class="comment"># 10秒不发送就过期</span></span><br><span class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    instance-id:</span> <span class="string">$&#123;spring.application.name&#125;:$&#123;server.port&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，我们应该添加了限制文件大小的配置</p>
+<h3>2.1.4.启动类</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LyUploadService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LyUploadService.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结构：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526192931088.png" alt="1526192931088"></p>
+<h2>2.2.编写上传功能</h2>
+<h3>2.2.1.controller</h3>
+<p>编写controller需要知道4个内容：</p>
+<ul>
+<li>请求方式：上传肯定是POST</li>
+<li>请求路径：/upload/image</li>
+<li>请求参数：文件，参数名是file，SpringMVC会封装为一个接口：MultipleFile</li>
+<li>返回结果：上传成功后得到的文件的url路径</li>
+</ul>
+<p>代码如下：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"upload"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UploadService uploadService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上传图片功能</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"image"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title">uploadImage</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span> MultipartFile file) </span>&#123;</span><br><span class="line">        String url = <span class="keyword">this</span>.uploadService.upload(file);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(url)) &#123;</span><br><span class="line">            <span class="comment">// url为空，证明上传失败</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回200，并且携带url路径</span></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(url);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.2.2.service</h3>
+<p>在上传文件过程中，我们需要对上传的内容进行校验：</p>
+<ol>
+<li>校验文件大小</li>
+<li>校验文件的媒体类型</li>
+<li>校验文件的内容</li>
+</ol>
+<p>文件大小在Spring的配置文件中设置，因此已经会被校验，我们不用管。</p>
+<p>具体代码：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(UploadController.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 支持的文件类型</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; suffixes = Arrays.asList(<span class="string">"image/png"</span>, <span class="string">"image/jpeg"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1、图片信息校验</span></span><br><span class="line">            <span class="comment">// 1)校验文件类型</span></span><br><span class="line">            String type = file.getContentType();</span><br><span class="line">            <span class="keyword">if</span> (!suffixes.contains(type)) &#123;</span><br><span class="line">                logger.info(<span class="string">"上传失败，文件类型不匹配：&#123;&#125;"</span>, type);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 2)校验图片内容</span></span><br><span class="line">            BufferedImage image = ImageIO.read(file.getInputStream());</span><br><span class="line">            <span class="keyword">if</span> (image == <span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.info(<span class="string">"上传失败，文件内容不符合要求"</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 2、保存图片</span></span><br><span class="line">            <span class="comment">// 2.1、生成保存目录</span></span><br><span class="line">            File dir = <span class="keyword">new</span> File(<span class="string">"D:\\heima\\upload"</span>);</span><br><span class="line">            <span class="keyword">if</span> (!dir.exists()) &#123;</span><br><span class="line">                dir.mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 2.2、保存图片</span></span><br><span class="line">            file.transferTo(<span class="keyword">new</span> File(dir, file.getOriginalFilename()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2.3、拼接图片地址</span></span><br><span class="line">            String url = <span class="string">"http://image.leyou.com/upload/"</span> + file.getOriginalFilename();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有一个问题：为什么图片地址需要使用另外的url？</p>
+<ul>
+<li>图片不能保存在服务器内部，这样会对服务器产生额外的加载负担</li>
+<li>一般静态资源都应该使用独立域名，这样访问静态资源时不会携带一些不必要的cookie，减小请求的数据量</li>
+</ul>
+<h3>2.2.3.测试上传</h3>
+<p>我们通过RestClient工具来测试：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526196967376.png" alt="1526196967376"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526197027688.png" alt="1526197027688"></p>
+<p>去目录下查看：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526197060729.png" alt="1526197060729"></p>
+<p>上传成功！</p>
+<h3>2.2.4.绕过网关</h3>
+<p>图片上传是文件的传输，如果也经过Zuul网关的代理，文件就会经过多次网路传输，造成不必要的网络负担。在高并发时，可能导致网络阻塞，Zuul网关不可用。这样我们的整个系统就瘫痪了。</p>
+<p>所以，我们上传文件的请求就不经过网关来处理了。</p>
+<h4>2.2.4.1.Zuul的路由过滤</h4>
+<p>Zuul中提供了一个ignored-patterns属性，用来忽略不希望路由的URL路径，示例：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zuul.ignored-patterns: /upload/**</span><br></pre></td></tr></table></figure></p>
+<p>路径过滤会对一切微服务进行判定。</p>
+<p>Zuul还提供了<code>ignored-services</code>属性，进行服务过滤：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zuul.ignored-services: upload-servie</span><br></pre></td></tr></table></figure></p>
+<p>我们这里采用忽略服务：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  ignored-services:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">upload-service</span> <span class="comment"># 忽略upload-service服务</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的配置采用了集合语法，代表可以配置多个</p>
+<h4>2.2.4.2.Nginx的rewrite指令</h4>
+<p>现在，我们修改页面的访问路径：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-upload</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-model</span>=<span class="string">"brand.image"</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">url</span>=<span class="string">"/upload/image"</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">:multiple</span>=<span class="string">"false"</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">:pic-width</span>=<span class="string">"250"</span> <span class="attr">:pic-height</span>=<span class="string">"90"</span></span></span><br><span class="line"><span class="tag">      /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>查看页面的请求路径：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526196446765.png" alt="1526196446765"></p>
+<p>可以看到这个地址不对，依然是去找Zuul网关，因为我们的系统全局配置了URL地址。怎么办？</p>
+<p>有同学会想：修改页面请求地址不就好了。</p>
+<p>注意：原则上，我们是不能把除了网关以外的服务对外暴露的，不安全。</p>
+<p>既然不能修改页面请求，那么就只能在Nginx反向代理上做文章了。</p>
+<p>我们修改nginx配置，将以/api/upload开头的请求拦截下来，转交到真实的服务地址:</p>
+<p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> /api/upload &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://127.0.0.1:8082;</span><br><span class="line">    <span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">    <span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样写大家觉得对不对呢？</p>
+<p>显然是不对的，因为ip和端口虽然对了，但是路径没变，依然是：http://127.0.0.1:8002/api/upload/image</p>
+<p>前面多了一个/api</p>
+<p>Nginx提供了rewrite指令，用于对地址进行重写，语法规则：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rewrite &quot;用来匹配路径的正则&quot; 重写后的路径 [指令];</span><br></pre></td></tr></table></figure></p>
+<p>我们的案例：</p>
+<p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">       <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">       <span class="attribute">server_name</span>  api.leyou.com;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$host</span>;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-Server <span class="variable">$host</span>;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"></span><br><span class="line">   	<span class="comment"># 上传路径的映射</span></span><br><span class="line">	<span class="attribute">location</span> /api/upload &#123;	</span><br><span class="line">		<span class="attribute">proxy_pass</span> http://127.0.0.1:8082;</span><br><span class="line">		<span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">		<span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="attribute">rewrite</span> <span class="string">"^/api/(.*)$"</span> /<span class="variable">$1</span> <span class="literal">break</span>; </span><br><span class="line">       &#125;</span><br><span class="line">	</span><br><span class="line">       <span class="attribute">location</span> / &#123;</span><br><span class="line">		<span class="attribute">proxy_pass</span> http://127.0.0.1:10010;</span><br><span class="line">		<span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">		<span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>首先，我们映射路径是/api/upload，而下面一个映射路径是 / ，根据最长路径匹配原则，/api/upload优先级更高。也就是说，凡是以/api/upload开头的路径，都会被第一个配置处理</p>
+</li>
+<li>
+<p><code>proxy_pass</code>：反向代理，这次我们代理到8082端口，也就是upload-service服务</p>
+</li>
+<li>
+<p><code>rewrite &quot;^/api/(.*)$&quot; /$1 break</code>，路径重写：</p>
+<ul>
+<li>
+<p><code>&quot;^/api/(.*)$&quot;</code>：匹配路径的正则表达式，用了分组语法，把<code>/api/</code>以后的所有部分当做1组</p>
+</li>
+<li>
+<p><code>/$1</code>：重写的目标路径，这里用$1引用前面正则表达式匹配到的分组（组编号从1开始），即<code>/api/</code>后面的所有。这样新的路径就是除去<code>/api/</code>以外的所有，就达到了去除<code>/api</code>前缀的目的</p>
+</li>
+<li>
+<p><code>break</code>：指令，常用的有2个，分别是：last、break</p>
+<ul>
+<li>last：重写路径结束后，将得到的路径重新进行一次路径匹配</li>
+<li>break：重写路径结束后，不再重新匹配路径。</li>
+</ul>
+<p>我们这里不能选择last，否则以新的路径/upload/image来匹配，就不会被正确的匹配到8082端口了</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>修改完成，输入<code>nginx -s reload</code>命令重新加载配置。然后再次上传试试。</p>
+<h3>2.2.5.跨域问题</h3>
+<p>重启nginx，再次上传，发现报错了：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526200471676.png" alt="1526200471676"></p>
+<p>不过庆幸的是，这个错误已经不是第一次见了，跨域问题。</p>
+<p>我们在upload-service中添加一个CorsFilter即可：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalCorsConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.添加CORS配置信息</span></span><br><span class="line">        CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        <span class="comment">//1) 允许的域,不要写*，否则cookie就无法使用了</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">"http://manage.leyou.com"</span>);</span><br><span class="line">        <span class="comment">//2) 是否发送Cookie信息</span></span><br><span class="line">        config.setAllowCredentials(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//3) 允许的请求方式</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">"OPTIONS"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"POST"</span>);</span><br><span class="line">        config.addAllowedHeader(<span class="string">"*"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.添加映射路径，我们拦截一切请求</span></span><br><span class="line">        UrlBasedCorsConfigurationSource configSource = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        configSource.registerCorsConfiguration(<span class="string">"/**"</span>, config);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.返回新的CorsFilter.</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(configSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再次测试：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526200606487.png" alt="1526200606487"></p>
+<p>不过，非常遗憾的是，访问图片地址，却没有响应。</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526200927268.png" alt="1526200927268"></p>
+<p>这是因为我们并没有任何服务器对应image.leyou.com这个域名。。</p>
+<p>这个问题，我们暂时放下，回头再来解决。</p>
+<h3>2.2.6.之前上传的缺陷</h3>
+<p>先思考一下，之前上传的功能，有没有什么问题？</p>
+<p>上传本身没有任何问题，问题出在保存文件的方式，我们是保存在服务器机器，就会有下面的问题：</p>
+<ul>
+<li>单机器存储，存储能力有限</li>
+<li>无法进行水平扩展，因为多台机器的文件无法共享,会出现访问不到的情况</li>
+<li>数据没有备份，有单点故障风险</li>
+<li>并发能力差</li>
+</ul>
+<p>这个时候，最好使用分布式文件存储来代替本地文件存储。</p>
+<h1>3.FastDFS</h1>
+<h2>3.1.什么是分布式文件系统</h2>
+<p>分布式文件系统（Distributed File System）是指文件系统管理的物理存储资源不一定直接连接在本地节点上，而是通过计算机网络与节点相连。</p>
+<p>通俗来讲：</p>
+<ul>
+<li>传统文件系统管理的文件就存储在本机。</li>
+<li>分布式文件系统管理的文件存储在很多机器，这些机器通过网络连接，要被统一管理。无论是上传或者访问文件，都需要通过管理中心来访问</li>
+</ul>
+<h2>3.2.什么是FastDFS</h2>
+<p>FastDFS是由淘宝的余庆先生所开发的一个轻量级、高性能的开源分布式文件系统。用纯C语言开发，功能丰富：</p>
+<ul>
+<li>文件存储</li>
+<li>文件同步</li>
+<li>文件访问（上传、下载）</li>
+<li>存取负载均衡</li>
+<li>在线扩容</li>
+</ul>
+<p>适合有大容量存储需求的应用或系统。同类的分布式文件系统有谷歌的GFS、HDFS（Hadoop）、TFS（淘宝）等。</p>
+<h2>3.3.FastDFS的架构</h2>
+<h3>3.3.1.架构图</h3>
+<p>先上图：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526205318630.png" alt="1526205318630"></p>
+<p>FastDFS两个主要的角色：Tracker Server 和 Storage Server 。</p>
+<ul>
+<li>Tracker Server：跟踪服务器，主要负责调度storage节点与client通信，在访问上起负载均衡的作用，和记录storage节点的运行状态，是连接client和storage节点的枢纽。</li>
+<li>Storage Server：存储服务器，保存文件和文件的meta data（元数据），每个storage server会启动一个单独的线程主动向Tracker cluster中每个tracker server报告其状态信息，包括磁盘使用情况，文件同步情况及文件上传下载次数统计等信息</li>
+<li>Group：文件组，多台Storage Server的集群。上传一个文件到同组内的一台机器上后，FastDFS会将该文件即时同步到同组内的其它所有机器上，起到备份的作用。不同组的服务器，保存的数据不同，而且相互独立，不进行通信。</li>
+<li>Tracker Cluster：跟踪服务器的集群，有一组Tracker Server（跟踪服务器）组成。</li>
+<li>Storage Cluster ：存储集群，有多个Group组成。</li>
+</ul>
+<h3>3.3.2.上传和下载流程</h3>
+<blockquote>
+<p>上传</p>
+</blockquote>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526205664373.png" alt="1526205664373"></p>
+<ol>
+<li>Client通过Tracker server查找可用的Storage server。</li>
+<li>Tracker server向Client返回一台可用的Storage server的IP地址和端口号。</li>
+<li>Client直接通过Tracker server返回的IP地址和端口与其中一台Storage server建立连接并进行文件上传。</li>
+<li>上传完成，Storage server返回Client一个文件ID，文件上传结束。</li>
+</ol>
+<blockquote>
+<p>下载</p>
+</blockquote>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526205705687.png" alt="1526205705687"></p>
+<ol>
+<li>Client通过Tracker server查找要下载文件所在的的Storage server。</li>
+<li>Tracker server向Client返回包含指定文件的某个Storage server的IP地址和端口号。</li>
+<li>Client直接通过Tracker server返回的IP地址和端口与其中一台Storage server建立连接并指定要下载文件。</li>
+<li>下载文件成功。</li>
+</ol>
+<h2>3.4.安装和使用</h2>
+<p>参考课前资料的：《centos安装FastDFS.md》</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526205975025.png" alt="1526205975025"></p>
+<h2>3.5.java客户端</h2>
+<p>余庆先生提供了一个Java客户端，但是作为一个C程序员，写的java代码可想而知。而且已经很久不维护了。</p>
+<p>这里推荐一个开源的FastDFS客户端，支持最新的SpringBoot2.0。</p>
+<p>配置使用极为简单，支持连接池，支持自动生成缩略图，狂拽酷炫吊炸天啊，有木有。</p>
+<p>地址：<a href="https://github.com/tobato/FastDFS_Client">tobato/FastDFS_client</a></p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526206304954.png" alt="1526206304954"></p>
+<h3>3.5.1.引入依赖</h3>
+<p>在父工程中，我们已经管理了依赖，版本为：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fastDFS.client.version</span>&gt;</span>1.26.2<span class="tag">&lt;/<span class="name">fastDFS.client.version</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>因此，这里我们直接引入坐标即可：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.tobato<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastdfs-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>3.5.2.引入配置类</h3>
+<p>纯java配置：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(FdfsClientConfig.class)</span><br><span class="line"><span class="comment">// 解决jmx重复注册bean的问题</span></span><br><span class="line"><span class="meta">@EnableMBeanExport</span>(registration = RegistrationPolicy.IGNORE_EXISTING)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastClientImporter</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>3.5.3.编写FastDFS属性</h3>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fdfs:</span></span><br><span class="line"><span class="attr">  so-timeout:</span> <span class="number">1501</span></span><br><span class="line"><span class="attr">  connect-timeout:</span> <span class="number">601</span></span><br><span class="line"><span class="attr">  thumb-image:</span> <span class="comment"># 缩略图</span></span><br><span class="line"><span class="attr">    width:</span> <span class="number">60</span></span><br><span class="line"><span class="attr">    height:</span> <span class="number">60</span></span><br><span class="line"><span class="attr">  tracker-list:</span> <span class="comment"># tracker地址</span></span><br><span class="line"><span class="bullet">    -</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.101</span><span class="string">:22122</span></span><br></pre></td></tr></table></figure></p>
+<h3>3.5.4.测试</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(classes = LyUploadService.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FdfsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FastFileStorageClient storageClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ThumbImageConfig thumbImageConfig;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpload</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\test\\baby.png"</span>);</span><br><span class="line">        <span class="comment">// 上传并且生成缩略图</span></span><br><span class="line">        StorePath storePath = <span class="keyword">this</span>.storageClient.uploadFile(</span><br><span class="line">                <span class="keyword">new</span> FileInputStream(file), file.length(), <span class="string">"png"</span>, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 带分组的路径</span></span><br><span class="line">        System.out.println(storePath.getFullPath());</span><br><span class="line">        <span class="comment">// 不带分组的路径</span></span><br><span class="line">        System.out.println(storePath.getPath());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUploadAndCreateThumb</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\test\\baby.png"</span>);</span><br><span class="line">        <span class="comment">// 上传并且生成缩略图</span></span><br><span class="line">        StorePath storePath = <span class="keyword">this</span>.storageClient.uploadImageAndCrtThumbImage(</span><br><span class="line">                <span class="keyword">new</span> FileInputStream(file), file.length(), <span class="string">"png"</span>, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 带分组的路径</span></span><br><span class="line">        System.out.println(storePath.getFullPath());</span><br><span class="line">        <span class="comment">// 不带分组的路径</span></span><br><span class="line">        System.out.println(storePath.getPath());</span><br><span class="line">        <span class="comment">// 获取缩略图路径</span></span><br><span class="line">        String path = thumbImageConfig.getThumbImagePath(storePath.getPath());</span><br><span class="line">        System.out.println(path);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">group1/M00/00/00/wKg4ZVro5eCAZEMVABfYcN8vzII630.png</span><br><span class="line">M00/00/00/wKg4ZVro5eCAZEMVABfYcN8vzII630.png</span><br><span class="line">M00/00/00/wKg4ZVro5eCAZEMVABfYcN8vzII630_60x60.png</span><br></pre></td></tr></table></figure></p>
+<p>访问第一个路径：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526215187172.png" alt="1526215187172"></p>
+<p>访问最后一个路径（缩略图路径），注意加组名：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526215257110.png" alt="1526215257110"></p>
+<h3>3.5.5.改造上传逻辑</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(UploadController.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 支持的文件类型</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; suffixes = Arrays.asList(<span class="string">"image/png"</span>, <span class="string">"image/jpeg"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    FastFileStorageClient storageClient;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1、图片信息校验</span></span><br><span class="line">            <span class="comment">// 1)校验文件类型</span></span><br><span class="line">            String type = file.getContentType();</span><br><span class="line">            <span class="keyword">if</span> (!suffixes.contains(type)) &#123;</span><br><span class="line">                logger.info(<span class="string">"上传失败，文件类型不匹配：&#123;&#125;"</span>, type);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 2)校验图片内容</span></span><br><span class="line">            BufferedImage image = ImageIO.read(file.getInputStream());</span><br><span class="line">            <span class="keyword">if</span> (image == <span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.info(<span class="string">"上传失败，文件内容不符合要求"</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2、将图片上传到FastDFS</span></span><br><span class="line">            <span class="comment">// 2.1、获取文件后缀名</span></span><br><span class="line">            String extension = StringUtils.substringAfterLast(file.getOriginalFilename(), <span class="string">"."</span>);</span><br><span class="line">            <span class="comment">// 2.2、上传</span></span><br><span class="line">            StorePath storePath = <span class="keyword">this</span>.storageClient.uploadFile(</span><br><span class="line">                    file.getInputStream(), file.getSize(), extension, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 2.3、返回完整路径</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">"http://image.leyou.com/"</span> + storePath.getFullPath();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>只需要把原来保存文件的逻辑去掉，然后上传到FastDFS即可。</p>
+<h3>3.5.6.测试</h3>
+<p>通过RestClient测试：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526215940805.png" alt="1526215940805"></p>
+<h2>3.6.页面测试上传</h2>
+<p>发现上传成功：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216133300.png" alt="1526216133300"></p>
+<p>不过，当我们访问页面时：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216178123.png" alt="1526216178123"></p>
+<p>这是因为我们图片是上传到虚拟机的，ip为：192.168.56.101</p>
+<p>因此，我们需要将image.leyou.com映射到192.168.56.101</p>
+<p>修改我们的hosts：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216272835.png" alt="1526216272835"></p>
+<p>再次上传：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216322359.png" alt="1526216322359"></p>
+<h1>4.修改品牌（作业）</h1>
+<p>修改的难点在于回显。</p>
+<p>当我们点击编辑按钮，希望弹出窗口的同时，看到原来的数据：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526216494380.png" alt="1526216494380"></p>
+<h2>4.1.点击编辑出现弹窗</h2>
+<p>这个比较简单，修改show属性为true即可实现，我们绑定一个点击事件：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-btn</span> <span class="attr">color</span>=<span class="string">"info"</span> @<span class="attr">click</span>=<span class="string">"editBrand"</span>&gt;</span>编辑<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后编写事件，改变show 的状态：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526217622765.png" alt="1526217622765"></p>
+<p>如果仅仅是这样，编辑按钮与新增按钮将没有任何区别，关键在于，如何回显呢？</p>
+<h2>4.2.回显数据</h2>
+<p>回显数据，就是把当前点击的品牌数据传递到子组件（MyBrandForm）。而父组件给子组件传递数据，通过props属性。</p>
+<ul>
+<li>
+<p>第一步：在编辑时获取当前选中的品牌信息，并且记录到data中</p>
+<p>先在data中定义属性，用来接收用来编辑的brand数据：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526218080029.png" alt="1526218080029"></p>
+<p>我们在页面触发编辑事件时，把当前的brand传递给editBrand方法：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-btn</span> <span class="attr">color</span>=<span class="string">"info"</span> @<span class="attr">click</span>=<span class="string">"editBrand(props.item)"</span>&gt;</span>编辑<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后在editBrand中接收数据，赋值给oldBrand：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">editBrand(oldBrand)&#123;</span><br><span class="line">  <span class="comment">// 控制弹窗可见：</span></span><br><span class="line">  <span class="keyword">this</span>.show = <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 获取要编辑的brand</span></span><br><span class="line">  <span class="keyword">this</span>.oldBrand = oldBrand;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>第二步：把获取的brand数据 传递给子组件</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--对话框的内容，表单--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">v-card-text</span> <span class="attr">class</span>=<span class="string">"px-5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">my-brand-form</span> @<span class="attr">close</span>=<span class="string">"closeWindow"</span> <span class="attr">:oldBrand</span>=<span class="string">"oldBrand"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-card-text</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>第三步：在子组件中通过props接收要编辑的brand数据，Vue会自动完成回显</p>
+<p>接收数据：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526218243761.png" alt="1526218243761"></p>
+<p>通过watch函数监控oldBrand的变化，把值copy到本地的brand：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    oldBrand: &#123;<span class="comment">// 监控oldBrand的变化</span></span><br><span class="line">        handler(val) &#123;</span><br><span class="line">            <span class="keyword">if</span>(val)&#123;</span><br><span class="line">                <span class="comment">// 注意不要直接复制，否则这边的修改会影响到父组件的数据，copy属性即可</span></span><br><span class="line">                <span class="keyword">this</span>.brand =  <span class="built_in">Object</span>.deepCopy(val)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 为空，初始化brand</span></span><br><span class="line">                <span class="keyword">this</span>.brand = &#123;</span><br><span class="line">                    name: <span class="string">''</span>,</span><br><span class="line">                    letter: <span class="string">''</span>,</span><br><span class="line">                    image: <span class="string">''</span>,</span><br><span class="line">                    categories: [],</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">            deep: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Object.deepCopy 自定义的对对象进行深度复制的方法。</li>
+<li>需要判断监听到的是否为空，如果为空，应该进行初始化</li>
+</ul>
+</li>
+</ul>
+<p>测试：发现数据回显了，除了商品分类以外：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526219653994.png" alt="1526219653994"></p>
+<h2>4.3.商品分类回显</h2>
+<p>为什么商品分类没有回显？</p>
+<p>因为品牌中并没有商品分类数据。我们需要在进入编辑页面之前，查询商品分类信息：</p>
+<h3>4.3.1.后台提供接口</h3>
+<blockquote>
+<h4>controller</h4>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过品牌id查询商品分类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"bid/&#123;bid&#125;"</span>)</span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;List&lt;Category&gt;&gt; queryByBrandId(<span class="meta">@PathVariable</span>(<span class="string">"bid"</span>) Long bid) &#123;</span><br><span class="line">    List&lt;Category&gt; list = <span class="keyword">this</span>.categoryService.queryByBrandId(bid);</span><br><span class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.size() &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Service</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Category&gt; <span class="title">queryByBrandId</span><span class="params">(Long bid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.categoryMapper.queryByBrandId(bid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>mapper</p>
+</blockquote>
+<p>因为需要通过中间表进行子查询，所以这里要手写Sql：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据品牌id查询商品分类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"SELECT * FROM tb_category WHERE id IN (SELECT category_id FROM tb_category_brand WHERE brand_id = #&#123;bid&#125;)"</span>)</span><br><span class="line"><span class="function">List&lt;Category&gt; <span class="title">queryByBrandId</span><span class="params">(Long bid)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h3>4.3.2.前台查询分类并渲染</h3>
+<p>我们在编辑页面打开之前，先把数据查询完毕：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">editBrand(oldBrand)&#123;</span><br><span class="line">    <span class="comment">// 根据品牌信息查询商品分类</span></span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">"/item/category/bid/"</span> + oldBrand.id)</span><br><span class="line">        .then(<span class="function">(<span class="params">&#123;data&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 控制弹窗可见：</span></span><br><span class="line">        <span class="keyword">this</span>.show = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 获取要编辑的brand</span></span><br><span class="line">        <span class="keyword">this</span>.oldBrand = oldBrand</span><br><span class="line">        <span class="comment">// 回显商品分类</span></span><br><span class="line">        <span class="keyword">this</span>.oldBrand.categories = data;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再次测试：数据成功回显了</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526222999115.png" alt="1526222999115"></p>
+<h3>4.3.3.新增窗口数据干扰</h3>
+<p>但是，此时却产生了新问题：新增窗口竟然也有数据？</p>
+<p>原因：</p>
+<p>​	如果之前打开过编辑，那么在父组件中记录的oldBrand会保留。下次再打开窗口，如果是编辑窗口到没问题，但是新增的话，就会再次显示上次打开的品牌信息了。</p>
+<p>解决：</p>
+<p>​	新增窗口打开前，把数据置空。</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">addBrand() &#123;</span><br><span class="line">    <span class="comment">// 控制弹窗可见：</span></span><br><span class="line">    <span class="keyword">this</span>.show = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// 把oldBrand变为null</span></span><br><span class="line">    <span class="keyword">this</span>.oldBrand = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>4.3.4.提交表单时判断是新增还是修改</h3>
+<p>新增和修改是同一个页面，我们该如何判断？</p>
+<p>父组件中点击按钮弹出新增或修改的窗口，因此父组件非常清楚接下来是新增还是修改。</p>
+<p>因此，最简单的方案就是，在父组件中定义变量，记录新增或修改状态，当弹出页面时，把这个状态也传递给子组件。</p>
+<p>第一步：在父组件中记录状态：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526224372366.png" alt="1526224372366"></p>
+<p>第二步：在新增和修改前，更改状态：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526224447288.png" alt="1526224447288"></p>
+<p>第三步：传递给子组件</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526224495244.png" alt="1526224495244"></p>
+<p>第四步，子组件接收标记：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526224563838.png" alt="1526224563838"></p>
+<p>标题的动态化：</p>
+<p><img src="/2019/05/26/day08-品牌管理/assets/1526224628514.png" alt="1526224628514"></p>
+<p>表单提交动态：</p>
+<p>axios除了除了get和post外，还有一个通用的请求方式：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将数据提交到后台</span></span><br><span class="line"><span class="comment">// this.$http.post('/item/brand', this.$qs.stringify(params))</span></span><br><span class="line"><span class="keyword">this</span>.$http(&#123;</span><br><span class="line">    method: <span class="keyword">this</span>.isEdit ? <span class="string">'put'</span> : <span class="string">'post'</span>, <span class="comment">// 动态判断是POST还是PUT</span></span><br><span class="line">    url: <span class="string">'/item/brand'</span>,</span><br><span class="line">    data: <span class="keyword">this</span>.$qs.stringify(<span class="keyword">this</span>.brand)</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 关闭窗口</span></span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">"close"</span>);</span><br><span class="line">    <span class="keyword">this</span>.$message.success(<span class="string">"保存成功！"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message.error(<span class="string">"保存失败！"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h1>5.删除（作业）</h1>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day07-搭建管理系统页面/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/day09-商品规格管理/" rel="prev" title="9.商品规格管理">
+                9.商品规格管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1.品牌的新增</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.页面实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1.初步编写弹窗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2.实现弹窗的可见和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.1.3.新增品牌的表单页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.1.4.编写表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">1.1.4.1.表单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">1.1.4.2.文本框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.3.</span> <span class="nav-text">1.1.4.3.级联下拉选框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.4.</span> <span class="nav-text">1.1.4.4.文件上传项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.5.</span> <span class="nav-text">1.1.4.5.按钮</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.5.</span> <span class="nav-text">1.1.5.表单校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">1.1.5.1.校验规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">1.1.5.2.项目中代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.6.</span> <span class="nav-text">1.1.6.表单提交</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.后台实现新增</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1.controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2.Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.3.Mapper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.请求参数格式错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1.原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2.QS工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.3.</span> <span class="nav-text">1.3.3.解决问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.新增完成后关闭窗口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2.实现图片上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.搭建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1.创建module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.1.2.依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.1.3.编写配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.4.</span> <span class="nav-text">2.1.4.启动类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.编写上传功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1.controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2.service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.2.3.测试上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.4.</span> <span class="nav-text">2.2.4.绕过网关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">2.2.4.1.Zuul的路由过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">2.2.4.2.Nginx的rewrite指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.5.</span> <span class="nav-text">2.2.5.跨域问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.6.</span> <span class="nav-text">2.2.6.之前上传的缺陷</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">3.FastDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.什么是分布式文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.什么是FastDFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.FastDFS的架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.1.</span> <span class="nav-text">3.3.1.架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.3.2.上传和下载流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.安装和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.</span> <span class="nav-text">3.5.java客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.1.</span> <span class="nav-text">3.5.1.引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.2.</span> <span class="nav-text">3.5.2.引入配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.3.</span> <span class="nav-text">3.5.3.编写FastDFS属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.4.</span> <span class="nav-text">3.5.4.测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.5.</span> <span class="nav-text">3.5.5.改造上传逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.6.</span> <span class="nav-text">3.5.6.测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.</span> <span class="nav-text">3.6.页面测试上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">4.修改品牌（作业）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">4.1.点击编辑出现弹窗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">4.2.回显数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">4.3.商品分类回显</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1.后台提供接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">controller</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2.前台查询分类并渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3.新增窗口数据干扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.3.4.提交表单时判断是新增还是修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">5.删除（作业）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

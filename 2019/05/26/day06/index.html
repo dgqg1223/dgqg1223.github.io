@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.学习目标  使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端 1.1.导入已有资源 后台项目相对复杂，为了有利于教学，我们不再从0搭建项目，而是直接使用课前资料中给大家准备好的源码：  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：  这正是一个用vue">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.后台搭建">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day06/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="0.学习目标  使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端 1.1.导入已有资源 后台项目相对复杂，为了有利于教学，我们不再从0搭建项目，而是直接使用课前资料中给大家准备好的源码：  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：  这正是一个用vue">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530555871804.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530367369490.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530367589197.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530367781173.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530368191250.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530368695265.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530374769782.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530374827792.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530374954209.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530375152204.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525960652724.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530555978248.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525960312939.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525961862771.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525961875288.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525962755237.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1525964023585.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530380040278.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525965779366.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530380292558.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525966180568.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530556073565.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530382550630.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530382601757.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530383586463.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530383612716.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530383927461.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530384150852.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526187409033.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526016663674.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/0C36B84E.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530556268445.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530384792790.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526188831504.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530385404783.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530385593052.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526189945180.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525999005260.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530556389224.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1525999774439.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530413709515.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530386186299.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526000692741.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526001573140.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526001762446.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530427294644.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530427514123.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530444682670.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530445885707.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530450599897.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530450744567.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530455133230.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530455291468.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530455437899.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530460311064.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530462650711.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530463010927.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526021968036.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530464178834.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530464255544.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530464304721.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526023540226.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526023837773.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526029254159.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530518876942.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1526029445561.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530523252532.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530523838357.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530524238344.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530527129881.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530527160208.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526031159242.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530532504861.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526031897445.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530533261856.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530533442878.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530534269196.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526033007616.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530534311458.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526033439890.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530534423194.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530541070271.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530541222679.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530543778541.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530549253999.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530549286718.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530549095150.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526033988251.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526034150067.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526041205846.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526048079191.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526048143014.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526048275064.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530553414937.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530554422695.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530554460215.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/9.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526049643506.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/22.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1526049939985.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1526050032436.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06/assets/1530555740595.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:30.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6.后台搭建">
+<meta name="twitter:description" content="0.学习目标  使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端 1.1.导入已有资源 后台项目相对复杂，为了有利于教学，我们不再从0搭建项目，而是直接使用课前资料中给大家准备好的源码：  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：  这正是一个用vue">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day06/assets/1530555871804.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day06/">
+
+
+
+
+
+  <title>6.后台搭建 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">6.后台搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:30+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>0.学习目标</h1>
+<ul>
+<li>使用资料搭建后台系统</li>
+<li>会使用nginx进行反向代理</li>
+<li>实现商品分类查询功能</li>
+<li>掌握cors解决跨域</li>
+<li>实现品牌查询功能</li>
+</ul>
+<h1>1.搭建后台管理前端</h1>
+<h2>1.1.导入已有资源</h2>
+<p>后台项目相对复杂，为了有利于教学，我们不再从0搭建项目，而是直接使用课前资料中给大家准备好的源码：</p>
+<p><img src="/2019/05/26/day06/assets/1530555871804.png" alt="1530555871804"></p>
+<p>我们解压缩，放到工作目录中：</p>
+<p><img src="/2019/05/26/day06/assets/1530367369490.png" alt="1530367369490"></p>
+<p>然后在Intellij idea中导入新的工程：</p>
+<p><img src="/2019/05/26/day06/assets/1530367589197.png" alt="1530367589197"></p>
+<p>选中我们的工程：</p>
+<p><img src="/2019/05/26/day06/assets/1530367781173.png" alt="1530367781173"></p>
+<p>这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：</p>
+<p><img src="/2019/05/26/day06/assets/1530368191250.png" alt="1530368191250"></p>
+<h2>1.2.安装依赖</h2>
+<p>你应该注意到，这里并没有node_modules文件夹，方便给大家下发，已经把依赖都删除了。不过package.json中依然定义了我们所需的一切依赖：</p>
+<p><img src="/2019/05/26/day06/assets/1530368695265.png" alt="1530368695265"></p>
+<p>我们只需要打开终端，进入项目目录，输入：<code>npm install</code>命令，即可安装这些依赖。</p>
+<p><img src="/2019/05/26/day06/assets/1530374769782.png" alt="1530374769782"></p>
+<p>大概需要几分钟。</p>
+<p><strong>如果安装过程出现以下问题</strong>：</p>
+<p><img src="/2019/05/26/day06/assets/1530374827792.png" alt="1530374827792"></p>
+<p>建议删除node_modules目录，重新安装。</p>
+<h2>1.3.运行一下看看</h2>
+<p>输入命令：<code>npm run dev</code></p>
+<p><img src="/2019/05/26/day06/assets/1530374954209.png" alt="1530374954209"></p>
+<p>发现默认的端口是9001。访问：http://localhost:9001</p>
+<p>会自动进行跳转：</p>
+<p><img src="/2019/05/26/day06/assets/1530375152204.png" alt="1525958950616"></p>
+<h1>2.Vuetify框架</h1>
+<h2>2.1.为什么要学习UI框架</h2>
+<p>Vue虽然会帮我们进行视图的渲染，但样式还是由我们自己来完成。这显然不是我们的强项，因此后端开发人员一般都喜欢使用一些现成的UI组件，拿来即用，常见的例如：</p>
+<ul>
+<li>BootStrap</li>
+<li>LayUI</li>
+<li>EasyUI</li>
+<li>ZUI</li>
+</ul>
+<p>然而这些UI组件的基因天生与Vue不合，因为他们更多的是利用DOM操作，借助于jQuery实现，而不是MVVM的思想。</p>
+<p>而目前与Vue吻合的UI框架也非常的多，国内比较知名的如：</p>
+<ul>
+<li>element-ui：饿了么出品</li>
+<li>i-view：某公司出品</li>
+</ul>
+<p>然而我们都不用，我们今天推荐的是一款国外的框架：Vuetify</p>
+<p>官方网站：https://vuetifyjs.com/zh-Hans/</p>
+<p><img src="/2019/05/26/day06/assets/1525960652724.png" alt="1525960652724"></p>
+<h2>2.2.为什么是Vuetify</h2>
+<p>有中国的为什么还要用外国的？原因如下：</p>
+<ul>
+<li>Vuetify几乎不需要任何CSS代码，而element-ui许多布局样式需要我们来编写</li>
+<li>Vuetify从底层构建起来的语义化组件。简单易学，容易记住。</li>
+<li>Vuetify基于Material Design（谷歌推出的多平台设计规范），更加美观，动画效果酷炫，且风格统一</li>
+</ul>
+<p>这是官网的说明：</p>
+<p><img src="/2019/05/26/day06/assets/1530555978248.png" alt="1530555978248"></p>
+<p>缺陷：</p>
+<ul>
+<li>目前官网虽然有中文文档，但因为翻译问题，几乎不太能看。</li>
+</ul>
+<h2>2.3.怎么用？</h2>
+<p>基于官方网站的文档进行学习：</p>
+<p><img src="/2019/05/26/day06/assets/1525960312939.png" alt="1525960312939"></p>
+<p>我们重点关注<code>UI components</code>即可，里面有大量的UI组件，我们要用的时候再查看，不用现在学习，先看下有什么：</p>
+<p><img src="/2019/05/26/day06/assets/1525961862771.png" alt="1525961862771"></p>
+<p><img src="/2019/05/26/day06/assets/1525961875288.png" alt="1525961875288"></p>
+<p>以后用到什么组件，就来查询即可。</p>
+<h1>3.项目结构</h1>
+<p>开始编码前，我们先了解下项目的结构。</p>
+<h2>3.1.目录结构</h2>
+<p>首先是目录结构图：<img src="/2019/05/26/day06/assets/1525962755237.png" alt="1525962755237"></p>
+<h2>3.2.调用关系</h2>
+<p>我们最主要理清index.html、main.js、App.vue之间的关系：</p>
+<p><img src="/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1525964023585.png" alt="1525964023585"></p>
+<p>理一下：</p>
+<ul>
+<li>index.html：html模板文件。定义了空的<code>div</code>，其id为<code>app</code>。</li>
+<li>main.js：<strong>实例化vue对象</strong>，并且绑定通过id选择器，绑定到index.html的div中，因此<strong>main.js的内容都将在index.html的div中显示</strong>。main.js中使用了App组件，即App.vue，也就是说index.html中最终展现的是App.vue中的内容。index.html引用它之后，就拥有了vue的内容（包括组件、样式等），所以，main.js也是<strong>webpack打包的入口</strong>。</li>
+<li>index.js：定义请求路径和组件的映射关系。相当于之前的<code>&lt;vue-router&gt;</code></li>
+<li>App.vue中也没有内容，而是定义了vue-router的锚点：<code>&lt;router-view&gt;</code>,我们之前讲过，vue-router路由后的组件将会在锚点展示。</li>
+<li>最终结论：<strong>一切路由后的内容都将通过App.vue在index.html中显示。</strong></li>
+<li>访问流程：用户在浏览器输入路径，例如：http://localhost:9001/#/item/brand --&gt; index.js(/item/brand路径对应pages/item/Brand.vue组件) --&gt; 该组件显示在App.vue的锚点位置 --&gt; main.js使用了App.vue组件，并把该组件渲染在index.html文件中（id为“app”的div中）</li>
+</ul>
+<h2>3.3.页面布局</h2>
+<p>接下来我们一起看下页面布局。</p>
+<p>Layout组件是我们的整个页面的布局组件：</p>
+<p><img src="/2019/05/26/day06/assets/1530380040278.png" alt="1530380040278"></p>
+<p>一个典型的三块布局。包含左，上，中三部分：</p>
+<p><img src="/2019/05/26/day06/assets/1525965779366.png" alt="1525965779366"></p>
+<p>里面使用了Vuetify中的2个组件和一个布局元素：</p>
+<ul>
+<li>
+<p><code>v-navigation-drawer</code> ：导航抽屉，主要用于容纳应用程序中的页面的导航链接。</p>
+<pre><code>![1530380237867](assets/1530380237867.png)
+</code></pre>
+</li>
+<li>
+<p><code>v-toolbar</code>：工具栏通常是网站导航的主要途径。可以与导航抽屉一起很好地工作，动态选择是否打开导航抽屉，实现可伸缩的侧边栏。</p>
+<p><img src="/2019/05/26/day06/assets/1530380292558.png" alt="1530380292558"></p>
+</li>
+<li>
+<p><code>v-content</code>：并不是一个组件，而是标记页面布局的元素。可以根据您指定的<strong>app</strong>组件的结构动态调整大小，使得您可以创建高度可定制的组件。</p>
+</li>
+</ul>
+<p>那么问题来了：<code>v-content</code>中的内容来自哪里？</p>
+<p><img src="/2019/05/26/day06/assets/1525966180568.png" alt="1525966180568"></p>
+<ul>
+<li>Layout映射的路径是<code>/</code></li>
+<li>除了Login以为的所有组件，都是定义在Layout的children属性，并且路径都是<code>/</code>的下面</li>
+<li>因此当路由到子组件时，会在Layout中定义的锚点中显示。</li>
+<li>并且Layout中的其它部分不会变化，这就实现了布局的共享。</li>
+</ul>
+<h1>4.使用域名访问本地项目</h1>
+<h2>4.1.统一环境</h2>
+<p>我们现在访问页面使用的是：http://localhost:9001</p>
+<p>有没有什么问题？</p>
+<p>实际开发中，会有不同的环境：</p>
+<ul>
+<li>开发环境：自己的电脑</li>
+<li>测试环境：提供给测试人员使用的环境</li>
+<li>预发布环境：数据是和生成环境的数据一致，运行最新的项目代码进去测试</li>
+<li>生产环境：项目最终发布上线的环境</li>
+</ul>
+<p>如果不同环境使用不同的ip去访问，可能会出现一些问题。为了保证所有环境的一致，我们会在各种环境下都使用域名来访问。</p>
+<p>我们将使用以下域名：</p>
+<ul>
+<li>主域名是：www.leyou.com，</li>
+<li>管理系统域名：manage.leyou.com</li>
+<li>网关域名：api.leyou.com</li>
+<li>...</li>
+</ul>
+<p>但是最终，我们希望这些域名指向的还是我们本机的某个端口。</p>
+<p>那么，当我们在浏览器输入一个域名时，浏览器是如何找到对应服务的ip和端口的呢？</p>
+<h2>4.2.域名解析</h2>
+<p>一个域名一定会被解析为一个或多个ip。这一般会包含两步：</p>
+<ul>
+<li>
+<p>本地域名解析</p>
+<p>浏览器会首先在本机的hosts文件中查找域名映射的IP地址，如果查找到就返回IP ，没找到则进行域名服务器解析，一般本地解析都会失败，因为默认这个文件是空的。</p>
+<ul>
+<li>Windows下的hosts文件地址：C:/Windows/System32/drivers/etc/hosts</li>
+<li>Linux下的hosts文件所在路径： /etc/hosts</li>
+</ul>
+<p>样式：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># My hosts</span><br><span class="line">127.0.0.1 localhost</span><br><span class="line">0.0.0.0 account.jetbrains.com</span><br><span class="line">127.0.0.1 www.xmind.net</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>域名服务器解析</p>
+<p>本地解析失败，才会进行域名服务器解析，域名服务器就是网络中的一台计算机，里面记录了所有注册备案的域名和ip映射关系，一般只要域名是正确的，并且备案通过，一定能找到。</p>
+</li>
+</ul>
+<h2>4.3.解决域名解析问题</h2>
+<p>我们不可能去购买一个域名，因此我们可以伪造本地的hosts文件，实现对域名的解析。修改本地的host为：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 api.leyou.com</span><br><span class="line">127.0.0.1 manage.leyou.com</span><br></pre></td></tr></table></figure></p>
+<p>这样就实现了域名的关系映射了。</p>
+<p>每次在C盘寻找hosts文件并修改是非常麻烦的，给大家推荐一个快捷修改host的工具，在课前资料中可以找到：</p>
+<p><img src="/2019/05/26/day06/assets/1530556073565.png" alt="1530556073565"></p>
+<p>解压，运行exe文件，效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530382550630.png" alt="1530382550630"></p>
+<p>我们添加了两个映射关系（中间用空格隔开）：</p>
+<ul>
+<li>127.0.0.1 api.leyou.com ：我们的网关Zuul</li>
+<li>127.0.0.1 manage.leyou.com：我们的后台系统地址</li>
+</ul>
+<p>现在，ping一下域名试试是否畅通：</p>
+<p><img src="/2019/05/26/day06/assets/1530382601757.png" alt="1530382601757"></p>
+<p>OK！</p>
+<p>通过域名访问：</p>
+<p><img src="/2019/05/26/day06/assets/1530383586463.png" alt="1530383586463"></p>
+<p>原因：我们配置了项目访问的路径，虽然manage.leyou.com映射的ip也是127.0.0.1，但是webpack会验证host是否符合配置。</p>
+<p><img src="/2019/05/26/day06/assets/1530383612716.png" alt="1530383612716"></p>
+<p>在webpack.dev.conf.js中取消host验证：</p>
+<p><img src="/2019/05/26/day06/assets/1530383927461.png" alt="1530383927461"></p>
+<p>重新执行<code>npm run dev</code>，刷新浏览器：</p>
+<p><img src="/2019/05/26/day06/assets/1530384150852.png" alt="1530384150852"></p>
+<p>OK！</p>
+<h2>4.4.nginx解决端口问题</h2>
+<p>域名问题解决了，但是现在要访问后台页面，还得自己加上端口：<code>http://manage.taotao.com:9001</code>。</p>
+<p>这就不够优雅了。我们希望的是直接域名访问：<code>http://manage.taotao.com</code>。这种情况下端口默认是80，如何才能把请求转移到9001端口呢？</p>
+<p>这里就要用到反向代理工具：Nginx</p>
+<h3>4.4.1.什么是Nginx</h3>
+<p><img src="/2019/05/26/day06/assets/1526187409033.png" alt="1526187409033"></p>
+<p>nginx可以作为web服务器，但更多的时候，我们把它作为网关，因为它具备网关必备的功能：</p>
+<ul>
+<li>反向代理</li>
+<li>负载均衡</li>
+<li>动态路由</li>
+<li>请求过滤</li>
+</ul>
+<h3>4.4.2.nginx作为web服务器</h3>
+<p>Web服务器分2类：</p>
+<ul>
+<li>web应用服务器，如：
+<ul>
+<li>tomcat</li>
+<li>resin</li>
+<li>jetty</li>
+</ul>
+</li>
+<li>web服务器，如：
+<ul>
+<li>Apache 服务器</li>
+<li>Nginx</li>
+<li>IIS</li>
+</ul>
+</li>
+</ul>
+<p>区分：web服务器不能解析jsp等页面，只能处理js、css、html等静态资源。
+并发：web服务器的并发能力远高于web应用服务器。</p>
+<h3>4.4.3.nginx作为反向代理</h3>
+<p>什么是反向代理？</p>
+<ul>
+<li>代理：通过客户机的配置，实现让一台服务器(代理服务器)代理客户机，客户的所有请求都交给代理服务器处理。</li>
+<li>反向代理：用一台服务器，代理真实服务器，用户访问时，不再是访问真实服务器，而是代理服务器。</li>
+</ul>
+<p>nginx可以当做反向代理服务器来使用：</p>
+<ul>
+<li>我们需要提前在nginx中配置好反向代理的规则，不同的请求，交给不同的真实服务器处理</li>
+<li>当请求到达nginx，nginx会根据已经定义的规则进行请求的转发，从而实现路由功能</li>
+</ul>
+<p>利用反向代理，就可以解决我们前面所说的端口问题，如图</p>
+<p><img src="/2019/05/26/day06/assets/1526016663674.png" alt="1526016663674"></p>
+<h3>4.4.4.安装和使用</h3>
+<blockquote>
+<h3>安装</h3>
+</blockquote>
+<p>安装非常简单，把课前资料提供的nginx直接解压即可，绿色免安装，舒服！</p>
+<p><img src="/2019/05/26/day06/assets/0C36B84E.gif" alt="img"></p>
+<p>我们在本地安装一台nginx：</p>
+<p><img src="/2019/05/26/day06/assets/1530556268445.png" alt="1530556268445"></p>
+<p>解压后，目录结构：</p>
+<p><img src="/2019/05/26/day06/assets/1530384792790.png" alt="1530384792790"></p>
+<ol>
+<li>conf：配置目录</li>
+<li>contrib：第三方依赖</li>
+<li>html：默认的静态资源目录，类似于tomcat的webapps</li>
+<li>logs：日志目录</li>
+<li>nginx.exe：启动程序。可双击运行，但不建议这么做。</li>
+</ol>
+<blockquote>
+<h3>反向代理配置</h3>
+</blockquote>
+<p>示例：</p>
+<p><img src="/2019/05/26/day06/assets/1526188831504.png" alt="1526188831504"></p>
+<p>nginx中的每个server就是一个反向代理配置，可以有多个server</p>
+<p>完整配置：</p>
+<p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#user  nobody;</span></span><br><span class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       mime.types;</span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">gzip</span>  <span class="literal">on</span>;</span><br><span class="line">	<span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">        <span class="attribute">server_name</span>  manage.leyou.com;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Server <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">			<span class="attribute">proxy_pass</span> http://127.0.0.1:9001;</span><br><span class="line">			<span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">			<span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">        <span class="attribute">server_name</span>  api.leyou.com;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Server <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">			<span class="attribute">proxy_pass</span> http://127.0.0.1:10010;</span><br><span class="line">			<span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">			<span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h3>使用</h3>
+</blockquote>
+<p>nginx可以通过命令行来启动，操作命令：</p>
+<ul>
+<li>启动：<code>start nginx.exe</code></li>
+<li>停止：<code>nginx.exe -s stop</code></li>
+<li>重新加载：<code>nginx.exe -s reload</code></li>
+</ul>
+<p>启动过程会闪烁一下，启动成功后，任务管理器中会有两个nginx进程：</p>
+<p><img src="/2019/05/26/day06/assets/1530385404783.png" alt="1530385404783"></p>
+<h2>4.5.测试</h2>
+<p>启动nginx，然后用域名访问后台管理系统：</p>
+<p><img src="/2019/05/26/day06/assets/1530385593052.png" alt="1530385593052"></p>
+<p>现在实现了域名访问网站了，中间的流程是怎样的呢？</p>
+<p><img src="/2019/05/26/day06/assets/1526189945180.png" alt="1526189945180"></p>
+<ol>
+<li>
+<p>浏览器准备发起请求，访问http://mamage.leyou.com，但需要进行域名解析</p>
+</li>
+<li>
+<p>优先进行本地域名解析，因为我们修改了hosts，所以解析成功，得到地址：127.0.0.1</p>
+</li>
+<li>
+<p>请求被发往解析得到的ip，并且默认使用80端口：http://127.0.0.1:80</p>
+<p>本机的nginx一直监听80端口，因此捕获这个请求</p>
+</li>
+<li>
+<p>nginx中配置了反向代理规则，将manage.leyou.com代理到127.0.0.1:9001，因此请求被转发</p>
+</li>
+<li>
+<p>后台系统的webpack server监听的端口是9001，得到请求并处理，完成后将响应返回到nginx</p>
+</li>
+<li>
+<p>nginx将得到的结果返回到浏览器</p>
+</li>
+</ol>
+<h1>5.实现商品分类查询</h1>
+<p>商城的核心自然是商品，而商品多了以后，肯定要进行分类，并且不同的商品会有不同的品牌信息，其关系如图所示：</p>
+<p><img src="/2019/05/26/day06/assets/1525999005260.png" alt="1525999005260"></p>
+<ul>
+<li>一个商品分类下有很多商品</li>
+<li>一个商品分类下有很多品牌</li>
+<li>而一个品牌，可能属于不同的分类</li>
+<li>一个品牌下也会有很多商品</li>
+</ul>
+<p>因此，我们需要依次去完成：商品分类、品牌、商品的开发。</p>
+<h2>5.1.导入数据</h2>
+<p>首先导入课前资料提供的sql：</p>
+<p><img src="/2019/05/26/day06/assets/1530556389224.png" alt="1530556389224"></p>
+<p>我们先看商品分类表：</p>
+<p><img src="/2019/05/26/day06/assets/1525999774439.png" alt="1525999774439"></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `tb_category` (</span><br><span class="line">  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &apos;类目id&apos;,</span><br><span class="line">  `name` varchar(20) NOT NULL COMMENT &apos;类目名称&apos;,</span><br><span class="line">  `parent_id` bigint(20) NOT NULL COMMENT &apos;父类目id,顶级类目填0&apos;,</span><br><span class="line">  `is_parent` tinyint(1) NOT NULL COMMENT &apos;是否为父节点，0为否，1为是&apos;,</span><br><span class="line">  `sort` int(4) NOT NULL COMMENT &apos;排序指数，越小越靠前&apos;,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  KEY `key_parent_id` (`parent_id`) USING BTREE</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=1424 DEFAULT CHARSET=utf8 COMMENT=&apos;商品类目表，类目和商品(spu)是一对多关系，类目与品牌是多对多关系&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>因为商品分类会有层级关系，因此这里我们加入了<code>parent_id</code>字段，对本表中的其它分类进行自关联。</p>
+<h2>5.2.页面实现</h2>
+<h3>5.2.1.页面分析</h3>
+<p>首先我们看下要实现的效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530413709515.png" alt="1530413709515"></p>
+<p>商品分类之间是会有层级关系的，采用树结构去展示是最直观的方式。</p>
+<p>一起来看页面，对应的是/pages/item/Category.vue：</p>
+<p><img src="/2019/05/26/day06/assets/1530386186299.png" alt="1530386186299"></p>
+<p>页面模板：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">v-flex</span> <span class="attr">xs12</span> <span class="attr">sm10</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">v-tree</span> <span class="attr">url</span>=<span class="string">"/item/category/list"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">:treeData</span>=<span class="string">"treeData"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">:isEdit</span>=<span class="string">"isEdit"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">handleAdd</span>=<span class="string">"handleAdd"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">handleEdit</span>=<span class="string">"handleEdit"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">handleDelete</span>=<span class="string">"handleDelete"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">handleClick</span>=<span class="string">"handleClick"</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">v-flex</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">v-card</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p><code>v-card</code>：卡片，是vuetify中提供的组件，提供一个悬浮效果的面板，一般用来展示一组数据。</p>
+<p><img src="/2019/05/26/day06/assets/1526000692741.png" alt="1526000692741"></p>
+</li>
+<li>
+<p><code>v-flex</code>：布局容器，用来控制响应式布局。与BootStrap的栅格系统类似，整个屏幕被分为12格。我们可以控制所占的格数来控制宽度：</p>
+<p><img src="/2019/05/26/day06/assets/1526001573140.png" alt="1526001573140"></p>
+<p>本例中，我们用<code>sm10</code>控制在小屏幕及以上时，显示宽度为10格</p>
+</li>
+<li>
+<p><code>v-tree</code>：树组件。Vuetify并没有提供树组件，这个是我们自己编写的自定义组件：</p>
+<p><img src="/2019/05/26/day06/assets/1526001762446.png" alt="1526001762446"></p>
+<p>里面涉及一些vue的高级用法，大家暂时不要关注其源码，会用即可。</p>
+</li>
+</ul>
+<h3>5.2.2.树组件的用法</h3>
+<p>也可参考课前资料中的：《自定义Vue组件的用法.md》</p>
+<p>这里我贴出树组件的用法指南。</p>
+<blockquote>
+<p>属性列表：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名称</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">数据类型</th>
+<th style="text-align:left">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">url</td>
+<td style="text-align:left">用来加载数据的地址，即延迟加载</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">isEdit</td>
+<td style="text-align:left">是否开启树的编辑功能</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">treeData</td>
+<td style="text-align:left">整颗树数据，这样就不用远程加载了</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">-</td>
+</tr>
+</tbody>
+</table>
+<p>这里推荐使用url进行延迟加载，<strong>每当点击父节点时，就会发起请求，根据父节点id查询子节点信息</strong>。</p>
+<p>当有treeData属性时，就不会触发url加载</p>
+<p>远程请求返回的结果格式：</p>
+<p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123; </span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">74</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"手机"</span>,</span><br><span class="line">        <span class="attr">"parentId"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"isParent"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"sort"</span>: <span class="number">2</span></span><br><span class="line">	&#125;,</span><br><span class="line">     &#123; </span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">75</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"家用电器"</span>,</span><br><span class="line">        <span class="attr">"parentId"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"isParent"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"sort"</span>: <span class="number">3</span></span><br><span class="line">	&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>事件：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事件名称</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">回调参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">handleAdd</td>
+<td style="text-align:left">新增节点时触发，isEdit为true时有效</td>
+<td style="text-align:left">新增节点node对象，包含属性：name、parentId和sort</td>
+</tr>
+<tr>
+<td style="text-align:left">handleEdit</td>
+<td style="text-align:left">当某个节点被编辑后触发，isEdit为true时有效</td>
+<td style="text-align:left">被编辑节点的id和name</td>
+</tr>
+<tr>
+<td style="text-align:left">handleDelete</td>
+<td style="text-align:left">当删除节点时触发，isEdit为true时有效</td>
+<td style="text-align:left">被删除节点的id</td>
+</tr>
+<tr>
+<td style="text-align:left">handleClick</td>
+<td style="text-align:left">点击某节点时触发</td>
+<td style="text-align:left">被点击节点的node对象,包含完整的node信息</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>完整node的信息</p>
+</blockquote>
+<p>回调函数中返回完整的node节点会包含以下数据：</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "id": 76, // 节点id</span><br><span class="line">    "name": "手机", // 节点名称</span><br><span class="line">    "parentId": 75, // 父节点id</span><br><span class="line">    "isParent": false, // 是否是父节点</span><br><span class="line">    "sort": 1, // 顺序</span><br><span class="line">    "path": ["手机", "手机通讯", "手机"] // 所有父节点的名称数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>5.3.实现功能</h2>
+<h3>5.3.1.url异步请求</h3>
+<p>给大家的页面中，treeData是假数据，我们删除数据treeData属性，只保留url看看会发生什么：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-tree</span> <span class="attr">url</span>=<span class="string">"/item/category/list"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:isEdit</span>=<span class="string">"isEdit"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">handleAdd</span>=<span class="string">"handleAdd"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">handleEdit</span>=<span class="string">"handleEdit"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">handleDelete</span>=<span class="string">"handleDelete"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">handleClick</span>=<span class="string">"handleClick"</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>刷新页面，可以看到：</p>
+<p><img src="/2019/05/26/day06/assets/1530427294644.png" alt="1530427294644"></p>
+<p>页面中的树没有了，并且发起了一条请求：http://localhost/api/item/category/list?pid=0</p>
+<p>大家可能会觉得很奇怪，我们明明是使用的相对路径，讲道理发起的请求地址应该是：</p>
+<p>http://manage.leyou.com/item/category/list</p>
+<p>但实际却是：</p>
+<p>http://localhost/api/item/category/list?pid=0</p>
+<p>这是因为，我们有一个全局的配置文件，对所有的请求路径进行了约定：</p>
+<p><img src="/2019/05/26/day06/assets/1530427514123.png" alt="1530427514123"></p>
+<p>路径是localhost，并且默认加上了/api的前缀，这恰好与我们的网关设置匹配，我们只需要把地址改成网关的地址即可,因为我们使用了nginx反向代理，这里可以写域名。</p>
+<p>接下来，我们要做的事情就是编写后台接口，返回对应的数据即可。</p>
+<h3>5.3.2.实体类</h3>
+<p>在<code>ly-item-interface</code>中添加category实体类：</p>
+<p><img src="/2019/05/26/day06/assets/1530444682670.png" alt="1530444682670"></p>
+<p>内容：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name=<span class="string">"tb_category"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Category</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Id</span></span><br><span class="line">	<span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> Long parentId;</span><br><span class="line">	<span class="keyword">private</span> Boolean isParent; <span class="comment">// 注意isParent生成的getter和setter方法需要手动加上Is</span></span><br><span class="line">	<span class="keyword">private</span> Integer sort;</span><br><span class="line">	<span class="comment">// getter和setter略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，这里要用到jpa的注解，因此我们在<code>ly-item-iterface</code>中添加jpa依赖</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.persistence<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>persistence-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>5.3.3.controller</h3>
+<p>编写一个controller一般需要知道四个内容：</p>
+<ul>
+<li>请求方式：决定我们用GetMapping还是PostMapping</li>
+<li>请求路径：决定映射路径</li>
+<li>请求参数：决定方法的参数</li>
+<li>返回值结果：决定方法的返回值</li>
+</ul>
+<p>在刚才页面发起的请求中，我们就能得到绝大多数信息：</p>
+<p><img src="/2019/05/26/day06/assets/1530445885707.png" alt="1530445885707"></p>
+<ul>
+<li>
+<p>请求方式：Get</p>
+</li>
+<li>
+<p>请求路径：/api/item/category/list。其中/api是网关前缀，/item是网关的路由映射，真实的路径应该是/category/list</p>
+</li>
+<li>
+<p>请求参数：pid=0，根据tree组件的说明，应该是父节点的id，第一次查询为0，那就是查询一级类目</p>
+</li>
+<li>
+<p>返回结果：？？</p>
+<p>根据前面tree组件的用法我们知道，返回的应该是json数组：</p>
+<p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123; </span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">74</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"手机"</span>,</span><br><span class="line">        <span class="attr">"parentId"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"isParent"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"sort"</span>: <span class="number">2</span></span><br><span class="line">	&#125;,</span><br><span class="line">     &#123; </span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">75</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"家用电器"</span>,</span><br><span class="line">        <span class="attr">"parentId"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"isParent"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"sort"</span>: <span class="number">3</span></span><br><span class="line">	&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>对应的java类型可以是List集合，里面的元素就是类目对象了。也就是<code>List&lt;Category&gt;</code></p>
+</li>
+</ul>
+<p>添加Controller：</p>
+<p><img src="/2019/05/26/day06/assets/1530450599897.png" alt="1530450599897"></p>
+<p>controller代码：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"category"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CategoryController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CategoryService categoryService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据parentId查询类目</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"list"</span>)</span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;List&lt;Category&gt;&gt; queryCategoryListByParentId(<span class="meta">@RequestParam</span>(value = <span class="string">"pid"</span>, defaultValue = <span class="string">"0"</span>) Long pid) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (pid == <span class="keyword">null</span> || pid.longValue() &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">// pid为null或者小于等于0，响应400</span></span><br><span class="line">                <span class="keyword">return</span> ResponseEntity.badRequest().build();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 执行查询操作</span></span><br><span class="line">            List&lt;Category&gt; categoryList = <span class="keyword">this</span>.categoryService.queryCategoryListByParentId(pid);</span><br><span class="line">            <span class="keyword">if</span> (CollectionUtils.isEmpty(categoryList))&#123;</span><br><span class="line">                <span class="comment">// 返回结果集为空，响应404</span></span><br><span class="line">                <span class="keyword">return</span> ResponseEntity.notFound().build();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 响应200</span></span><br><span class="line">            <span class="keyword">return</span> ResponseEntity.ok(categoryList);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 响应500</span></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>5.3.4.service</h3>
+<p>一般service层我们会定义接口和实现类，不过这里我们就偷懒一下，直接写实现类了：</p>
+<p><img src="/2019/05/26/day06/assets/1530450744567.png" alt="1530450744567"></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CategoryService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CategoryMapper categoryMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据parentId查询子类目</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Category&gt; <span class="title">queryCategoryListByParentId</span><span class="params">(Long pid)</span> </span>&#123;</span><br><span class="line">        Category record = <span class="keyword">new</span> Category();</span><br><span class="line">        record.setParentId(pid);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.categoryMapper.select(record);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>5.3.5.mapper</h3>
+<p>我们使用通用mapper来简化开发：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CategoryMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Category</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意，我们并没有在mapper接口上声明@Mapper注解，那么mybatis如何才能找到接口呢？</p>
+<p>我们在启动类上添加一个扫描包功能：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.leyou.item.mapper"</span>) <span class="comment">// mapper接口的包扫描</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeyouItemServiceApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LeyouItemServiceApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>5.3.6.启动并测试</h3>
+<p>我们不经过网关，直接访问：http://localhost:8081/category/list</p>
+<p><img src="/2019/05/26/day06/assets/1530455133230.png" alt="1530455133230"></p>
+<p>然后试试网关是否畅通：http://api.leyou.com/api/item/category/list</p>
+<p><img src="/2019/05/26/day06/assets/1530455291468.png" alt="1530455291468"></p>
+<p>一切OK！</p>
+<p>然后刷新后台管理页面查看：</p>
+<p><img src="/2019/05/26/day06/assets/1530455437899.png" alt="1530455437899"></p>
+<p>发现报错了！</p>
+<p>浏览器直接访问没事，但是这里却报错，什么原因？</p>
+<h1>6.跨域问题</h1>
+<p>跨域：浏览器对于javascript的同源策略的限制 。</p>
+<p>以下情况都属于跨域：</p>
+<table>
+<thead>
+<tr>
+<th>跨域原因说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>域名不同</td>
+<td><code>www.jd.com</code> 与 <code>www.taobao.com</code></td>
+</tr>
+<tr>
+<td>域名相同，端口不同</td>
+<td><code>www.jd.com:8080</code> 与 <code>www.jd.com:8081</code></td>
+</tr>
+<tr>
+<td>二级域名不同</td>
+<td><code>item.jd.com</code> 与 <code>miaosha.jd.com</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果<strong>域名和端口都相同，但是请求路径不同</strong>，不属于跨域，如：</p>
+<p><code>www.jd.com/item</code></p>
+<p><code>www.jd.com/goods</code></p>
+<p>而我们刚才是从<code>manage.leyou.com</code>去访问<code>api.leyou.com</code>，这属于二级域名不同，跨域了。</p>
+<h2>6.1.为什么有跨域问题？</h2>
+<p>跨域不一定会有跨域问题。</p>
+<p>因为跨域问题是浏览器对于ajax请求的一种安全限制：<strong>一个页面发起的ajax请求，只能是与当前页域名相同的路径</strong>，这能有效的阻止跨站攻击。</p>
+<p>因此：<strong>跨域问题 是针对ajax的一种限制</strong>。</p>
+<p>但是这却给我们的开发带来了不便，而且在实际生产环境中，肯定会有很多台服务器之间交互，地址和端口都可能不同，怎么办？</p>
+<h2>6.2.解决跨域问题的方案</h2>
+<p>目前比较常用的跨域解决方案有3种：</p>
+<ul>
+<li>
+<p>Jsonp</p>
+<p>最早的解决方案，利用script标签可以跨域的原理实现。</p>
+<p>限制：</p>
+<ul>
+<li>需要服务的支持</li>
+<li>只能发起GET请求</li>
+</ul>
+</li>
+<li>
+<p>nginx反向代理</p>
+<p>思路是：利用nginx把跨域反向代理为不跨域，支持各种请求方式</p>
+<p>缺点：需要在nginx进行额外配置，语义不清晰</p>
+</li>
+<li>
+<p>CORS</p>
+<p>规范化的跨域请求解决方案，安全可靠。</p>
+<p>优势：</p>
+<ul>
+<li>在服务端进行控制是否允许跨域，可自定义规则</li>
+<li>支持各种请求方式</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>会产生额外的请求</li>
+</ul>
+</li>
+</ul>
+<p>我们这里会采用<strong>cors的跨域方案</strong>。</p>
+<h2>6.3.cors解决跨域</h2>
+<h3>6.3.1.什么是cors</h3>
+<p>CORS是一个W3C标准，全称是&quot;跨域资源共享&quot;（Cross-origin resource sharing）。</p>
+<p>它允许浏览器向跨源服务器，发出<a href="http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html"><code>XMLHttpRequest</code></a>请求，从而克服了AJAX只能<a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源</a>使用的限制。</p>
+<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。</p>
+<ul>
+<li>
+<p>浏览器端：</p>
+<p>目前，所有浏览器都支持该功能（IE10以下不行）。整个CORS通信过程，都是浏览器自动完成，不需要用户参与。</p>
+</li>
+<li>
+<p>服务端：</p>
+<p>CORS通信与AJAX没有任何差别，因此你不需要改变以前的业务逻辑。只不过，浏览器会在请求中携带一些头信息，我们需要以此判断是否允许其跨域，然后在响应头中加入一些信息即可。这一般通过过滤器完成即可。</p>
+</li>
+</ul>
+<h3>6.3.2.原理有点复杂</h3>
+<p>浏览器会将ajax请求分为两类，其处理方案略有差异：简单请求、特殊请求。</p>
+<h4>6.3.2.1.简单请求</h4>
+<p>只要同时满足以下两大条件，就属于简单请求。：</p>
+<p>（1) 请求方法是以下三种方法之一：</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<p>（2）HTTP的头信息不超出以下几种字段：</p>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type：只限于三个值<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>text/plain</code></li>
+</ul>
+<p>当浏览器发现发起的ajax请求是简单请求时，会在请求头中携带一个字段：<code>Origin</code>.</p>
+<p><img src="/2019/05/26/day06/assets/1530460311064.png" alt="1530460311064"></p>
+<p>Origin中会指出当前请求属于哪个域（协议+域名+端口）。服务会根据这个值决定是否允许其跨域。</p>
+<p>如果服务器允许跨域，需要在返回的响应头中携带下面信息：</p>
+<p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Access-Control-Allow-Origin</span>: http://manage.leyou.com</span><br><span class="line"><span class="attribute">Access-Control-Allow-Credentials</span>: true</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Access-Control-Allow-Origin：可接受的域，是一个具体域名或者*（代表任意域名）</li>
+<li>Access-Control-Allow-Credentials：是否允许携带cookie，默认情况下，cors不会携带cookie，除非这个值是true</li>
+</ul>
+<blockquote>
+<p>有关cookie：</p>
+</blockquote>
+<p>要想操作cookie，需要满足3个条件：</p>
+<ul>
+<li>服务的响应头中需要携带Access-Control-Allow-Credentials并且为true。</li>
+<li>浏览器发起ajax需要指定withCredentials 为true</li>
+<li>响应头中的Access-Control-Allow-Origin一定不能为*，必须是指定的域名</li>
+</ul>
+<h4>6.3.2.2.特殊请求</h4>
+<p>不符合简单请求的条件，会被浏览器判定为特殊请求,，例如请求方式为PUT。</p>
+<blockquote>
+<p>预检请求</p>
+</blockquote>
+<p>特殊请求会在正式通信之前，增加一次HTTP查询请求，称为&quot;预检&quot;请求（preflight）。</p>
+<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的<code>XMLHttpRequest</code>请求，否则就报错。</p>
+<p>一个“预检”请求的样板：</p>
+<p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">OPTIONS</span> <span class="string">/cors</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Origin</span>: http://manage.leyou.com</span><br><span class="line"><span class="attribute">Access-Control-Request-Method</span>: PUT</span><br><span class="line"><span class="attribute">Access-Control-Request-Headers</span>: X-Custom-Header</span><br><span class="line"><span class="attribute">Host</span>: api.leyou.com</span><br><span class="line"><span class="attribute">Accept-Language</span>: en-US</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0...</span><br></pre></td></tr></table></figure></p>
+<p>与简单请求相比，除了Origin以外，多了两个头：</p>
+<ul>
+<li>Access-Control-Request-Method：接下来会用到的请求方式，比如PUT</li>
+<li>Access-Control-Request-Headers：会额外用到的头信息</li>
+</ul>
+<blockquote>
+<p>预检请求的响应</p>
+</blockquote>
+<p>服务的收到预检请求，如果许可跨域，会发出响应：</p>
+<p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span>: Mon, 01 Dec 2008 01:15:39 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.0.61 (Unix)</span><br><span class="line"><span class="attribute">Access-Control-Allow-Origin</span>: http://manage.leyou.com</span><br><span class="line"><span class="attribute">Access-Control-Allow-Credentials</span>: true</span><br><span class="line"><span class="attribute">Access-Control-Allow-Methods</span>: GET, POST, PUT</span><br><span class="line"><span class="attribute">Access-Control-Allow-Headers</span>: X-Custom-Header</span><br><span class="line"><span class="attribute">Access-Control-Max-Age</span>: 1728000</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Encoding</span>: gzip</span><br><span class="line"><span class="attribute">Content-Length</span>: 0</span><br><span class="line"><span class="attribute">Keep-Alive</span>: timeout=2, max=100</span><br><span class="line"><span class="attribute">Connection</span>: Keep-Alive</span><br><span class="line"><span class="attribute">Content-Type</span>: text/plain</span><br></pre></td></tr></table></figure></p>
+<p>除了<code>Access-Control-Allow-Origin</code>和<code>Access-Control-Allow-Credentials</code>以外，这里又额外多出3个头：</p>
+<ul>
+<li>Access-Control-Allow-Methods：允许访问的方式</li>
+<li>Access-Control-Allow-Headers：允许携带的头</li>
+<li>Access-Control-Max-Age：本次许可的有效时长，单位是秒，<strong>过期之前的ajax请求就无需再次进行预检了</strong></li>
+</ul>
+<p>如果浏览器得到上述响应，则认定为可以跨域，后续就跟简单请求的处理是一样的了。</p>
+<h3>6.3.3.实现非常简单</h3>
+<p>虽然原理比较复杂，但是前面说过：</p>
+<ul>
+<li>浏览器端都有浏览器自动完成，我们无需操心</li>
+<li>服务端可以通过拦截器统一实现，不必每次都去进行跨域判定的编写。</li>
+</ul>
+<p>事实上，SpringMVC已经帮我们写好了CORS的跨域过滤器：CorsFilter ,内部已经实现了刚才所讲的判定逻辑，我们直接用就好了。</p>
+<p>在<code>leyou-gateway</code>中编写一个配置类，并且注册CorsFilter：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalCorsConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.添加CORS配置信息</span></span><br><span class="line">        CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        <span class="comment">//1) 允许的域,不要写*，否则cookie就无法使用了</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">"http://manage.leyou.com"</span>);</span><br><span class="line">        <span class="comment">//2) 是否发送Cookie信息</span></span><br><span class="line">        config.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//3) 允许的请求方式</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">"OPTIONS"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"HEAD"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"GET"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"PUT"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"POST"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"DELETE"</span>);</span><br><span class="line">        config.addAllowedMethod(<span class="string">"PATCH"</span>);</span><br><span class="line">        <span class="comment">// 4）允许的头信息</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">"*"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.添加映射路径，我们拦截一切请求</span></span><br><span class="line">        UrlBasedCorsConfigurationSource configSource = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        configSource.registerCorsConfiguration(<span class="string">"/**"</span>, config);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.返回新的CorsFilter.</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(configSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结构：</p>
+<p><img src="/2019/05/26/day06/assets/1530462650711.png" alt="1530462650711"></p>
+<p>重启测试，访问正常：</p>
+<p><img src="/2019/05/26/day06/assets/1530463010927.png" alt="1530463010927"></p>
+<p>分类的增删改功能暂时就不做了，页面已经预留好了事件接口，有兴趣的同学可以完成一下。</p>
+<h1>7.从0开始品牌的查询</h1>
+<p>商品分类完成以后，自然轮到了品牌功能了。</p>
+<p>先看看我们要实现的效果：</p>
+<p><img src="/2019/05/26/day06/assets/1526021968036.png" alt="1526021968036"></p>
+<p>接下来，我们从0开始，实现下从前端到后端的完整开发。</p>
+<h2>7.1.设计前端页面</h2>
+<p>为了方便看到效果，我们新建一个MyBrand.vue（注意先停掉服务器），从0开始搭建。</p>
+<p><img src="/2019/05/26/day06/assets/1530464178834.png" alt="1530464178834"></p>
+<p>内容初始化一下：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;span&gt;</span><br><span class="line">    hello</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &quot;myBrand&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- scoped:当前样式只作用于当前组件的节点 --&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>改变router新的index.js，将路由地址指向MyBrand.vue</p>
+<p><img src="/2019/05/26/day06/assets/1530464255544.png" alt="1530464255544"></p>
+<p>打开服务器，再次查看页面：</p>
+<p><img src="/2019/05/26/day06/assets/1530464304721.png" alt="1530464304721"></p>
+<p>干干净净了。只剩hello</p>
+<h3>7.1.1.查询表格</h3>
+<p>大家看到这个原型页面肯定能看出，其主体就是一个table。我们去Vuetify查看有关table的文档：</p>
+<p><img src="/2019/05/26/day06/assets/1526023540226.png" alt="1526023540226"></p>
+<p>仔细阅读，发现<code>v-data-table</code>中有以下核心属性：</p>
+<ul>
+<li>
+<p>dark：是否使用黑暗色彩主题，默认是false</p>
+</li>
+<li>
+<p>expand：表格的行是否可以展开，默认是false</p>
+</li>
+<li>
+<p>headers：定义表头的数组，数组的每个元素就是一个表头信息对象，结构：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  text: string, <span class="comment">// 表头的显示文本</span></span><br><span class="line">  value: string, <span class="comment">// 表头对应的每行数据的key</span></span><br><span class="line">  align: <span class="string">'left'</span> | <span class="string">'center'</span> | <span class="string">'right'</span>, <span class="comment">// 位置</span></span><br><span class="line">  sortable: boolean, <span class="comment">// 是否可排序</span></span><br><span class="line">  class: string[] | string,// 样式</span><br><span class="line">  width: string,<span class="comment">// 宽度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>items：表格的数据的数组，数组的每个元素是一行数据的对象，对象的key要与表头的value一致</p>
+</li>
+<li>
+<p>loading：是否显示加载数据的进度条，默认是false</p>
+</li>
+<li>
+<p>no-data-text：当没有查询到数据时显示的提示信息，string类型，无默认值</p>
+</li>
+<li>
+<p>pagination.sync：包含分页和排序信息的对象，将其与vue实例中的属性关联，表格的分页或排序按钮被触发时，会自动将最新的分页和排序信息更新。对象结构：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    page: <span class="number">1</span>, <span class="comment">// 当前页</span></span><br><span class="line">    rowsPerPage: <span class="number">5</span>, <span class="comment">// 每页大小</span></span><br><span class="line">    sortBy: <span class="string">''</span>, <span class="comment">// 排序字段</span></span><br><span class="line">    descending:<span class="literal">false</span>, <span class="comment">// 是否降序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>total-items：分页的总条数信息，number类型，无默认值</p>
+</li>
+<li>
+<p>select-all ：是否显示每一行的复选框，Boolean类型，无默认值</p>
+</li>
+<li>
+<p>value：当表格可选的时候，返回选中的行</p>
+</li>
+</ul>
+<p>我们向下翻，找找有没有看起来牛逼的案例。</p>
+<p>找到这样一条：</p>
+<p><img src="/2019/05/26/day06/assets/1526023837773.png" alt="1526023837773"></p>
+<p>其它的案例都是由Vuetify帮我们对查询到的当前页数据进行排序和分页，这显然不是我们想要的。我们希望能在服务端完成对整体品牌数据的排序和分页，而这个案例恰好合适。</p>
+<p>点击按钮，我们直接查看源码，然后直接复制到MyBrand.vue中</p>
+<p>模板：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;v-data-table</span><br><span class="line">      :headers=&quot;headers&quot;</span><br><span class="line">      :items=&quot;desserts&quot;</span><br><span class="line">      :pagination.sync=&quot;pagination&quot;</span><br><span class="line">      :total-items=&quot;totalDesserts&quot;</span><br><span class="line">      :loading=&quot;loading&quot;</span><br><span class="line">      class=&quot;elevation-1&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.calories &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.fat &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.carbs &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.protein &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.iron &#125;&#125;&lt;/td&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/v-data-table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<h3>7.1.2.表格分析</h3>
+<p>接下来，就分析一下案例中每一部分是什么意思，搞清楚了，我们也可以自己玩了。</p>
+<p>先看模板中table上的一些属性：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;v-data-table</span><br><span class="line">              :headers=&quot;headers&quot;</span><br><span class="line">              :items=&quot;desserts&quot;</span><br><span class="line">              :pagination.sync=&quot;pagination&quot;</span><br><span class="line">              :total-items=&quot;totalDesserts&quot;</span><br><span class="line">              :loading=&quot;loading&quot;</span><br><span class="line">              class=&quot;elevation-1&quot;</span><br><span class="line">              &gt;</span><br><span class="line">&lt;/v-data-table&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>headers：表头信息，是一个数组</p>
+</li>
+<li>
+<p>items：要在表格中展示的数据，数组结构，每一个元素是一行。在这里应该是品牌集合</p>
+</li>
+<li>
+<p>pagination.sync：分页信息，包含了当前页，每页大小，排序字段，排序方式等。加上.sync代表服务端排序，当用户点击分页条时，该对象的值会跟着变化。监控这个值，并在这个值变化时去服务端查询，即可实现页面数据动态加载了。</p>
+</li>
+<li>
+<p>total-items：总条数，在这里是品牌的总记录数</p>
+</li>
+<li>
+<p>loading：boolean类型，true：代表数据正在加载，会有进度条。false：数据加载完毕。</p>
+<p><img src="/2019/05/26/day06/assets/1526029254159.png" alt="1526029254159"></p>
+</li>
+</ul>
+<p>另外，在<code>v-data-tables</code>中，我们还看到另一段代码：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.calories &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.fat &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.carbs &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.protein &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-right&quot;&gt;&#123;&#123; props.item.iron &#125;&#125;&lt;/td&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这段就是在渲染每一行的数据。Vue会自动遍历上面传递的<code>items</code>属性，并把得到的对象传递给这段<code>template</code>中的<code>props.item</code>属性。我们从中得到数据，渲染在页面即可。</p>
+<p>我们需要做的事情，主要有两件：</p>
+<ul>
+<li>给items和totalItems赋值</li>
+<li>当pagination变化时，重新获取数据，再次给items和totalItems赋值</li>
+</ul>
+<h3>7.1.3.动手实现</h3>
+<p>表格中具体有哪些列呢？参照品牌表：</p>
+<p><img src="/2019/05/26/day06/assets/1530518876942.png" alt="1530518876942"></p>
+<p>品牌中有id,name,image,letter字段。</p>
+<h4>7.1.3.1.修改模板</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;v-data-table</span><br><span class="line">      :headers=&quot;headers&quot;</span><br><span class="line">      :items=&quot;brands&quot;</span><br><span class="line">      :pagination.sync=&quot;pagination&quot;</span><br><span class="line">      :total-items=&quot;totalBrands&quot;</span><br><span class="line">      :loading=&quot;loading&quot;</span><br><span class="line">      class=&quot;elevation-1&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.id &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&lt;img v-if=&quot;props.item.image&quot; :src=&quot;props.item.image&quot; width=&quot;130&quot; height=&quot;40&quot;/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.letter &#125;&#125;&lt;/td&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/v-data-table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>我们修改了以下部分：</p>
+<ul>
+<li>items：指向一个brands变量，等下在js代码中定义</li>
+<li>total-items：指向了totalBrands变量，等下在js代码中定义</li>
+<li>template模板中，渲染了四个字段：
+<ul>
+<li>id：</li>
+<li>name</li>
+<li>image，注意，我们不是以文本渲染，而是赋值到一个<code>img</code>标签的src属性中，并且做了非空判断</li>
+<li>letter</li>
+</ul>
+</li>
+</ul>
+<h4>7.1.3.2.编写数据模型</h4>
+<p>接下来编写要用到的数据：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    totalBrands: <span class="number">0</span>, <span class="comment">// 总条数</span></span><br><span class="line">    brands: [], <span class="comment">// 当前页品牌数据</span></span><br><span class="line">    loading: <span class="literal">true</span>, <span class="comment">// 是否在加载中</span></span><br><span class="line">    pagination: &#123;&#125;, <span class="comment">// 分页信息</span></span><br><span class="line">    headers: [ <span class="comment">// 头信息</span></span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'id'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'id'</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'名称'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'name'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'LOGO'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'image'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'首字母'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'letter'</span>&#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>7.1.3.3.数据初始化</h4>
+<p>接下来就是对brands和totalBrands完成赋值动作了。</p>
+<p>我们编写一个函数来完成赋值，提高复用性：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  getDataFromServer()&#123; <span class="comment">// 从服务端加载数据的函数</span></span><br><span class="line">    <span class="comment">// 伪造演示数据</span></span><br><span class="line">    <span class="keyword">const</span> brands = [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2032</span>,</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"OPPO"</span>,</span><br><span class="line">        <span class="string">"image"</span>: <span class="string">"http://img10.360buyimg.com/popshop/jfs/t2119/133/2264148064/4303/b8ab3755/56b2f385N8e4eb051.jpg"</span>,</span><br><span class="line">        <span class="string">"letter"</span>: <span class="string">"O"</span>,</span><br><span class="line">        <span class="string">"categories"</span>: <span class="literal">null</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2033</span>,</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"飞利浦（PHILIPS）"</span>,</span><br><span class="line">        <span class="string">"image"</span>: <span class="string">"http://img12.360buyimg.com/popshop/jfs/t18361/122/1318410299/1870/36fe70c9/5ac43a4dNa44a0ce0.jpg"</span>,</span><br><span class="line">        <span class="string">"letter"</span>: <span class="string">"F"</span>,</span><br><span class="line">        <span class="string">"categories"</span>: <span class="literal">null</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2034</span>,</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"华为（HUAWEI）"</span>,</span><br><span class="line">        <span class="string">"image"</span>: <span class="string">"http://img10.360buyimg.com/popshop/jfs/t5662/36/8888655583/7806/1c629c01/598033b4Nd6055897.jpg"</span>,</span><br><span class="line">        <span class="string">"letter"</span>: <span class="string">"H"</span>,</span><br><span class="line">        <span class="string">"categories"</span>: <span class="literal">null</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2036</span>,</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"酷派（Coolpad）"</span>,</span><br><span class="line">        <span class="string">"image"</span>: <span class="string">"http://img10.360buyimg.com/popshop/jfs/t2521/347/883897149/3732/91c917ec/5670cf96Ncffa2ae6.jpg"</span>,</span><br><span class="line">        <span class="string">"letter"</span>: <span class="string">"K"</span>,</span><br><span class="line">        <span class="string">"categories"</span>: <span class="literal">null</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2037</span>,</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"魅族（MEIZU）"</span>,</span><br><span class="line">        <span class="string">"image"</span>: <span class="string">"http://img13.360buyimg.com/popshop/jfs/t3511/131/31887105/4943/48f83fa9/57fdf4b8N6e95624d.jpg"</span>,</span><br><span class="line">        <span class="string">"letter"</span>: <span class="string">"M"</span>,</span><br><span class="line">        <span class="string">"categories"</span>: <span class="literal">null</span></span><br><span class="line">      &#125;</span><br><span class="line">    ];</span><br><span class="line">    <span class="comment">// 延迟一段时间，模拟数据请求时间</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.brands = brands; <span class="comment">// 赋值给品牌数组</span></span><br><span class="line">      <span class="keyword">this</span>.totalBrands = brands.length; <span class="comment">// 赋值数据总条数</span></span><br><span class="line">      <span class="keyword">this</span>.loading = <span class="literal">false</span>; <span class="comment">// 数据加载完成</span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后使用钩子函数，在Vue实例初始化完毕后调用这个方法，这里使用mounted（渲染后）函数：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染后执行</span></span><br><span class="line">mounted()&#123;</span><br><span class="line">  <span class="keyword">this</span>.getDataFromServer() <span class="comment">// 调用数据初始化函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>6.2.3.4.完整代码</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;v-data-table</span><br><span class="line">      :headers=&quot;headers&quot;</span><br><span class="line">      :items=&quot;brands&quot;</span><br><span class="line">      :pagination.sync=&quot;pagination&quot;</span><br><span class="line">      :total-items=&quot;totalBrands&quot;</span><br><span class="line">      :loading=&quot;loading&quot;</span><br><span class="line">      class=&quot;elevation-1&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.id &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&lt;img v-if=&quot;props.item.image&quot; :src=&quot;props.item.image&quot; width=&quot;130&quot; height=&quot;40&quot;/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.letter &#125;&#125;&lt;/td&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/v-data-table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &quot;myBrand&quot;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        totalBrands: 0, // 总条数</span><br><span class="line">        brands: [], // 当前页品牌数据</span><br><span class="line">        loading: true, // 是否在加载中</span><br><span class="line">        pagination: &#123;&#125;, // 分页信息</span><br><span class="line">        headers: [ // 头信息</span><br><span class="line">          &#123;text: &apos;id&apos;, align: &apos;center&apos;, value: &apos;id&apos;&#125;,</span><br><span class="line">          &#123;text: &apos;名称&apos;, align: &apos;center&apos;, value: &apos;name&apos;, sortable: false&#125;,</span><br><span class="line">          &#123;text: &apos;LOGO&apos;, align: &apos;center&apos;, value: &apos;image&apos;, sortable: false&#125;,</span><br><span class="line">          &#123;text: &apos;首字母&apos;, align: &apos;center&apos;, value: &apos;letter&apos;&#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      getDataFromServer()&#123; // 从服务端加载数据的函数</span><br><span class="line">        // 伪造演示数据</span><br><span class="line">        const brands = [</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: 2032,</span><br><span class="line">            &quot;name&quot;: &quot;OPPO&quot;,</span><br><span class="line">            &quot;image&quot;: &quot;http://img10.360buyimg.com/popshop/jfs/t2119/133/2264148064/4303/b8ab3755/56b2f385N8e4eb051.jpg&quot;,</span><br><span class="line">            &quot;letter&quot;: &quot;O&quot;,</span><br><span class="line">            &quot;categories&quot;: null</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: 2033,</span><br><span class="line">            &quot;name&quot;: &quot;飞利浦（PHILIPS）&quot;,</span><br><span class="line">            &quot;image&quot;: &quot;http://img12.360buyimg.com/popshop/jfs/t18361/122/1318410299/1870/36fe70c9/5ac43a4dNa44a0ce0.jpg&quot;,</span><br><span class="line">            &quot;letter&quot;: &quot;F&quot;,</span><br><span class="line">            &quot;categories&quot;: null</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: 2034,</span><br><span class="line">            &quot;name&quot;: &quot;华为（HUAWEI）&quot;,</span><br><span class="line">            &quot;image&quot;: &quot;http://img10.360buyimg.com/popshop/jfs/t5662/36/8888655583/7806/1c629c01/598033b4Nd6055897.jpg&quot;,</span><br><span class="line">            &quot;letter&quot;: &quot;H&quot;,</span><br><span class="line">            &quot;categories&quot;: null</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: 2036,</span><br><span class="line">            &quot;name&quot;: &quot;酷派（Coolpad）&quot;,</span><br><span class="line">            &quot;image&quot;: &quot;http://img10.360buyimg.com/popshop/jfs/t2521/347/883897149/3732/91c917ec/5670cf96Ncffa2ae6.jpg&quot;,</span><br><span class="line">            &quot;letter&quot;: &quot;K&quot;,</span><br><span class="line">            &quot;categories&quot;: null</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: 2037,</span><br><span class="line">            &quot;name&quot;: &quot;魅族（MEIZU）&quot;,</span><br><span class="line">            &quot;image&quot;: &quot;http://img13.360buyimg.com/popshop/jfs/t3511/131/31887105/4943/48f83fa9/57fdf4b8N6e95624d.jpg&quot;,</span><br><span class="line">            &quot;letter&quot;: &quot;M&quot;,</span><br><span class="line">            &quot;categories&quot;: null</span><br><span class="line">          &#125;</span><br><span class="line">        ];</span><br><span class="line">        // 延迟一段时间，模拟数据请求时间</span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">          this.brands = brands; // 赋值给品牌数组</span><br><span class="line">          this.totalBrands = brands.length; // 赋值数据总条数</span><br><span class="line">          this.loading = false; // 数据加载完成</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 渲染后执行</span><br><span class="line">    mounted()&#123;</span><br><span class="line">      this.getDataFromServer() // 调用数据初始化函数</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- scoped:当前样式只作用于当前组件的节点 --&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>刷新页面查看：</p>
+<p><img src="/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1526029445561.png" alt="1526029445561"></p>
+<h3>7.1.4.优化页面</h3>
+<h4>7.1.4.1.编辑和删除按钮</h4>
+<p>我们将来要对品牌进行增删改，需要给每一行数据添加 修改删除的按钮，一般放到改行的最后一列。</p>
+<p>其实就是多了一列，只是这一列没有数据，而是两个按钮而已。可以在官方文档中找一个带有操作按钮的表格，作为参考。</p>
+<p><img src="/2019/05/26/day06/assets/1530523252532.png" alt="1530523252532"></p>
+<p>我们先在头（headers）中添加一列：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">headers: [ <span class="comment">// 头信息</span></span><br><span class="line">    &#123;<span class="attr">text</span>: <span class="string">'id'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'id'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">text</span>: <span class="string">'名称'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'name'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">text</span>: <span class="string">'LOGO'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'image'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">text</span>: <span class="string">'首字母'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'letter'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">text</span>: <span class="string">'操作'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'id'</span>, <span class="attr">sortable</span>: <span class="literal">false</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>然后在模板中添加按钮：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">	&lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.id &#125;&#125;&lt;/td&gt;</span><br><span class="line">	&lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">	&lt;td class=&quot;text-xs-center&quot;&gt;&lt;img v-if=&quot;props.item.image&quot; :src=&quot;props.item.image&quot; width=&quot;130&quot; height=&quot;40&quot;/&gt;&lt;/td&gt;</span><br><span class="line">	&lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.letter &#125;&#125;&lt;/td&gt;</span><br><span class="line">	&lt;td class=&quot;text-xs-center&quot;&gt;</span><br><span class="line">        &lt;v-icon small class=&quot;mr-2&quot; @click=&quot;editItem(props.item)&quot;&gt;</span><br><span class="line">            edit</span><br><span class="line">        &lt;/v-icon&gt;</span><br><span class="line">        &lt;v-icon small @click=&quot;deleteItem(props.item)&quot;&gt;</span><br><span class="line">            delete</span><br><span class="line">        &lt;/v-icon&gt;</span><br><span class="line">    &lt;/td&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530523838357.png" alt="1530523838357"></p>
+<h4>7.1.4.2.新增按钮</h4>
+<p>在官方文档中找到按钮的用法：</p>
+<p><img src="/2019/05/26/day06/assets/1530524238344.png" alt="1530524238344"></p>
+<p>因为新增跟某个品牌无关，是独立的，因此我们可以放到表格的外面。</p>
+<p><img src="/2019/05/26/day06/assets/1530527129881.png" alt="1530527129881"></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530527160208.png" alt="1530527160208"></p>
+<h4>7.1.4.3.卡片（card）</h4>
+<p>为了不让按钮显得过于孤立，我们可以将按<code>新增按钮</code>和<code>表格</code>放到一张卡片（card）中。</p>
+<p>我们去官网查看卡片的用法：</p>
+<p><img src="/2019/05/26/day06/assets/1526031159242.png" alt="1526031159242"></p>
+<p>卡片<code>v-card</code>包含四个基本组件：</p>
+<ul>
+<li>v-card-media：一般放图片或视频</li>
+<li>v-card-title：卡片的标题，一般位于卡片顶部</li>
+<li>v-card-text：卡片的文本（主体内容），一般位于卡片正中</li>
+<li>v-card-action：卡片的按钮，一般位于卡片底部</li>
+</ul>
+<p>我们可以把<code>新增的按钮</code>放到<code>v-card-title</code>位置，把<code>table</code>放到下面，这样就成一个上下关系。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;v-card&gt;</span><br><span class="line">    &lt;v-card-title flat color=&quot;white&quot;&gt;</span><br><span class="line">      &lt;v-btn color=&quot;primary&quot;&gt;新增&lt;/v-btn&gt;</span><br><span class="line">    &lt;/v-card-title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;v-data-table</span><br><span class="line">      :headers=&quot;headers&quot;</span><br><span class="line">      :items=&quot;brands&quot;</span><br><span class="line">      :pagination.sync=&quot;pagination&quot;</span><br><span class="line">      :total-items=&quot;totalBrands&quot;</span><br><span class="line">      :loading=&quot;loading&quot;</span><br><span class="line">      class=&quot;elevation-1&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.id &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&lt;img v-if=&quot;props.item.image&quot; :src=&quot;props.item.image&quot; width=&quot;130&quot; height=&quot;40&quot;/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.letter &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;</span><br><span class="line">          &lt;v-icon small class=&quot;mr-2&quot; @click=&quot;editItem(props.item)&quot;&gt;</span><br><span class="line">            edit</span><br><span class="line">          &lt;/v-icon&gt;</span><br><span class="line">          &lt;v-icon small @click=&quot;deleteItem(props.item)&quot;&gt;</span><br><span class="line">            delete</span><br><span class="line">          &lt;/v-icon&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/v-data-table&gt;</span><br><span class="line">  &lt;/v-card&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530532504861.png" alt="1530532504861"></p>
+<h4>7.1.4.4.添加搜索框</h4>
+<p>我们还可以在卡片头部添加一个搜索框，其实就是一个文本输入框。</p>
+<p>查看官网中，文本框的用法：</p>
+<p><img src="/2019/05/26/day06/assets/1526031897445.png" alt="1526031897445"></p>
+<ul>
+<li>name：字段名，表单中会用到</li>
+<li>label/placeholder：提示文字</li>
+<li>value：值。可以用v-model代替，实现双向绑定</li>
+</ul>
+<p>修改模板，添加输入框：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-card-title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-btn</span> <span class="attr">color</span>=<span class="string">"primary"</span>&gt;</span>新增品牌<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--搜索框，与search属性关联--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">label</span>=<span class="string">"输入关键字搜索"</span> <span class="attr">v-model</span>=<span class="string">"search"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-card-title</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：要在数据模型中，添加search字段：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    totalBrands: <span class="number">0</span>, <span class="comment">// 总条数</span></span><br><span class="line">    brands: [], <span class="comment">// 当前页品牌数据</span></span><br><span class="line">    search: <span class="string">""</span>, <span class="comment">// 查询关键字</span></span><br><span class="line">    loading: <span class="literal">true</span>, <span class="comment">// 是否在加载中</span></span><br><span class="line">    pagination: &#123;&#125;, <span class="comment">// 分页信息</span></span><br><span class="line">    headers: [ <span class="comment">// 头信息</span></span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'id'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'id'</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'名称'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'name'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'LOGO'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'image'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'首字母'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'letter'</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">text</span>: <span class="string">'操作'</span>, <span class="attr">align</span>: <span class="string">'center'</span>, <span class="attr">value</span>: <span class="string">'id'</span>, <span class="attr">sortable</span>: <span class="literal">false</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530533261856.png" alt="1530533261856"></p>
+<p>发现输入框超级长！！！</p>
+<p>这个时候，我们可以使用Vuetify提供的一个空间隔离工具：</p>
+<p><img src="/2019/05/26/day06/assets/1530533442878.png" alt="1530533442878"></p>
+<p>修改代码：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-card-title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-btn</span> <span class="attr">color</span>=<span class="string">"primary"</span>&gt;</span>新增品牌<span class="tag">&lt;/<span class="name">v-btn</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--空间隔离组件--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-spacer</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--搜索框，与search属性关联--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">label</span>=<span class="string">"输入关键字搜索"</span> <span class="attr">v-model</span>=<span class="string">"search"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">v-card-title</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06/assets/1530534269196.png" alt="1530534269196"></p>
+<h4>7.1.4.5.添加搜索图标</h4>
+<p>查看textfiled的文档，发现：</p>
+<p><img src="/2019/05/26/day06/assets/1526033007616.png" alt="1526033007616"></p>
+<p>通过append-icon属性可以为 输入框添加后置图标，所有可用图标名称可以到 <a href="https://material.io/tools/icons/">material-icons官网</a>去查看。</p>
+<p>修改我们的代码：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">label</span>=<span class="string">"输入关键字搜索"</span> <span class="attr">v-model</span>=<span class="string">"search"</span> <span class="attr">append-icon</span>=<span class="string">"search"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06/assets/1530534311458.png" alt="1530534311458"></p>
+<h4>7.1.4.6.把文本框变紧凑</h4>
+<p>搜索框看起来高度比较高，页面不够紧凑。这其实是因为默认在文本框下面预留有错误提示空间。通过下面的属性可以取消提示：</p>
+<p><img src="/2019/05/26/day06/assets/1526033439890.png" alt="1526033439890"></p>
+<p>修改代码：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-text-field</span> <span class="attr">label</span>=<span class="string">"输入关键字搜索"</span> <span class="attr">v-model</span>=<span class="string">"search"</span> <span class="attr">append-icon</span>=<span class="string">"search"</span> <span class="attr">hide-details</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530534423194.png" alt="1530534423194"></p>
+<p>几乎已经达到了原来一样的效果了吧！</p>
+<h2>7.2.后台提供查询接口</h2>
+<p>前台页面已经准备好，接下来就是后台提供数据接口了。</p>
+<h3>7.2.1.数据库表</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `tb_brand` (</span><br><span class="line">  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &apos;品牌id&apos;,</span><br><span class="line">  `name` varchar(50) NOT NULL COMMENT &apos;品牌名称&apos;,</span><br><span class="line">  `image` varchar(200) DEFAULT &apos;&apos; COMMENT &apos;品牌图片地址&apos;,</span><br><span class="line">  `letter` char(1) DEFAULT &apos;&apos; COMMENT &apos;品牌的首字母&apos;,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=325400 DEFAULT CHARSET=utf8 COMMENT=&apos;品牌表，一个品牌下有多个商品（spu），一对多关系&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>简单的四个字段，不多解释。</p>
+<p>这里需要注意的是，品牌和商品分类之间是多对多关系。因此我们有一张中间表，来维护两者间关系：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `tb_category_brand` (</span><br><span class="line">  `category_id` bigint(20) NOT NULL COMMENT &apos;商品类目id&apos;,</span><br><span class="line">  `brand_id` bigint(20) NOT NULL COMMENT &apos;品牌id&apos;,</span><br><span class="line">  PRIMARY KEY (`category_id`,`brand_id`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;商品分类和品牌的中间表，两者是多对多关系&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>但是，你可能会发现，这张表中并<strong>没有设置外键约束</strong>，似乎与数据库的设计范式不符。为什么这么做？</p>
+<ul>
+<li>外键会严重影响数据库读写的效率</li>
+<li>数据删除时会比较麻烦</li>
+</ul>
+<p>在电商行业，性能是非常重要的。我们宁可在代码中通过逻辑来维护表关系，也不设置外键。</p>
+<h3>7.2.2.实体类</h3>
+<p><img src="/2019/05/26/day06/assets/1530541070271.png" alt="1530541070271"></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"tb_brand"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Brand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">// 品牌名称</span></span><br><span class="line">    <span class="keyword">private</span> String image;<span class="comment">// 品牌图片</span></span><br><span class="line">    <span class="keyword">private</span> Character letter;</span><br><span class="line">    <span class="comment">// getter setter 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>7.2.3.mapper</h3>
+<p><img src="/2019/05/26/day06/assets/1530541222679.png" alt="1530541222679"></p>
+<p>通用mapper来简化开发：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BrandMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Brand</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>7.2.4.controller</h3>
+<p>编写controller先思考四个问题，这次没有前端代码，需要我们自己来设定</p>
+<ul>
+<li>请求方式：查询，肯定是Get</li>
+<li>请求路径：分页查询，/brand/page</li>
+<li>请求参数：根据我们刚才编写的页面，有分页功能，有排序功能，有搜索过滤功能，因此至少要有5个参数：
+<ul>
+<li>page：当前页，int</li>
+<li>rows：每页大小，int</li>
+<li>sortBy：排序字段，String</li>
+<li>desc：是否为降序，boolean</li>
+<li>key：搜索关键词，String</li>
+</ul>
+</li>
+<li>响应结果：分页结果一般至少需要两个数据
+<ul>
+<li>total：总条数</li>
+<li>items：当前页数据</li>
+<li>totalPage：有些还需要总页数</li>
+</ul>
+</li>
+</ul>
+<p>这里我们封装一个类，来表示分页结果：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long total;<span class="comment">// 总条数</span></span><br><span class="line">    <span class="keyword">private</span> Long totalPage;<span class="comment">// 总页数</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; items;<span class="comment">// 当前页数据</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageResult</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageResult</span><span class="params">(Long total, List&lt;T&gt; items)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.total = total;</span><br><span class="line">        <span class="keyword">this</span>.items = items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageResult</span><span class="params">(Long total, Long totalPage, List&lt;T&gt; items)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.total = total;</span><br><span class="line">        <span class="keyword">this</span>.totalPage = totalPage;</span><br><span class="line">        <span class="keyword">this</span>.items = items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getTotal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTotal</span><span class="params">(Long total)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.total = total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">getItems</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setItems</span><span class="params">(List&lt;T&gt; items)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.items = items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getTotalPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> totalPage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTotalPage</span><span class="params">(Long totalPage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.totalPage = totalPage;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外，这个PageResult以后可能在其它项目中也有需求，因此我们将其抽取到<code>leyou-common</code>中，提高复用性：</p>
+<p><img src="/2019/05/26/day06/assets/1530543778541.png" alt="1530543778541"></p>
+<p><strong>不要忘记在leyou-item-service工程的pom.xml中引入leyou-common的依赖</strong>：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.common<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们编写Controller</p>
+<p><img src="/2019/05/26/day06/assets/1530549253999.png" alt="1530549253999"></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"brand"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BrandController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BrandService brandService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"page"</span>)</span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;PageResult&lt;Brand&gt;&gt; queryBrandByPage(</span><br><span class="line">            <span class="meta">@RequestParam</span>(value = <span class="string">"page"</span>, defaultValue = <span class="string">"1"</span>) Integer page,</span><br><span class="line">            <span class="meta">@RequestParam</span>(value = <span class="string">"rows"</span>, defaultValue = <span class="string">"5"</span>) Integer rows,</span><br><span class="line">            <span class="meta">@RequestParam</span>(value = <span class="string">"sortBy"</span>, required = <span class="keyword">false</span>) String sortBy,</span><br><span class="line">            <span class="meta">@RequestParam</span>(value = <span class="string">"desc"</span>, defaultValue = <span class="string">"false"</span>) Boolean desc,</span><br><span class="line">            <span class="meta">@RequestParam</span>(value = <span class="string">"key"</span>, required = <span class="keyword">false</span>) String key) &#123;</span><br><span class="line">        PageResult&lt;Brand&gt; result = <span class="keyword">this</span>.brandService.queryBrandByPageAndSort(page,rows,sortBy,desc, key);</span><br><span class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span> || result.getItems().size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>7.2.5.Service</h3>
+<p><img src="/2019/05/26/day06/assets/1530549286718.png" alt="1530549286718"></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BrandService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BrandMapper brandMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PageResult&lt;Brand&gt; <span class="title">queryBrandByPageAndSort</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            Integer page, Integer rows, String sortBy, Boolean desc, String key)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 开始分页</span></span><br><span class="line">        PageHelper.startPage(page, rows);</span><br><span class="line">        <span class="comment">// 过滤</span></span><br><span class="line">        Example example = <span class="keyword">new</span> Example(Brand.class);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isNotBlank(key)) &#123;</span><br><span class="line">            example.createCriteria().andLike(<span class="string">"name"</span>, <span class="string">"%"</span> + key + <span class="string">"%"</span>)</span><br><span class="line">                    .orEqualTo(<span class="string">"letter"</span>, key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isNotBlank(sortBy)) &#123;</span><br><span class="line">            <span class="comment">// 排序</span></span><br><span class="line">            String orderByClause = sortBy + (desc ? <span class="string">" DESC"</span> : <span class="string">" ASC"</span>);</span><br><span class="line">            example.setOrderByClause(orderByClause);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 查询</span></span><br><span class="line">        Page&lt;Brand&gt; pageInfo = (Page&lt;Brand&gt;) brandMapper.selectByExample(example);</span><br><span class="line">        <span class="comment">// 返回结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PageResult&lt;&gt;(pageInfo.getTotal(), pageInfo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>7.2.6.测试</h3>
+<p>通过浏览器访问试试：http://api.leyou.com/api/item/brand/page</p>
+<p><img src="/2019/05/26/day06/assets/1530549095150.png" alt="1530549095150"></p>
+<p>接下来，去页面请求数据并渲染</p>
+<h2>7.3.异步查询工具axios</h2>
+<p>异步查询数据，自然是通过ajax查询，大家首先想起的肯定是jQuery。但jQuery与MVVM的思想不吻合，而且ajax只是jQuery的一小部分。因此不可能为了发起ajax请求而去引用这么大的一个库。</p>
+<h3>7.3.1.axios入门</h3>
+<p>Vue官方推荐的ajax请求框架叫做：axios，看下demo：</p>
+<p><img src="/2019/05/26/day06/assets/1526033988251.png" alt="1526033988251"></p>
+<p>axios的Get请求语法：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">axios.get(<span class="string">"/item/category/list?pid=0"</span>) <span class="comment">// 请求路径和请求参数拼接</span></span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line">    	<span class="comment">// 成功回调函数</span></span><br><span class="line">	&#125;)</span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="comment">// 失败回调函数</span></span><br><span class="line">	&#125;)</span><br><span class="line"><span class="comment">// 参数较多时，可以通过params来传递参数</span></span><br><span class="line">axios.get(<span class="string">"/item/category/list"</span>, &#123;</span><br><span class="line">        params:&#123;</span><br><span class="line">            pid:<span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">resp</span>)</span>&#123;&#125;)<span class="comment">// 成功时的回调</span></span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;&#125;)<span class="comment">// 失败时的回调</span></span><br></pre></td></tr></table></figure></p>
+<p>axios的POST请求语法：</p>
+<p>比如新增一个用户</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">axios.post(<span class="string">"/user"</span>,&#123;</span><br><span class="line">    	name:<span class="string">"Jack"</span>,</span><br><span class="line">    	age:<span class="number">21</span></span><br><span class="line">	&#125;)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">resp</span>)</span>&#123;&#125;)</span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>注意，POST请求传参，不需要像GET请求那样定义一个对象，在对象的params参数中传参。post()方法的第二个参数对象，就是将来要传递的参数</li>
+</ul>
+<p>PUT和DELETE请求与POST请求类似</p>
+<h3>7.3.2.axios的全局配置</h3>
+<p>而在我们的项目中，已经引入了axios，并且进行了简单的封装，在src下的http.js中：</p>
+<p><img src="/2019/05/26/day06/assets/1526034150067.png" alt="1526034150067"></p>
+<p>http.js中对axios进行了一些默认配置：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'./config'</span></span><br><span class="line"><span class="comment">// config中定义的基础路径是：http://api.leyou.com/api</span></span><br><span class="line">axios.defaults.baseURL = config.api; <span class="comment">// 设置axios的基础请求路径</span></span><br><span class="line">axios.defaults.timeout = <span class="number">2000</span>; <span class="comment">// 设置axios的请求时间</span></span><br><span class="line"></span><br><span class="line">Vue.prototype.$http = axios;<span class="comment">// 将axios赋值给Vue原型的$http属性，这样所有vue实例都可使用该对象</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>http.js中导入了config的配置，还记得吗？</p>
+<p><img src="/2019/05/26/day06/assets/1526041205846.png" alt="1526041205846"></p>
+</li>
+<li>
+<p>http.js对axios进行了全局配置：<code>baseURL=config.api</code>，即<code>http://api.leyou.com/api</code>。因此以后所有用axios发起的请求，都会以这个地址作为前缀。</p>
+</li>
+<li>
+<p>通过<code>Vue.property.$http = axios</code>，将<code>axios</code>赋值给了 Vue原型中的<code>$http</code>。这样以后所有的Vue实例都可以访问到$http，也就是访问到了axios了。</p>
+</li>
+</ul>
+<h3>7.3.3.小试一下</h3>
+<p>我们在组件<code>MyBrand.vue</code>的getDataFromServer方法，通过$http发起get请求，测试查询品牌的接口，看是否能获取到数据：</p>
+<p><img src="/2019/05/26/day06/assets/1526048079191.png" alt="1526048221750"></p>
+<p>网络监视：</p>
+<p><img src="/2019/05/26/day06/assets/1526048143014.png" alt="1526048143014"></p>
+<p>resp到底都有那些数据，查看控制台结果：</p>
+<p><img src="/2019/05/26/day06/assets/1526048275064.png" alt="1526048275064"></p>
+<p>可以看到，在请求成功的返回结果response中，有一个data属性，里面就是真正的响应数据。</p>
+<p>响应结果中与我们设计的一致，包含3个内容：</p>
+<ul>
+<li>total：总条数，目前是165</li>
+<li>items：当前页数据</li>
+<li>totalPage：总页数，我们没有返回</li>
+</ul>
+<h2>7.4.异步加载品牌数据</h2>
+<p>虽然已经通过ajax请求获取了品牌数据，但是刚才的请求没有携带任何参数，这样显然不对。我们后端接口需要5个参数：</p>
+<ul>
+<li>page：当前页，int</li>
+<li>rows：每页大小，int</li>
+<li>sortBy：排序字段，String</li>
+<li>desc：是否为降序，boolean</li>
+<li>key：搜索关键词，String</li>
+</ul>
+<p>而页面中分页信息应该是在pagination对象中，我们通过浏览器工具，查看pagination中有哪些属性：</p>
+<p><img src="/2019/05/26/day06/assets/1530553414937.png" alt="1530553414937"></p>
+<p>分别是：</p>
+<ul>
+<li>descending：是否是降序，对应请求参数的desc</li>
+<li>page：当前页，对应参数的page</li>
+<li>rowsPerpage：每页大小，对应参数中的rows</li>
+<li>sortBy：排序字段，对应参数的sortBy</li>
+</ul>
+<p>缺少一个搜索关键词，这个应该是通过v-model与输入框绑定的属性：search。这样，所有参数就都有了。</p>
+<p>另外，不要忘了把查询的结果赋值给brands和totalBrands属性，Vuetify会帮我们渲染页面。</p>
+<p>接下来，我们完善请求参数：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  getDataFromServer() &#123; <span class="comment">// 从服务端加载数据的函数</span></span><br><span class="line">    <span class="keyword">this</span>.loading = <span class="literal">true</span>; <span class="comment">// 加载数据</span></span><br><span class="line">    <span class="comment">// 通过axios获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">"/item/brand/page"</span>, &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">        page: <span class="keyword">this</span>.pagination.page, <span class="comment">// 当前页</span></span><br><span class="line">        rows: <span class="keyword">this</span>.pagination.rowsPerPage, <span class="comment">// 每页条数</span></span><br><span class="line">        sortBy: <span class="keyword">this</span>.pagination.sortBy, <span class="comment">// 排序字段</span></span><br><span class="line">        desc: <span class="keyword">this</span>.pagination.descending, <span class="comment">// 是否降序</span></span><br><span class="line">        key: <span class="keyword">this</span>.search <span class="comment">// 查询字段</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">resp</span> =&gt;</span> &#123; <span class="comment">// 获取响应结果对象</span></span><br><span class="line">      <span class="keyword">this</span>.totalBrands = resp.data.total; <span class="comment">// 总条数</span></span><br><span class="line">      <span class="keyword">this</span>.brands = resp.data.items; <span class="comment">// 品牌数据</span></span><br><span class="line">      <span class="keyword">this</span>.loading = <span class="literal">false</span>; <span class="comment">// 加载完成</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查看网络请求：</p>
+<p><img src="/2019/05/26/day06/assets/1530554422695.png" alt="1530554422695"></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06/assets/1530554460215.png" alt="1530554460215"></p>
+<h2>7.5.完成分页和过滤</h2>
+<h3>6.6.1.分页</h3>
+<p>现在我们实现了页面加载时的第一次查询，你会发现你点击分页或搜索不会发起新的请求，怎么办？</p>
+<p>虽然点击分页，不会发起请求，但是通过浏览器工具查看，会发现pagination对象的属性一直在变化：</p>
+<p><img src="/2019/05/26/day06/assets/9.gif" alt></p>
+<p>我们可以利用Vue的监视功能：watch，当pagination发生改变时，会调用我们的回调函数，我们在回调函数中进行数据的查询即可！</p>
+<p>具体实现：</p>
+<p><img src="/2019/05/26/day06/assets/1526049643506.png" alt="1526049643506"></p>
+<p>成功实现分页功能：</p>
+<p><img src="/2019/05/26/day06/assets/22.gif" alt="1526049720200"></p>
+<h3>6.6.2.过滤</h3>
+<p>分页实现了，过滤也很好实现了。过滤字段对应的是search属性，我们只要监视这个属性即可:</p>
+<p><img src="/2019/05/26/day06/assets/1526049939985.png" alt="1526049939985"></p>
+<p>查看网络请求：</p>
+<p><img src="/2019/05/26/day06/H:/%E4%B9%90%E4%BC%98/day06-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2/assets/1526050032436.png" alt="1526050032436"></p>
+<p>页面结果：</p>
+<p><img src="/2019/05/26/day06/assets/1530555740595.png" alt="1530555740595"></p>
+<h2>6.7.完整代码</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;v-card&gt;</span><br><span class="line">    &lt;v-card-title flat color=&quot;white&quot;&gt;</span><br><span class="line">      &lt;v-btn color=&quot;primary&quot;&gt;新增&lt;/v-btn&gt;</span><br><span class="line">      &lt;!--空间隔离组件--&gt;</span><br><span class="line">      &lt;v-spacer /&gt;</span><br><span class="line">      &lt;!--搜索框，与search属性关联--&gt;</span><br><span class="line">      &lt;v-text-field label=&quot;输入关键字搜索&quot; append-icon=&quot;search&quot; v-model=&quot;search&quot; hide-details/&gt;</span><br><span class="line">    &lt;/v-card-title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;v-data-table</span><br><span class="line">      :headers=&quot;headers&quot;</span><br><span class="line">      :items=&quot;brands&quot;</span><br><span class="line">      :pagination.sync=&quot;pagination&quot;</span><br><span class="line">      :total-items=&quot;totalBrands&quot;</span><br><span class="line">      :loading=&quot;loading&quot;</span><br><span class="line">      class=&quot;elevation-1&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot=&quot;items&quot; slot-scope=&quot;props&quot;&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.id &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&lt;img v-if=&quot;props.item.image&quot; :src=&quot;props.item.image&quot; width=&quot;130&quot; height=&quot;40&quot;/&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;&#123;&#123; props.item.letter &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;td class=&quot;text-xs-center&quot;&gt;</span><br><span class="line">          &lt;v-icon small class=&quot;mr-2&quot; @click=&quot;editItem(props.item)&quot;&gt;</span><br><span class="line">            edit</span><br><span class="line">          &lt;/v-icon&gt;</span><br><span class="line">          &lt;v-icon small @click=&quot;deleteItem(props.item)&quot;&gt;</span><br><span class="line">            delete</span><br><span class="line">          &lt;/v-icon&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/v-data-table&gt;</span><br><span class="line">  &lt;/v-card&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &quot;myBrand&quot;,</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        totalBrands: 0, // 总条数</span><br><span class="line">        brands: [], // 当前页品牌数据</span><br><span class="line">        search: &quot;&quot;, // 查询关键字</span><br><span class="line">        loading: true, // 是否在加载中</span><br><span class="line">        pagination: &#123;&#125;, // 分页信息</span><br><span class="line">        headers: [ // 头信息</span><br><span class="line">          &#123;text: &apos;id&apos;, align: &apos;center&apos;, value: &apos;id&apos;&#125;,</span><br><span class="line">          &#123;text: &apos;名称&apos;, align: &apos;center&apos;, value: &apos;name&apos;, sortable: false&#125;,</span><br><span class="line">          &#123;text: &apos;LOGO&apos;, align: &apos;center&apos;, value: &apos;image&apos;, sortable: false&#125;,</span><br><span class="line">          &#123;text: &apos;首字母&apos;, align: &apos;center&apos;, value: &apos;letter&apos;&#125;,</span><br><span class="line">          &#123;text: &apos;操作&apos;, align: &apos;center&apos;, value: &apos;id&apos;, sortable: false&#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      pagination:&#123;</span><br><span class="line">        deep: true, // 深度监视</span><br><span class="line">        handler()&#123;</span><br><span class="line">          this.getDataFromServer();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      search()&#123;</span><br><span class="line">        this.pagination.page = 1;</span><br><span class="line">        this.getDataFromServer();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      getDataFromServer() &#123; // 从服务端加载数据的函数</span><br><span class="line">        this.loading = true; // 加载数据</span><br><span class="line">        // 通过axios获取数据</span><br><span class="line">        this.$http.get(&quot;/item/brand/page&quot;, &#123;</span><br><span class="line">          params: &#123;</span><br><span class="line">            page: this.pagination.page, // 当前页</span><br><span class="line">            rows: this.pagination.rowsPerPage, // 每页条数</span><br><span class="line">            sortBy: this.pagination.sortBy, // 排序字段</span><br><span class="line">            desc: this.pagination.descending, // 是否降序</span><br><span class="line">            key: this.search // 查询字段</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;).then(resp =&gt; &#123; // 获取响应结果对象</span><br><span class="line">          this.totalBrands = resp.data.total; // 总条数</span><br><span class="line">          this.brands = resp.data.items; // 品牌数据</span><br><span class="line">          this.loading = false; // 加载完成</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 渲染后执行</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      this.getDataFromServer() // 调用数据初始化函数</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- scoped:当前样式只作用于当前组件的节点 --&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>大家下去可以尝试实现品牌的增删改功能</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day06-webpack/" rel="next" title="6.webpack">
+                <i class="fa fa-chevron-left"></i> 6.webpack
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/day07-商品分类及品牌/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1.搭建后台管理前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.导入已有资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.运行一下看看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2.Vuetify框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.为什么要学习UI框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.为什么是Vuetify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.怎么用？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">3.项目结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.调用关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.页面布局</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">4.使用域名访问本地项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">4.1.统一环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">4.2.域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">4.3.解决域名解析问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.</span> <span class="nav-text">4.4.nginx解决端口问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.1.</span> <span class="nav-text">4.4.1.什么是Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.2.</span> <span class="nav-text">4.4.2.nginx作为web服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.3.</span> <span class="nav-text">4.4.3.nginx作为反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.4.</span> <span class="nav-text">4.4.4.安装和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.5.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.6.</span> <span class="nav-text">反向代理配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.7.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.5.</span> <span class="nav-text">4.5.测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">5.实现商品分类查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">5.1.导入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.</span> <span class="nav-text">5.2.页面实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.1.</span> <span class="nav-text">5.2.1.页面分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.2.</span> <span class="nav-text">5.2.2.树组件的用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.</span> <span class="nav-text">5.3.实现功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1.url异步请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2.实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.3.</span> <span class="nav-text">5.3.3.controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.4.</span> <span class="nav-text">5.3.4.service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.5.</span> <span class="nav-text">5.3.5.mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.6.</span> <span class="nav-text">5.3.6.启动并测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">6.跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">6.1.为什么有跨域问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">6.2.解决跨域问题的方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.</span> <span class="nav-text">6.3.cors解决跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.1.</span> <span class="nav-text">6.3.1.什么是cors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.2.</span> <span class="nav-text">6.3.2.原理有点复杂</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.2.1.</span> <span class="nav-text">6.3.2.1.简单请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.2.2.</span> <span class="nav-text">6.3.2.2.特殊请求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.3.</span> <span class="nav-text">6.3.3.实现非常简单</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">7.从0开始品牌的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.</span> <span class="nav-text">7.1.设计前端页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.1.</span> <span class="nav-text">7.1.1.查询表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.2.</span> <span class="nav-text">7.1.2.表格分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.</span> <span class="nav-text">7.1.3.动手实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.1.</span> <span class="nav-text">7.1.3.1.修改模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.2.</span> <span class="nav-text">7.1.3.2.编写数据模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.3.</span> <span class="nav-text">7.1.3.3.数据初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.4.</span> <span class="nav-text">6.2.3.4.完整代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.</span> <span class="nav-text">7.1.4.优化页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.1.</span> <span class="nav-text">7.1.4.1.编辑和删除按钮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.2.</span> <span class="nav-text">7.1.4.2.新增按钮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.3.</span> <span class="nav-text">7.1.4.3.卡片（card）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.4.</span> <span class="nav-text">7.1.4.4.添加搜索框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.5.</span> <span class="nav-text">7.1.4.5.添加搜索图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.6.</span> <span class="nav-text">7.1.4.6.把文本框变紧凑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.</span> <span class="nav-text">7.2.后台提供查询接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.1.</span> <span class="nav-text">7.2.1.数据库表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.2.</span> <span class="nav-text">7.2.2.实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.3.</span> <span class="nav-text">7.2.3.mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.4.</span> <span class="nav-text">7.2.4.controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.5.</span> <span class="nav-text">7.2.5.Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.6.</span> <span class="nav-text">7.2.6.测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.</span> <span class="nav-text">7.3.异步查询工具axios</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.1.</span> <span class="nav-text">7.3.1.axios入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.2.</span> <span class="nav-text">7.3.2.axios的全局配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.3.</span> <span class="nav-text">7.3.3.小试一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.4.</span> <span class="nav-text">7.4.异步加载品牌数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.5.</span> <span class="nav-text">7.5.完成分页和过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.5.1.</span> <span class="nav-text">6.6.1.分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.5.2.</span> <span class="nav-text">6.6.2.过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.6.</span> <span class="nav-text">6.7.完整代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

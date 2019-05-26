@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Git、GitHuB与GitLab Git 是一个分布式版本控制软件。 GitHub于Git都是用于管理版本的服务端软件，GitHub提供免费服务（代码需要公开）以及付费服务(代码私有)。 GitLab用于在企业内部管理Git版本库，功能上类似GitHub。 Git文件的三种状态    状态 描述 对应区域     modified 已修改 工作区   staged 已暂存 索引区（暂存区）">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git.1.入门文件基础操作">
+<meta property="og:url" content="http://yoursite.com/2019/02/17/1.Git入门文件基础操作/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="Git、GitHuB与GitLab Git 是一个分布式版本控制软件。 GitHub于Git都是用于管理版本的服务端软件，GitHub提供免费服务（代码需要公开）以及付费服务(代码私有)。 GitLab用于在企业内部管理Git版本库，功能上类似GitHub。 Git文件的三种状态    状态 描述 对应区域     modified 已修改 工作区   staged 已暂存 索引区（暂存区）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T07:51:29.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git.1.入门文件基础操作">
+<meta name="twitter:description" content="Git、GitHuB与GitLab Git 是一个分布式版本控制软件。 GitHub于Git都是用于管理版本的服务端软件，GitHub提供免费服务（代码需要公开）以及付费服务(代码私有)。 GitLab用于在企业内部管理Git版本库，功能上类似GitHub。 Git文件的三种状态    状态 描述 对应区域     modified 已修改 工作区   staged 已暂存 索引区（暂存区）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/17/1.Git入门文件基础操作/">
+
+
+
+
+
+  <title>Git.1.入门文件基础操作 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/1.Git入门文件基础操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git.1.入门文件基础操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-17T15:01:32+08:00">
+                2019-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/版本控制工具/" itemprop="url" rel="index">
+                    <span itemprop="name">版本控制工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2>Git、GitHuB与GitLab</h2>
+<p>Git 是一个分布式版本控制软件。
+GitHub于Git都是用于管理版本的服务端软件，GitHub提供免费服务（代码需要公开）以及付费服务(代码私有)。
+GitLab用于在企业内部管理Git版本库，功能上类似GitHub。</p>
+<h2>Git文件的三种状态</h2>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>描述</th>
+<th>对应区域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>modified</td>
+<td>已修改</td>
+<td>工作区</td>
+</tr>
+<tr>
+<td>staged</td>
+<td>已暂存</td>
+<td>索引区（暂存区）</td>
+</tr>
+<tr>
+<td>committed</td>
+<td>已提交</td>
+<td>文件版本库</td>
+</tr>
+</tbody>
+</table>
+<p>modified：在工作目录修改的Git文件。
+staged：对已经修改文件执行Git暂存操作，放入暂存区。
+committed：对暂存区的文件执行Git提交操作，存入版本库中。</p>
+<h2>Git常用操作</h2>
+<h3>创建git仓库</h3>
+<p>首先新建个文件夹mygit作为git仓库的文件目录，在mygit文件夹下 <strong>git init</strong> 命令生成git仓库相关的文件。git仓库文件存放在.git隐藏文件夹下。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir mygit</span><br><span class="line">$ cd mygit</span><br><span class="line">$ git init</span><br><span class="line">$ ls -al</span><br><span class="line">total 16</span><br><span class="line">drwxr-xr-x 1 CHEN 197609 0 2月  12 14:33 ./</span><br><span class="line">drwxr-xr-x 1 CHEN 197609 0 2月  12 14:31 ../</span><br><span class="line">drwxr-xr-x 1 CHEN 197609 0 2月  12 14:33 .git/</span><br><span class="line">$ cd .git</span><br><span class="line">$ ls -al</span><br><span class="line">total 11</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 ./</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 ../</span><br><span class="line">-rw-r--r-- 1 CHEN 197609 130 2月  12 14:33 config</span><br><span class="line">-rw-r--r-- 1 CHEN 197609  73 2月  12 14:33 description</span><br><span class="line">-rw-r--r-- 1 CHEN 197609  23 2月  12 14:33 HEAD</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 hooks/</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 info/</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 objects/</span><br><span class="line">drwxr-xr-x 1 CHEN 197609   0 2月  12 14:33 refs/</span><br></pre></td></tr></table></figure></p>
+<h3>文件操作</h3>
+<p>git status 查看Git工作区状态
+git add &lt;file&gt; 在已修改的文件加入到Git暂存区中
+git add . 将所有工作区的文件加入到暂存区
+git commit 提交到Git版本库中
+git log 日志</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">$ pwd</span><br><span class="line">/c/Users/CHEN/mygit</span><br><span class="line"></span><br><span class="line">#在Git库中创建test.txt 写入内容查看git文件状态 </span><br><span class="line">$ touch test.txt</span><br><span class="line">$ echo &apos;hello world&apos; &gt;test.txt</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br><span class="line"></span><br><span class="line">#将在已修改的文件加入到Git暂存区中</span><br><span class="line">$ git add test.txt</span><br><span class="line">warning: LF will be replaced by CRLF in test.txt.</span><br><span class="line">The file will have its original line endings in your working directory</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">#将暂存区中的文件提交到Git版本库中</span><br><span class="line">$ git commit -m &apos;initial commit&apos;</span><br><span class="line">[master ea36502] initial commit</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line">#查看提交日志</span><br><span class="line">git log</span><br><span class="line">commit ea365027e0b230733898fea25c8b65a68fca9bcf (HEAD -&gt; master)</span><br><span class="line">Author: dgqg1223 &lt;2878466@qq.com&gt;</span><br><span class="line">Date:   Tue Feb 12 16:16:22 2019 +0800</span><br><span class="line"></span><br><span class="line">    initial commit</span><br></pre></td></tr></table></figure></p>
+<h3>取消修改和从暂存区撤回</h3>
+<p>git checkout -- &lt;file&gt; 取消修改
+git reset HEAD &lt;file&gt;; 从暂存区撤回到修改状态
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$ echo &apos;welcome&apos; &gt; test.txt</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br><span class="line">$ cat test.txt</span><br><span class="line">welcome</span><br><span class="line">#取消修改</span><br><span class="line">$ git checkout test.txt</span><br><span class="line">$ cat test.txt</span><br><span class="line">hello world</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line">$ echo &apos;welcome&apos; &gt; test.txt</span><br><span class="line">$ git add test.txt</span><br><span class="line">warning: LF will be replaced by CRLF in test.txt.</span><br><span class="line">The file will have its original line endings in your working directory</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line">#从暂存区撤回到修改状态</span><br><span class="line">$ git reset HEAD test.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M       test.txt</span><br><span class="line"></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure></p>
+<h3>删除已提交的文件与重命名</h3>
+<p>rm 系统自带删除文件命令，执行后需要自己存入暂存区之后提交
+git rm git为我们提供的rm命令，执行后可以直接提交
+mv 系统自带移动命令，可以用来重命名，执行后需要自己存入暂存区之后提交
+git mv git为我们提供的mv命令，执行后可以直接提交</p>
+<h3>git log相关操作</h3>
+<p>git log -3 显示最近3行提交日志
+git log --pretty=oneline 每行提交日志一行显示
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ git log -3</span><br><span class="line">commit 6fb99c970e4505b23a651e75869ae2b089841b0c (HEAD -&gt; dev, master)</span><br><span class="line">Author: dgqg1223 &lt;2878466@qq.com&gt;</span><br><span class="line">Date:   Wed Feb 13 16:02:31 2019 +0800</span><br><span class="line"></span><br><span class="line">    cereate test and .gitignore</span><br><span class="line"></span><br><span class="line">commit ea365027e0b230733898fea25c8b65a68fca9bcf</span><br><span class="line">Author: dgqg1223 &lt;2878466@qq.com&gt;</span><br><span class="line">Date:   Tue Feb 12 16:16:22 2019 +0800</span><br><span class="line"></span><br><span class="line">    initial commit</span><br><span class="line"></span><br><span class="line">commit 1a85be516532439892205080efceec55ff1af5bb</span><br><span class="line">Author: dgqg1223 &lt;2878466@qq.com&gt;</span><br><span class="line">Date:   Tue Feb 12 15:40:49 2019 +0800</span><br><span class="line"></span><br><span class="line">    sdcond commit</span><br><span class="line"></span><br><span class="line">CHEN@DESKTOP-ER5E7MT MINGW64 ~/mygit (dev)</span><br><span class="line">$ git log --pretty=oneline</span><br><span class="line">6fb99c970e4505b23a651e75869ae2b089841b0c (HEAD -&gt; dev, master) cereate test and .gitignore</span><br><span class="line">ea365027e0b230733898fea25c8b65a68fca9bcf initial commit</span><br><span class="line">1a85be516532439892205080efceec55ff1af5bb sdcond commit</span><br><span class="line">96d05738f22d4d5714d542843a013cd129c096c9 initial commit</span><br></pre></td></tr></table></figure></p>
+<h3>自定义git log格式</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git log --pretty=format:&quot;%h - %an,%ar :%s&quot;</span><br><span class="line">6fb99c9 - dgqg1223,2 hours ago :cereate test and .gitignore</span><br><span class="line">ea36502 - dgqg1223,25 hours ago :initial commit</span><br><span class="line">1a85be5 - dgqg1223,26 hours ago :sdcond commit</span><br><span class="line">96d0573 - dgqg1223,27 hours ago :initial commit</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%H</td>
+<td>提交对象（commit）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%h</td>
+<td>提交对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>树对象（tree）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>树对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%P</td>
+<td>父对象（parent）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>父对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%an</td>
+<td>作者（author）的名字</td>
+</tr>
+<tr>
+<td>%ae</td>
+<td>作者的电子邮件地址</td>
+</tr>
+<tr>
+<td>%ad</td>
+<td>作者修订日期（可以用 -date= 选项定制格式）</td>
+</tr>
+<tr>
+<td>%ar</td>
+<td>作者修订日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%cn</td>
+<td>提交者(committer)的名字</td>
+</tr>
+<tr>
+<td>%ce</td>
+<td>提交者的电子邮件地址</td>
+</tr>
+<tr>
+<td>%cd</td>
+<td>提交日期</td>
+</tr>
+<tr>
+<td>%cr</td>
+<td>提交日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>提交说明</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>git config --global alias.lm  &quot;log --no-merges --color --date=format:'%Y-%m-%d %H:%M:%S' --author='你的名字！自己修改！' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</p>
+</blockquote>
+<blockquote>
+<p>git config --global alias.lms  &quot;log --no-merges --color --stat --date=format:'%Y-%m-%d %H:%M:%S' --author='你的名字！自己修改！' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</p>
+</blockquote>
+<blockquote>
+<p>git config --global alias.ls &quot;log --no-merges --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</p>
+</blockquote>
+<blockquote>
+<p>git config --global alias.lss &quot;log --no-merges --color --stat --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</p>
+</blockquote>
+<h3>查看git帮助的三种方式</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git help config</span><br><span class="line">$ git config --help</span><br><span class="line">$ man git-config</span><br></pre></td></tr></table></figure></p>
+<h3>.gitignore</h3>
+<p>可以定义在不想被git管理的文件（不存入git库只在本地使用），在git仓库下建立.gitignore文件，vi写入不需要git管理的文件名，之后把.gitignore提交到版本控制器中。
+.gitignore支持通配符和正则表达式
+git会自动忽略空文件夹
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#所有名字为a.b的文件都忽略</span><br><span class="line">a.b</span><br><span class="line">#所有.b结尾的文件都忽略</span><br><span class="line">*.b</span><br><span class="line">#c.b不忽略</span><br><span class="line">!c.b</span><br><span class="line">#只忽略根目录下的test.txt</span><br><span class="line">/test.txt</span><br><span class="line">#只忽略根目录下某个文件夹下的test.txt</span><br><span class="line">/*/test.txt</span><br><span class="line">#忽略根目录某个文件夹中或所有子文件夹下的test.txt</span><br><span class="line">/**/test.txt</span><br><span class="line">#忽略doc文件夹下所有.txt文件</span><br><span class="line">doc/*.txt</span><br><span class="line">#忽略doc文件夹下子文件夹下的子文件夹下的所有.txt文件</span><br><span class="line">doc/*/*.txt</span><br><span class="line">#忽略doc文件夹下所有的.txt文件（包括各层子文件夹）</span><br><span class="line">doc/**/*.txt</span><br></pre></td></tr></table></figure></p>
+<h2>关于Git的提交id（commit id）</h2>
+<p>Git的提交commit id 是一个摘要值，这个摘要值是通过sha1方式计算出来的，由于Git是分布式版本控制系统，所以无法使用递增的版本号。使用版本号也可以取前几位。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">commit ea365027e0b230733898fea25c8b65a68fca9bcf (HEAD -&gt; master)</span><br><span class="line">Author: dgqg1223 &lt;2878466@qq.com&gt;</span><br><span class="line">Date:   Tue Feb 12 16:16:22 2019 +0800</span><br></pre></td></tr></table></figure></p>
+<h2>Git修改本地存储的用户名和邮箱</h2>
+<h3>Git用户名和邮箱存放的位置（linux为例，windows可以使用git Bash查看）</h3>
+<ol>
+<li>/etc/gitconfig（存放于系统全局配置文件，几乎不使用，作用域为整个操作系统）</li>
+<li>~/.gitconfig(存放于系统配置文件，很常用，作用域为用户)</li>
+<li>项目库中/.get/config(存放在Git库文件夹中，作用域为当前Git库)</li>
+</ol>
+<p>作用优先级:从小到大 库&gt;用户&gt;操作系统。</p>
+<h3>修改相关操作</h3>
+<p>使用git config 命令可以查看用法
+相关参数：
+--global              修改全局配置文件
+--system              修改系统配置文件
+--local               修改本地配置文件
+-l, --list            查看所有配置文件信息
+--unset               删除指定配置文件信息
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ git config</span><br><span class="line">usage: git config [&lt;options&gt;]</span><br><span class="line"></span><br><span class="line">Config file location</span><br><span class="line">    --global              use global config file</span><br><span class="line">    --system              use system config file</span><br><span class="line">    --local               use repository config file</span><br><span class="line">    -f, --file &lt;file&gt;     use given config file</span><br><span class="line">    --blob &lt;blob-id&gt;      read config from given blob object</span><br><span class="line"></span><br><span class="line">Action</span><br><span class="line">    --get                 get value: name [value-regex]</span><br><span class="line">    --get-all             get all values: key [value-regex]</span><br><span class="line">    --get-regexp          get values for regexp: name-regex [value-regex]</span><br><span class="line">    --get-urlmatch        get value specific for the URL: section[.var] URL</span><br><span class="line">    --replace-all         replace all matching variables: name value [value_regex]</span><br><span class="line">    --add                 add a new variable: name value</span><br><span class="line">    --unset               remove a variable: name [value-regex]</span><br><span class="line">    --unset-all           remove all matches: name [value-regex]</span><br><span class="line">    --rename-section      rename section: old-name new-name</span><br><span class="line">    --remove-section      remove a section: name</span><br><span class="line">    -l, --list            list all</span><br><span class="line">    -e, --edit            open an editor</span><br><span class="line">    --get-color           find the color configured: slot [default]</span><br><span class="line">    --get-colorbool       find the color setting: slot [stdout-is-tty]</span><br><span class="line"></span><br><span class="line">Type</span><br><span class="line">    -t, --type &lt;&gt;         value is given this type</span><br><span class="line">    --bool                value is &quot;true&quot; or &quot;false&quot;</span><br><span class="line">    --int                 value is decimal number</span><br><span class="line">    --bool-or-int         value is --bool or --int</span><br><span class="line">    --path                value is a path (file or directory name)</span><br><span class="line">    --expiry-date         value is an expiry date</span><br><span class="line"></span><br><span class="line">Other</span><br><span class="line">    -z, --null            terminate values with NUL byte</span><br><span class="line">    --name-only           show variable names only</span><br><span class="line">    --includes            respect include directives on lookup</span><br><span class="line">    --show-origin         show origin of config (file, standard input, blob, command line)</span><br><span class="line">    --default &lt;value&gt;     with --get, use default value when missing entry</span><br></pre></td></tr></table></figure></p>
+<p>具体操作
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#查看配置文件</span><br><span class="line">$ cat .git/config</span><br><span class="line">[core]</span><br><span class="line">        repositoryformatversion = 0</span><br><span class="line">        filemode = false</span><br><span class="line">        bare = false</span><br><span class="line">        logallrefupdates = true</span><br><span class="line">        symlinks = false</span><br><span class="line">        ignorecase = true</span><br><span class="line">#添加用户与邮箱</span><br><span class="line">$ git config --local user.name &apos;张三&apos;</span><br><span class="line">$ git config --local user.email &apos;test@test.com&apos;</span><br><span class="line">#查看配置文件已经添加了用户和邮箱信息</span><br><span class="line">$ cat .git/config</span><br><span class="line">[core]</span><br><span class="line">        repositoryformatversion = 0</span><br><span class="line">        filemode = false</span><br><span class="line">        bare = false</span><br><span class="line">        logallrefupdates = true</span><br><span class="line">        symlinks = false</span><br><span class="line">        ignorecase = true</span><br><span class="line">[user]</span><br><span class="line">        name = 张三</span><br><span class="line">        email = test@test.com</span><br><span class="line">#可以单独查看指定配置</span><br><span class="line">$ git config user.name</span><br><span class="line">张三</span><br><span class="line">$ git config user.email</span><br><span class="line">test@test.com</span><br><span class="line">#可以使用--list参数看到所有配置信息</span><br><span class="line">$ git config --list</span><br><span class="line">... ...</span><br><span class="line">core.logallrefupdates=true</span><br><span class="line">core.symlinks=false</span><br><span class="line">core.ignorecase=true</span><br><span class="line">user.name=张三</span><br><span class="line">user.email=test@test.com</span><br><span class="line">#更改用户名为李四</span><br><span class="line">$ git config user.name &apos;李四&apos;</span><br><span class="line">#查看配置文件已变更为李四</span><br><span class="line">$ cat .git/config</span><br><span class="line">[core]</span><br><span class="line">        repositoryformatversion = 0</span><br><span class="line">        filemode = false</span><br><span class="line">        bare = false</span><br><span class="line">        logallrefupdates = true</span><br><span class="line">        symlinks = false</span><br><span class="line">        ignorecase = true</span><br><span class="line">[user]</span><br><span class="line">        name = 李四</span><br><span class="line">        email = test@test.com</span><br><span class="line">#删除用户名和邮箱信息</span><br><span class="line">$ git config --local --unset user.name</span><br><span class="line">$ git config --local --unset user.email</span><br><span class="line">#查看配置文件已经删除</span><br><span class="line">$ cat .git/config</span><br><span class="line">[core]</span><br><span class="line">        repositoryformatversion = 0</span><br><span class="line">        filemode = false</span><br><span class="line">        bare = false</span><br><span class="line">        logallrefupdates = true</span><br><span class="line">        symlinks = false</span><br><span class="line">        ignorecase = true</span><br></pre></td></tr></table></figure></p>
+<p>git commit --anend --reset-author 修改用户名邮箱后重新提交</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/17/idea快速上手指南/" rel="next" title="IDEA快速上手指南">
+                <i class="fa fa-chevron-left"></i> IDEA快速上手指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/17/2.Git分支相关操作/" rel="prev" title="Git.2.分支相关操作">
+                Git.2.分支相关操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Git、GitHuB与GitLab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Git文件的三种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Git常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">创建git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">取消修改和从暂存区撤回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">删除已提交的文件与重命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">git log相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text">自定义git log格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.7.</span> <span class="nav-text">查看git帮助的三种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.</span> <span class="nav-text">.gitignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">关于Git的提交id（commit id）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Git修改本地存储的用户名和邮箱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Git用户名和邮箱存放的位置（linux为例，windows可以使用git Bash查看）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">修改相关操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

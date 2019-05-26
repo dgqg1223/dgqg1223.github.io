@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="官方文档：https://redis.io/documentation 菜鸟教程文档：http://www.runoob.com/redis/redis-tutorial.html Redis 介绍 下载并安装redis-3.0.0 123456789101112131415161718[root@iZi1qirs2ab583Z ~]#wget http://download.redis.io/r">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis.1.安装与基础命令">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/redis/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="官方文档：https://redis.io/documentation 菜鸟教程文档：http://www.runoob.com/redis/redis-tutorial.html Redis 介绍 下载并安装redis-3.0.0 123456789101112131415161718[root@iZi1qirs2ab583Z ~]#wget http://download.redis.io/r">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/redis/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/redis/2.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:33.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis.1.安装与基础命令">
+<meta name="twitter:description" content="官方文档：https://redis.io/documentation 菜鸟教程文档：http://www.runoob.com/redis/redis-tutorial.html Redis 介绍 下载并安装redis-3.0.0 123456789101112131415161718[root@iZi1qirs2ab583Z ~]#wget http://download.redis.io/r">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/20/redis/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/20/redis/">
+
+
+
+
+
+  <title>Redis.1.安装与基础命令 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis.1.安装与基础命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T11:59:05+08:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataBase/" itemprop="url" rel="index">
+                    <span itemprop="name">DataBase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>官方文档：https://redis.io/documentation<br>
+菜鸟教程文档：http://www.runoob.com/redis/redis-tutorial.html</p>
+<h1>Redis 介绍</h1>
+<h1>下载并安装redis-3.0.0</h1>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@iZi1qirs2ab583Z ~]<span class="comment">#wget http://download.redis.io/releases/redis-3.0.0.tar.gz</span></span><br><span class="line">[root@iZi1qirs2ab583Z ~]<span class="comment"># tar -zxf redis-3.0.0.tar.gz </span></span><br><span class="line">[root@iZi1qirs2ab583Z redis-3.0.0]<span class="comment">#cd redis-3.0.0</span></span><br><span class="line">[root@iZi1qirs2ab583Z redis-3.0.0]<span class="comment">#make</span></span><br><span class="line">[root@iZi1qirs2ab583Z redis-3.0.0]<span class="comment">#make install PREFIX=/usr/local/redis</span></span><br><span class="line"><span class="built_in">cd</span> src &amp;&amp; make install</span><br><span class="line">make[1]: Entering directory `/root/redis-3.0.0/src<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Hint: It'</span>s a good idea to run <span class="string">'make test'</span> ;)</span><br><span class="line"></span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">make[1]: Leaving directory `/root/redis-3.0.0/src<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#看到上面界面表示安装成功</span></span><br></pre></td></tr></table></figure></p>
+<h1>Redis启动</h1>
+<h2>前端启动（不推荐）</h2>
+<p>进入redis目录 使用<strong>前端启动命令</strong><code>./redis-server</code> 启动Redis 看到下面画面表示Redis启动成功，可以使用<code>ctrl+c</code>快捷键退出
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@iZi1qirs2ab583Z bin]<span class="comment"># ./redis-server</span></span><br><span class="line">25083:C 18 Mar 20:40:15.035 <span class="comment"># Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf</span></span><br><span class="line">                _._                                                  </span><br><span class="line">           _.-``__ <span class="string">''</span>-._                                             </span><br><span class="line">      _.-``    `.  `_.  <span class="string">''</span>-._           Redis 3.0.0 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ <span class="string">''</span>-._                                   </span><br><span class="line"> (    <span class="string">'      ,       .-`  | `,    )     Running in standalone mode</span></span><br><span class="line"><span class="string"> |`-._`-...-` __...-.``-._|'</span>` _.-<span class="string">'|     Port: 6379</span></span><br><span class="line"><span class="string"> |    `-._   `._    /     _.-'</span>    |     PID: 25083</span><br><span class="line">  `-._    `-._  `-./  _.-<span class="string">'    _.-'</span>                                   </span><br><span class="line"> |`-._`-._    `-.__.-<span class="string">'    _.-'</span>_.-<span class="string">'|                                  </span></span><br><span class="line"><span class="string"> |    `-._`-._        _.-'</span>_.-<span class="string">'    |           http://redis.io        </span></span><br><span class="line"><span class="string">  `-._    `-._`-.__.-'</span>_.-<span class="string">'    _.-'</span>                                   </span><br><span class="line"> |`-._`-._    `-.__.-<span class="string">'    _.-'</span>_.-<span class="string">'|                                  </span></span><br><span class="line"><span class="string"> |    `-._`-._        _.-'</span>_.-<span class="string">'    |                                  </span></span><br><span class="line"><span class="string">  `-._    `-._`-.__.-'</span>_.-<span class="string">'    _.-'</span>                                   </span><br><span class="line">      `-._    `-.__.-<span class="string">'    _.-'</span>                                       </span><br><span class="line">          `-._        _.-<span class="string">'                                           </span></span><br><span class="line"><span class="string">              `-.__.-'</span>                                               </span><br><span class="line"></span><br><span class="line">25083:M 18 Mar 20:40:15.037 <span class="comment"># Server started, Redis version 3.0.0</span></span><br><span class="line">25083:M 18 Mar 20:40:15.037 <span class="comment"># WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.</span></span><br><span class="line">25083:M 18 Mar 20:40:15.037 <span class="comment"># WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span></span><br><span class="line">25083:M 18 Mar 20:40:15.038 <span class="comment"># WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.</span></span><br><span class="line">25083:M 18 Mar 20:40:15.038 * The server is now ready to accept connections on port 6379</span><br></pre></td></tr></table></figure></p>
+<h2>后端启动</h2>
+<h3>准备工作</h3>
+<ol>
+<li>Redis源码包中的<code>redis.conf</code> 复制到安装目录下（<code>/usr/local/redis/bin/</code>）</li>
+<li>修改安装目录下redis.config 将<code>daemonize</code>改为<code>yes</code></li>
+</ol>
+<h3>启动与关闭</h3>
+<ol>
+<li>
+<p>后端启动
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@iZi1qirs2ab583Z bin]<span class="comment"># ./redis-server redis.conf</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>正常关闭
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@iZi1qirs2ab583Z bin]<span class="comment"># ./redis-cli shutdown</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>非正常关闭（不推荐）
+直接kill进程id 不推荐</p>
+</li>
+</ol>
+<h3>端口占用问题</h3>
+<ol>
+<li>
+<p>查找被占用的端口</p>
+<blockquote>
+<p>ps -ef|grep redis</p>
+</blockquote>
+</li>
+<li>
+<p>杀掉占用端口的进程</p>
+<blockquote>
+<p>kill -9 进程id</p>
+</blockquote>
+</li>
+</ol>
+<h2>如何登陆</h2>
+<h3>命令行登陆</h3>
+<ol>
+<li>本地登陆（redis/bin目录下）
+<blockquote>
+<p>./redis-cli</p>
+</blockquote>
+</li>
+<li>远程登陆（redis/bin目录下）
+<blockquote>
+<p>./redis-cli -h 127.0.0.1 -p 6379</p>
+</blockquote>
+</li>
+<li>退出
+<blockquote>
+<p>exit</p>
+</blockquote>
+</li>
+</ol>
+<h3>Redis客户端【了解】</h3>
+<ol>
+<li>安装客户端（redis-desktop-manager-0.8.0.3841.exe）</li>
+<li>使用客户端登陆
+<img src="/2019/03/20/redis/1.png" alt="1.png"></li>
+</ol>
+<p>远程登陆错误请参考下面linux防火墙设置</p>
+<h3>解决登陆超时问题 设置防火墙</h3>
+<p>contos6.5 使用iptable防火墙策略</p>
+<ol>
+<li>
+<p>方法一:使用命令添加端口号<br>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/sbin/iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br><span class="line">/etc/rc.d/init.d/iptables save</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>方法一:修改<code>iptables</code>文件 复制一行修改为要开启的端口号</p>
+<blockquote>
+<p>vi /etc/sysconfig/iptables</p>
+</blockquote>
+</li>
+<li>
+<p>修改iptable 需要重启iptable</p>
+<blockquote>
+<p>service iptables restart</p>
+</blockquote>
+</li>
+</ol>
+<h2>Redis 数据类型介绍</h2>
+<p>Redis中存储数据是通过key-value存储的，对于value的类型有以下几种：</p>
+<ul>
+<li>字符串</li>
+<li>Hash类型</li>
+<li>List</li>
+<li>Set</li>
+<li>SortedSet（zset）</li>
+</ul>
+<p>PS：
+在redis中的命令语句中，命令是忽略大小写的，而key是不忽略大小写的。</p>
+<h2>使用数据库</h2>
+<p>在使用客户端软件登陆后我们发现有redis默认有15个库,使用<code>select &lt;db number&gt;</code>切换数据库,当我们登陆后指定使用哪个库时候默认用第一个库（db0）,通过使用发现redis会为我们自动管理库的个数
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@iZi1qirs2ab583Z bin]<span class="comment"># ./redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt; select 1</span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
+<h2>String类型</h2>
+<p>自己理解：相当于普通的key value 键值对</p>
+<h3>String类型相关命令</h3>
+<ol>
+<li>
+<p>存入 <code>SET &lt;key&gt; &lt;value&gt;</code></p>
+<blockquote>
+<p>set name xiaoli</p>
+</blockquote>
+</li>
+<li>
+<p>取出 <code>GET &lt;key&gt;</code></p>
+<blockquote>
+<p>get name</p>
+</blockquote>
+</li>
+<li>
+<p>存入多个值 <code>MSET &lt;key&gt; &lt;value&gt; [key value …]</code></p>
+<blockquote>
+<p>mset k1 v1 k2 v2 k3 v3 k4 v4</p>
+</blockquote>
+</li>
+<li>
+<p>取出多个值 <code>MGET &lt;key&gt; [key …]</code></p>
+<blockquote>
+<p>mget k1 k2 k3 k4</p>
+</blockquote>
+</li>
+<li>
+<p>取出值并重新赋值 <code>GETSET &lt;key&gt; &lt;value&gt;</code></p>
+<blockquote>
+<p>getset name zhangsan</p>
+</blockquote>
+</li>
+<li>
+<p>删除 <code>del &lt;key&gt;</code></p>
+<blockquote>
+<p>del name</p>
+</blockquote>
+</li>
+<li>
+<p>递增数值 <code>INCR &lt;key&gt;</code>
+（如没有自动创建key,如果存在key value必须为数字）</p>
+<blockquote>
+<p>incr num</p>
+</blockquote>
+</li>
+<li>
+<p>递减数值 <code>DECR &lt;key&gt;</code></p>
+<blockquote>
+<p>decr num</p>
+</blockquote>
+</li>
+<li>
+<p>增加指定的数值 <code>INCRBY &lt;key&gt; &lt;increment&gt;</code></p>
+<blockquote>
+<p>incrby num 2</p>
+</blockquote>
+</li>
+<li>
+<p>减少指定的数值 <code>RECRBY &lt;key&gt; &lt;decrement&gt;</code></p>
+<blockquote>
+<p>decrby num 2</p>
+</blockquote>
+</li>
+<li>
+<p>追加value值(value后) <code>APPEND &lt;key&gt; &lt;value&gt;</code></p>
+<blockquote>
+<p>append name world</p>
+</blockquote>
+</li>
+<li>
+<p>获取字符串长度 <code>STRLEN &lt;key&gt;</code> 返回0 key存在</p>
+<blockquote>
+<p>strlen name</p>
+</blockquote>
+</li>
+</ol>
+<h2>Hash类型</h2>
+<p>自己理解：相当于map存入map，一般用于存入json对象，当我们将json数据(jiso格式：<code>User “{“username”:”gyf”,”age”:”80”}”</code>)用redis String方式存储时候若只修改字符串中某一个值，需要重新赋值整个字符串操作，redis hash解决了这个问题，使用hash方式存储可以我们只对字符串中某个值操作，提高效率。</p>
+<p>hash叫散列类型，它提供了字段和字段值的映射。字段值只能是字符串类型，不支持散列类型、集合类型等其它类型。如下：<br>
+<img src="/2019/03/20/redis/2.png" alt="2.png"></p>
+<h3>Hash类型相关命令</h3>
+<p>HSET命令不区分插入和更新操作，当执行插入操作时HSET命令返回1，当执行更新操作时返回0。</p>
+<ol>
+<li>
+<p>插入/更新 <code>HSET &lt;key&gt; &lt;field&gt; &lt;value&gt;</code></p>
+<blockquote>
+<p>hset user username xiaoli</p>
+</blockquote>
+</li>
+<li>
+<p>插入多个/更新 <code>HMSET &lt;key&gt; &lt;field&gt; &lt;value&gt; [field value ...]</code></p>
+<blockquote>
+<p>hmset user1 username xiaoli age 20</p>
+</blockquote>
+</li>
+<li>
+<p>当不key不存在时插入 <code>HSETNX &lt;key&gt; &lt;field&gt; &lt;value&gt;</code></p>
+<blockquote>
+<p>hsetnx user username zhangsan</p>
+</blockquote>
+</li>
+<li>
+<p>取值 <code>HGET &lt;key&gt; &lt;field&gt;</code></p>
+<blockquote>
+<p>hget user username</p>
+</blockquote>
+</li>
+<li>
+<p>取多个值 <code>HMGET &lt;key&gt; &lt;field&gt; [field ...]</code></p>
+<blockquote>
+<p>hmget user1 username age</p>
+</blockquote>
+</li>
+<li>
+<p>取所有值 <code>HGETALL &lt;key&gt;</code></p>
+<blockquote>
+<p>hgetall user1</p>
+</blockquote>
+</li>
+<li>
+<p>删除一个或多个字段 <code>HDEL &lt;key&gt; &lt;field&gt; [field ...]</code></p>
+<blockquote>
+<p>hdel user1 age</p>
+</blockquote>
+</li>
+<li>
+<p>增加数字（字段为数字）<code>HINCRBY &lt;key&gt; &lt;field&gt; increment</code></p>
+<blockquote>
+<p>hincrby user1 age 2</p>
+</blockquote>
+</li>
+<li>
+<p>判断字段是否存在 <code>HEXISTS &lt;key&gt; &lt;field&gt;</code></p>
+<blockquote>
+<p>hexists user1 age</p>
+</blockquote>
+</li>
+<li>
+<p>只获取字段名或字段值 <code>HKEYS &lt;key&gt;</code> <code>HVALS &lt;key&gt;</code></p>
+<blockquote>
+<p>hkeys user</p>
+</blockquote>
+</li>
+<li>
+<p>获取字段数量 <code>HLEN &lt;key&gt;</code></p>
+<blockquote>
+<p>hlen user1</p>
+</blockquote>
+</li>
+</ol>
+<h2>List 类型</h2>
+<h3>回顾ArrayList 与LinkedList 的区别</h3>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>ArrayList</th>
+<th>LinkedList</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现原理</td>
+<td>数组（通过下标存储）</td>
+<td>双向链表（每个元素都记录前后元素指针）</td>
+</tr>
+<tr>
+<td>查询速度</td>
+<td>快(根据索引查询)</td>
+<td>根据要查询的元素位置决定（需要按顺序查询元素，若元素考前或靠后快）</td>
+</tr>
+<tr>
+<td>新增删除</td>
+<td>慢（数组需要移位操作）</td>
+<td><strong>快</strong>（插入或删除时候更改相邻元素的指针）</td>
+</tr>
+</tbody>
+</table>
+<h3>Redis list 介绍</h3>
+<p>列表类型（list）可以存储一个有序的字符串列表，常用的操作是向<strong>列表两端添加元素</strong>，或者<strong>获得列表的某一个片段</strong>。<br>
+<strong>列表类型内部是使用双向链表（double linked list）实现的</strong>，所以向列表两端添加元素的时间复杂度为0(1)，获取越接近两端的元素速度就越快。这意味着即使是一个有几千万个元素的列表，获取头部或尾部的10条记录也是极快的。</p>
+<h3>list类型常用命令</h3>
+<ol>
+<li>向列表左边添加元素 <code>LPUSH &lt;key&gt; &lt;value&gt; [value ...]</code>
+<blockquote>
+<p>lpush list:1 1 2 3 4 5 6 7 8 9</p>
+</blockquote>
+</li>
+<li>向列表右边增加元素 <code>RPUSH &lt;key&gt; &lt;value&gt; [value ...]</code>
+<blockquote>
+<p>rpush list:1 1 2 3 4 5 6 7 8 9</p>
+</blockquote>
+</li>
+<li>查看列表 <code>LRANGE &lt;key&gt; &lt;start&gt; &lt;stop&gt;</code> stop参数为-1 查询到最后的那个元素
+<blockquote>
+<p>lrange list:1 0 -1</p>
+</blockquote>
+</li>
+<li>从列表左边/右边 弹出1个元素 <code>LPOP &lt;key&gt;</code> / <code>RPOP &lt;key&gt;</code>
+<blockquote>
+<p>lpop list:1</p>
+</blockquote>
+</li>
+<li>获取列表中元素的个数 <code>LLEN &lt;key&gt;</code>
+<blockquote>
+<p>llen list:1</p>
+</blockquote>
+</li>
+<li>删除列表中指定的值 <code>LREM &lt;key&gt; &lt;count&gt; &lt;value&gt;</code> count <code>&gt;0</code>从左侧删除<code>&lt;0</code>从右侧删除<code>=0</code>删除全部值为value的元素(例子从右侧删除2个元素值为7的元素)
+<blockquote>
+<p>lrem list:1 -2 7</p>
+</blockquote>
+</li>
+<li>通过索引获取元素 <code>LINDEX &lt;key&gt; &lt;index&gt;</code>
+<blockquote>
+<p>lindex list:1 10</p>
+</blockquote>
+</li>
+<li>通过索引设置元素值 <code>LSET &lt;key&gt; &lt;index&gt; &lt;value&gt;</code>
+<blockquote>
+<p>lset list:1 10 5</p>
+</blockquote>
+</li>
+<li>只保留列表指定片段 <code>LTRIM &lt;key&gt; &lt;start&gt; &lt;stop&gt;</code>
+<blockquote>
+<p>ltrim list:1 1 6</p>
+</blockquote>
+</li>
+<li>查找元素值并再元素左|右插入元素 <code>LINSERT &lt;key&gt; &lt;BEFORE|AFTER&gt; &lt;pivot&gt; &lt;value&gt;</code>
+<blockquote>
+<p>linsert list:1 before 4 10</p>
+</blockquote>
+</li>
+<li>将元素从一个列表转移到另一个列表中<code>RPOPLPUSH &lt;source&gt; &lt;destination&gt;</code> 只移动一个
+<blockquote>
+<p>rpoplpush list:1 list:2</p>
+</blockquote>
+</li>
+</ol>
+<h2>Set 类型</h2>
+<p><strong>集合中的数据是不重复且没有顺序</strong><br>
+集合类型的常用操作是<strong>向集合中加入或删除元素、判断某个元素是否存在</strong>等，由于集合类型的Redis内部是使用值为空的散列表实现，所有这些操作的时间复杂度都为0(1)。<br>
+Redis还提供了多个集合之间的<strong>交集、并集、差集</strong>的运算。</p>
+<h2>Set类型常用命令</h2>
+<ol>
+<li>
+<p>增加一个或多个元素 <code>SADD &lt;key&gt; &lt;member&gt; [member ...]</code></p>
+<blockquote>
+<p>sadd set:1 1 2 3 4 5 6</p>
+</blockquote>
+</li>
+<li>
+<p>删除一个或多个元素 <code>SREM &lt;key&gt; &lt;member&gt; [member ...]</code></p>
+<blockquote>
+<p>srem set:1 5</p>
+</blockquote>
+</li>
+<li>
+<p>获得集合中的所有元素 <code>SMEMBERS &lt;key&gt;</code></p>
+<blockquote>
+<p>smembers set:1</p>
+</blockquote>
+</li>
+<li>
+<p>判断元素是否在集合中 <code>SISMEMBER &lt;key&gt; &lt;member&gt;</code></p>
+<blockquote>
+<p>sismember set:1 7</p>
+</blockquote>
+</li>
+<li>
+<p>集合差集运算 <code>SDIFF &lt;key1&gt; &lt;key2&gt;</code></p>
+<blockquote>
+<p>sdiff set:1 set:2</p>
+</blockquote>
+</li>
+<li>
+<p>集合交集运算 <code>SINTER &lt;key1&gt; &lt;key2&gt;</code></p>
+<blockquote>
+<p>sinter set1 set2</p>
+</blockquote>
+</li>
+<li>
+<p>集合并集运算 <code>SUNION &lt;key1&gt; &lt;key2&gt;</code></p>
+<blockquote>
+<p>sunion user newuser</p>
+</blockquote>
+</li>
+<li>
+<p>获得集合中元素的个数 <code>SCARD &lt;key&gt;</code></p>
+<blockquote>
+<p>scard set:1</p>
+</blockquote>
+</li>
+<li>
+<p>从集合中弹出一个元素 <code>SPOP &lt;key&gt;</code></p>
+<blockquote>
+<p>spop set:1</p>
+</blockquote>
+</li>
+</ol>
+<h2>SortedSet类型zset</h2>
+<p><strong>zset是有序集合</strong>
+在集合类型的基础上，有序集合类型为集合中的每个元素都关联一个分数，这使得我们不仅可以完成插入、删除和判断元素是否存在在集合中，还能够获得分数最高或最低的前N个元素、获取指定分数范围内的元素等与分数有关的操作。</p>
+<p>在某些方面有序集合和列表类型有些相似。<br>
+1、二者都是有序的。<br>
+2、二者都可以获得某一范围的元素。<br>
+但是，二者有着很大区别：<br>
+1、列表类型是通过链表实现的，获取靠近两端的数据速度极快，而当元素增多后，访问中间数据的速度会变慢。<br>
+2、有序集合类型使用散列表实现，所有即使读取位于中间部分的数据也很快。<br>
+3、列表中不能简单的调整某个元素的位置，但是有序集合可以（通过更改分数实现）
+4、有序集合要比列表类型更耗内存。</p>
+<p>自己理解：set中存入map,元素（value）中加入了对应的score，通过scored对set进行排序</p>
+<h3>zset常用命令</h3>
+<ol>
+<li>添加元素 <code>ZADD &lt;key&gt; &lt;score&gt; &lt;member&gt; [score member ...]</code>
+<blockquote>
+<p>zadd scoreboard 80 zhangsan 89 lisi 94 wangwu</p>
+</blockquote>
+</li>
+<li>获取元素的score <code>ZSCORE &lt;key&gt; &lt;member&gt;</code>
+<blockquote>
+<p>zscore scoreboard zhangsan</p>
+</blockquote>
+</li>
+<li>删除元素 <code>ZREM key &lt;member&gt; [member ...]</code>
+<blockquote>
+<p>zrem scoreboard zhangsan</p>
+</blockquote>
+</li>
+<li>取范围内的元素列表从小到大 <code>ZRANGE &lt;key&gt; &lt;start&gt; &lt;stop&gt; [WITHSCORES]</code> <em>WITHSCORES 表示显示 score值</em>
+<blockquote>
+<p>zrange scoreboard 0 2 WITHSCORES</p>
+</blockquote>
+</li>
+<li>取范围内的元素列表从大到小 <code>ZREVRANGE &lt;key&gt; &lt;start&gt; &lt;stop&gt; [WITHSCORES]</code>
+<blockquote>
+<p>zrevrange scoreboard 0 2</p>
+</blockquote>
+</li>
+<li>指定score范围的元素 <code>ZRANGEBYSCORE &lt;key&gt; &lt;min&gt; &lt;max&gt; [WITHSCORES] [LIMIT offset count]</code>  <em>LIMIT offset count 参数指分页</em>
+<blockquote>
+<p>ZRANGEBYSCORE scoreboard 70 100 limit 1 2</p>
+</blockquote>
+</li>
+<li>增加某个元素的score值 <code>ZINCRBY &lt;key&gt; &lt;increment&gt; &lt;member&gt;</code>
+<blockquote>
+<p>zincrby scoreboard 10 chener</p>
+</blockquote>
+</li>
+<li>获得集合中元素的数量 <code>ZCARD &lt;key&gt;</code>
+<blockquote>
+<p>zcard scoreboard</p>
+</blockquote>
+</li>
+<li>获得指定score范围内的元素个数 <code>ZCOUNT &lt;key&gt; &lt;min&gt; &lt;max&gt;</code></li>
+<li>按照排名范围删除元素 <code>ZREMRANGEBYRANK &lt;key&gt; &lt;start&gt; &lt;stop&gt;</code></li>
+<li>按照score范围删除元素 <code>ZREMRANGEBYSCORE &lt;key&gt; &lt;min&gt; &lt;max&gt;</code></li>
+<li>获取元素的排名从小到大 <code>ZRANK &lt;key&gt; &lt;member&gt;</code></li>
+<li>获取元素的排名从大到小 <code>ZREVRANK &lt;key&gt; &lt;member&gt;</code></li>
+</ol>
+<h2>Keys命令【了解】</h2>
+<h3>关于key生存时间</h3>
+<ol>
+<li>设置key的生存时间 <code>EXPIRE &lt;key&gt; &lt;seconds&gt;</code></li>
+<li>查看key剩余生存时间 <code>TTL &lt;key&gt;</code></li>
+<li>清除生存时间 <code>PERSIST &lt;key&gt;</code></li>
+<li>设置kay生存时间-毫秒 <code>PEXPIRE &lt;key&gt; &lt;milliseconds&gt;</code></li>
+</ol>
+<h3>关于key操作</h3>
+<ol>
+<li>模糊查询数据库中的key <code>KEYS *key*</code></li>
+<li>查询指定的key是否存在 <code>KEYS &lt;key&gt;</code></li>
+<li>删除一个key <code>DEL &lt;key&gt;</code></li>
+<li>对key进行重命名 <code>RENAME &lt;key&gt; &lt;new name&gt;</code></li>
+<li>判断key的类型 <code>TYPE &lt;key&gt;</code></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/vue安装/" rel="next" title="vue环境安装">
+                <i class="fa fa-chevron-left"></i> vue环境安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/22/activeMQ/" rel="prev" title="activeMQ">
+                activeMQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Redis 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">下载并安装redis-3.0.0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Redis启动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">前端启动（不推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">后端启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.2.</span> <span class="nav-text">启动与关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.3.</span> <span class="nav-text">端口占用问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">如何登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.1.</span> <span class="nav-text">命令行登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.2.</span> <span class="nav-text">Redis客户端【了解】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.3.</span> <span class="nav-text">解决登陆超时问题 设置防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">Redis 数据类型介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">使用数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text">String类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.1.</span> <span class="nav-text">String类型相关命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.7.</span> <span class="nav-text">Hash类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.7.1.</span> <span class="nav-text">Hash类型相关命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.</span> <span class="nav-text">List 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.1.</span> <span class="nav-text">回顾ArrayList 与LinkedList 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.2.</span> <span class="nav-text">Redis list 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.3.</span> <span class="nav-text">list类型常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.9.</span> <span class="nav-text">Set 类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.10.</span> <span class="nav-text">Set类型常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.11.</span> <span class="nav-text">SortedSet类型zset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.11.1.</span> <span class="nav-text">zset常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.12.</span> <span class="nav-text">Keys命令【了解】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.12.1.</span> <span class="nav-text">关于key生存时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.12.2.</span> <span class="nav-text">关于key操作</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

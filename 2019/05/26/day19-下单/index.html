@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.学习目标  会调用订单系统接口 实现订单结算功能 实现微信支付功能  1.订单系统接口 我们不做开发，只讲解 1.1.导入订单服务 把课前资料提供的leyou-order复制到D:\heima\code\leyou目录。 然后在工程内导入：  然后导入module：  选择导入module：  选择目录中的 ly-order：  打开父工程leyou的pom文件，添加ly-order模块：">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="19.下单">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day19-下单/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="0.学习目标  会调用订单系统接口 实现订单结算功能 实现微信支付功能  1.订单系统接口 我们不做开发，只讲解 1.1.导入订单服务 把课前资料提供的leyou-order复制到D:\heima\code\leyou目录。 然后在工程内导入：  然后导入module：  选择导入module：  选择目录中的 ly-order：  打开父工程leyou的pom文件，添加ly-order模块：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527849592739.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527849713858.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527849755740.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527988253596.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527988384844.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528724925709.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534050474425.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534050501639.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534050571547.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528726383029.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534050960735.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534056625226.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534056963545.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534057111628.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534057197865.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534057752285.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528729105237.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534057869509.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534058725566.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534058696076.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059150417.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059488506.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059550338.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059762431.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059802562.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534059974834.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534060051812.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528796883071.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534060875467.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534061834503.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534061965270.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534062028046.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534062115599.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527990452791.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534062458952.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534063127883.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534063368728.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534068627040.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528011713709.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534070259673.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528012065388.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534070467947.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534070743780.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528012881735.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534071010391.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534071493245.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534071647717.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534071794146.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534072483208.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534072753146.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534073678931.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534073704731.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534074122199.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534074293296.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534074374101.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528340102503.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528340136603.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528340413139.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527848350188.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527848358128.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527848368179.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/chapter6_5_1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362159620.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362220886.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534313526721.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362348399.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1534313925398.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362377494.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362023061.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362420151.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528362464276.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1528376883924.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:33.389Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="19.下单">
+<meta name="twitter:description" content="0.学习目标  会调用订单系统接口 实现订单结算功能 实现微信支付功能  1.订单系统接口 我们不做开发，只讲解 1.1.导入订单服务 把课前资料提供的leyou-order复制到D:\heima\code\leyou目录。 然后在工程内导入：  然后导入module：  选择导入module：  选择目录中的 ly-order：  打开父工程leyou的pom文件，添加ly-order模块：">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day19-下单/assets/1527849592739.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day19-下单/">
+
+
+
+
+
+  <title>19.下单 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day19-下单/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">19.下单</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:33+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>0.学习目标</h1>
+<ul>
+<li>会调用订单系统接口</li>
+<li>实现订单结算功能</li>
+<li>实现微信支付功能</li>
+</ul>
+<h1>1.订单系统接口</h1>
+<p>我们不做开发，只讲解</p>
+<h2>1.1.导入订单服务</h2>
+<p>把课前资料提供的<code>leyou-order</code>复制到<code>D:\heima\code\leyou</code>目录。</p>
+<p>然后在工程内导入：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527849592739.png" alt="1527849592739"></p>
+<p>然后导入module：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527849713858.png" alt="1527849713858"></p>
+<p>选择导入module：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527849755740.png" alt="1527849755740"></p>
+<p>选择目录中的 <code>ly-order</code>：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527988253596.png" alt="1527988253596"></p>
+<p>打开父工程leyou的pom文件，添加<code>ly-order</code>模块：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527988384844.png" alt="1527988384844"></p>
+<h2>1.2.Swagger-UI</h2>
+<p>丝袜哥</p>
+<h3>1.2.1.什么是OpenAPI</h3>
+<p>随着互联网技术的发展，现在的网站架构基本都由原来的后端渲染，变成了：前端渲染、前后端分离的形态，而且前端技术和后端技术在各自的道路上越走越远。  前端和后端的唯一联系，变成了API接口；API文档变成了前后端开发人员联系的纽带，变得越来越重要。</p>
+<p>没有API文档工具之前，大家都是手写API文档的，在什么地方书写的都有，而且API文档没有统一规范和格式，每个公司都不一样。这无疑给开发带来了灾难。</p>
+<p>OpenAPI规范（OpenAPI Specification 简称OAS）是Linux基金会的一个项目，试图通过定义一种用来描述API格式或API定义的语言，来规范RESTful服务开发过程。目前V3.0版本的OpenAPI规范已经发布并开源在github上 。</p>
+<p>官网：https://github.com/OAI/OpenAPI-Specification</p>
+<h3>1.2.2.什么是swagger？</h3>
+<p>OpenAPI是一个编写API文档的规范，然而如果手动去编写OpenAPI规范的文档，是非常麻烦的。而Swagger就是一个实现了OpenAPI规范的工具集。</p>
+<p>官网：https://swagger.io/</p>
+<p>看官方的说明：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528724925709.png" alt="1528724925709"></p>
+<p>Swagger包含的工具集：</p>
+<ul>
+<li><strong>Swagger编辑器：</strong> Swagger Editor允许您在浏览器中编辑YAML中的OpenAPI规范并实时预览文档。</li>
+<li><strong>Swagger UI：</strong> Swagger UI是HTML，Javascript和CSS资产的集合，可以从符合OAS标准的API动态生成漂亮的文档。</li>
+<li>**Swagger Codegen：**允许根据OpenAPI规范自动生成API客户端库（SDK生成），服务器存根和文档。</li>
+<li>**Swagger Parser：**用于解析来自Java的OpenAPI定义的独立库</li>
+<li>**Swagger Core：**与Java相关的库，用于创建，使用和使用OpenAPI定义</li>
+<li><strong>Swagger Inspector（免费）：</strong> API测试工具，可让您验证您的API并从现有API生成OpenAPI定义</li>
+<li><strong>SwaggerHub（免费和商业）：</strong> API设计和文档，为使用OpenAPI的团队构建。</li>
+</ul>
+<h3>1.2.3.快速入门</h3>
+<p>SpringBoot已经集成了Swagger，使用简单注解即可生成swagger的API文档。</p>
+<h4>1）引入依赖</h4>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4>2）编写配置</h4>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">api</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .host(<span class="string">"http://order.leyou.com"</span>)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">"com.leyou.order.controller"</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">"乐优商城订单系统"</span>)</span><br><span class="line">                .description(<span class="string">"乐优商城订单系统接口文档"</span>)</span><br><span class="line">                .version(<span class="string">"1.0"</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>3）接口声明</h4>
+<p>在controller的每个handler上添加接口说明注解：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"order"</span>)</span><br><span class="line"><span class="meta">@Api</span>(<span class="string">"订单服务接口"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PayHelper payHelper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建订单</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> order 订单对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 订单编号</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"创建订单接口，返回订单编号"</span>, notes = <span class="string">"创建订单"</span>)</span><br><span class="line">    <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"order"</span>, required = <span class="keyword">true</span>, value = <span class="string">"订单的json对象,包含订单条目和物流信息"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Long&gt; <span class="title">createOrder</span><span class="params">(@RequestBody @Valid Order order)</span> </span>&#123;</span><br><span class="line">        Long id = <span class="keyword">this</span>.orderService.createOrder(order);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(id, HttpStatus.CREATED);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分页查询当前用户订单</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> status 订单状态</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 分页订单数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"list"</span>)</span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"分页查询当前用户订单，并且可以根据订单状态过滤"</span>, </span><br><span class="line">                  notes = <span class="string">"分页查询当前用户订单"</span>)</span><br><span class="line">    <span class="meta">@ApiImplicitParams</span>(&#123;</span><br><span class="line">        <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"page"</span>, value = <span class="string">"当前页"</span>, </span><br><span class="line">                          defaultValue = <span class="string">"1"</span>, type = <span class="string">"Integer"</span>),</span><br><span class="line">        <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"rows"</span>, value = <span class="string">"每页大小"</span>, </span><br><span class="line">                          defaultValue = <span class="string">"5"</span>, type = <span class="string">"Integer"</span>),</span><br><span class="line">        <span class="meta">@ApiImplicitParam</span>(</span><br><span class="line">            name = <span class="string">"status"</span>, </span><br><span class="line">            value = <span class="string">"订单状态：1未付款，2已付款未发货，3已发货未确认，4已确认未评价，5交易关闭，6交易成功，已评价"</span>, type = <span class="string">"Integer"</span>),</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;PageResult&lt;Order&gt;&gt; queryUserOrderList(</span><br><span class="line">        <span class="meta">@RequestParam</span>(value = <span class="string">"page"</span>, defaultValue = <span class="string">"1"</span>) Integer page,</span><br><span class="line">        <span class="meta">@RequestParam</span>(value = <span class="string">"rows"</span>, defaultValue = <span class="string">"5"</span>) Integer rows,</span><br><span class="line">        <span class="meta">@RequestParam</span>(value = <span class="string">"status"</span>, required = <span class="keyword">false</span>) Integer status) &#123;</span><br><span class="line">        PageResult&lt;Order&gt; result = <span class="keyword">this</span>.orderService.queryUserOrderList(page, rows, status);</span><br><span class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>常用注解说明：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> <span class="doctag">@Api</span>：修饰整个类，描述Controller的作用</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiOperation</span>：描述一个类的一个方法，或者说一个接口</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiParam</span>：单个参数描述</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiModel</span>：用对象来接收参数</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiProperty</span>：用对象接收参数时，描述对象的一个字段</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiResponse</span>：HTTP响应其中1个描述</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiResponses</span>：HTTP响应整体描述</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiIgnore</span>：使用该注解忽略这个API</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiError</span> ：发生错误返回的信息</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiImplicitParam</span>：一个请求参数</span></span><br><span class="line"><span class="comment"> <span class="doctag">@ApiImplicitParams</span>：多个请求参数</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></p>
+<h4>4）启动测试</h4>
+<p>启动服务，然后访问：http://localhost:8089/swagger-ui.html</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534050474425.png" alt="1534050474425"></p>
+<p>点击order-controller，查看接口信息：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534050501639.png" alt="1534050501639"></p>
+<p>点击任意一个接口，即可看到详细信息：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534050571547.png" alt="1534050571547"></p>
+<h2>1.3.测试接口</h2>
+<h3>1.3.1.创建订单接口</h3>
+<p>可以通过页面看到接口信息：</p>
+<ul>
+<li>请求方式：POST</li>
+<li>请求路径：/order</li>
+<li>请求参数：包含订单、订单详情等数据的json对象。</li>
+<li>返回结果：订单编号</li>
+</ul>
+<p>点击<code>Try It Out</code>来测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528726383029.png" alt="1528726383029"></p>
+<p>输入数据：</p>
+<p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"totalPay"</span>: <span class="number">236800</span>,</span><br><span class="line">  <span class="attr">"postFee"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"paymentType"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"actualPay"</span>: <span class="number">236800</span>,</span><br><span class="line">  <span class="attr">"buyerMessage"</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">"buyerNick"</span>: <span class="string">"huge"</span>,</span><br><span class="line">  <span class="attr">"orderDetails"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"skuId"</span>: <span class="number">3893493</span>,</span><br><span class="line">      <span class="attr">"num"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"苹果（Apple）iPhone 6 (A1586) 16GB 金色 移动联通电信4G手机3"</span>,</span><br><span class="line">      <span class="attr">"price"</span>: <span class="number">236800</span>,</span><br><span class="line">      <span class="attr">"ownSpec"</span>: <span class="string">"&#123;\"机身颜色\":\"钻雕蓝\",\"内存\":\"4GB\",\"机身存储\":\"64GB\"&#125;"</span>,</span><br><span class="line">      <span class="attr">"image"</span>: <span class="string">"http://image.leyou.com/images/9/4/1524297342728.jpg"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"receiver"</span>: <span class="string">"锋哥"</span>,</span><br><span class="line">  <span class="attr">"receiverMobile"</span>: <span class="string">"15800000000"</span>,</span><br><span class="line">  <span class="attr">"receiverState"</span>: <span class="string">"上海"</span>,</span><br><span class="line">  <span class="attr">"receiverCity"</span>: <span class="string">"上海"</span>,</span><br><span class="line">  <span class="attr">"receiverDistrict"</span>: <span class="string">"浦东新签"</span>,</span><br><span class="line">  <span class="attr">"receiverAddress"</span>: <span class="string">"航头镇航头路18号传智播客3号楼"</span>,</span><br><span class="line">  <span class="attr">"receiverZip"</span>: <span class="string">"210000"</span>,</span><br><span class="line">  <span class="attr">"invoiceType"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"sourceType"</span>:<span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后点击execute：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534050960735.png" alt="1534050960735"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534056625226.png" alt="1534056625226"></p>
+<p>下单需要登录，通过登录生成token：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534056963545.png" alt="1534056963545"></p>
+<p>把token的值手动加入到浏览器的cookie中：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534057111628.png" alt="1534057111628"></p>
+<p><img src="/2019/05/26/day19-下单/assets/1534057197865.png" alt="1534057197865"></p>
+<p>添加成功，响应订单编号。但是和数据库保存的订单编号不太一样（后几位不一样，浏览器展示长整型会出现精度损失）</p>
+<h3>1.3.2.生成ID的方式</h3>
+<blockquote>
+<p>订单id的特殊性</p>
+</blockquote>
+<p>订单数据非常庞大，将来一定会做分库分表。那么这种情况下， 要保证id的唯一，就不能靠数据库自增，而是自己来实现算法，生成唯一id。</p>
+<blockquote>
+<p>雪花算法</p>
+</blockquote>
+<p>这里的订单id是通过一个工具类生成的：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534057752285.png" alt="1534057752285"></p>
+<p>而工具类所采用的生成id算法，是由Twitter公司开源的snowflake（雪花）算法。</p>
+<blockquote>
+<p>简单原理</p>
+</blockquote>
+<p>雪花算法会生成一个64位的二进制数据，为一个Long型。(转换成字符串后长度最多19位) ，其基本结构：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528729105237.png" alt="1528729105237"></p>
+<p>第一位：为未使用</p>
+<p>第二部分：41位为毫秒级时间(41位的长度可以使用69年)</p>
+<p>第三部分：5位datacenterId和5位workerId(10位的长度最多支持部署1024个节点）</p>
+<p>第四部分：最后12位是毫秒内的计数（12位的计数顺序号支持每个节点每毫秒产生4096个ID序号）</p>
+<p>snowflake生成的ID整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞（由datacenter和workerId作区分），并且效率较高。经测试snowflake每秒能够产生26万个ID。</p>
+<blockquote>
+<p>配置</p>
+</blockquote>
+<p>为了保证不重复，我们给每个部署的节点都配置机器id：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leyou:</span></span><br><span class="line"><span class="attr">  worker:</span></span><br><span class="line"><span class="attr">    workerId:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">    datacenterId:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>加载属性：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"leyou.worker"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdWorkerProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> workerId;<span class="comment">// 当前机器id</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> datacenterId;<span class="comment">// 序列号</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getWorkerId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> workerId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWorkerId</span><span class="params">(<span class="keyword">long</span> workerId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.workerId = workerId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getDatacenterId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> datacenterId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDatacenterId</span><span class="params">(<span class="keyword">long</span> datacenterId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.datacenterId = datacenterId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编写配置类：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(IdWorkerProperties.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdWorkerConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IdWorker <span class="title">idWorker</span><span class="params">(IdWorkerProperties prop)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> IdWorker(prop.getWorkerId(), prop.getDatacenterId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>使用：</p>
+</blockquote>
+<p><img src="/2019/05/26/day19-下单/assets/1534057869509.png" alt="1534057869509"></p>
+<h3>1.3.2.查询订单接口</h3>
+<p>接口说明：</p>
+<ul>
+<li>请求方式：GET</li>
+<li>请求路径：/order/{id}</li>
+<li>请求参数：id，订单编号</li>
+<li>返回结果：Order，订单的json对象</li>
+</ul>
+<p>测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534058725566.png" alt="1534058725566"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534058696076.png" alt="1534058696076"></p>
+<h3>1.3.3.更新订单状态</h3>
+<p>接口说明：</p>
+<ul>
+<li>请求参数：PUT</li>
+<li>请求路径：/order/{id}/{status}</li>
+<li>请求参数：
+<ul>
+<li>id：订单编号，String类型，不能为空</li>
+<li>status：订单状态，不能为空</li>
+</ul>
+</li>
+<li>返回结果：null</li>
+</ul>
+<p>测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059150417.png" alt="1534059150417"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059488506.png" alt="1534059488506"></p>
+<p>数据库中也发生了改变：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059550338.png" alt="1534059550338"></p>
+<h3>1.3.4.分页查询订单</h3>
+<p>接口说明：</p>
+<ul>
+<li>请求方式：Get</li>
+<li>请求路径：/order/list</li>
+<li>请求参数：
+<ul>
+<li>page：当前页，Integer类型，默认为1</li>
+<li>rows：每页大小，Integer类型，默认为5</li>
+<li>status：订单状态，String类型，默认查询全部状态订单</li>
+</ul>
+</li>
+<li>返回结果：PageResult   对象，包含下面属性：
+<ul>
+<li>total：总条数</li>
+<li>items：当前页订单数组
+<ul>
+<li>订单对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059762431.png" alt="1534059762431"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059802562.png" alt="1534059802562"></p>
+<h3>1.3.5.生成微信付款链接</h3>
+<p>接口说明：</p>
+<ul>
+<li>请求方式：Get</li>
+<li>请求路径：/order/url/{id}</li>
+<li>请求参数：id，订单编号</li>
+<li>返回结果：String类型，生成的微信支付链接</li>
+</ul>
+<p>测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534059974834.png" alt="1534059974834"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534060051812.png" alt="1534060051812"></p>
+<h4>微信支付工具</h4>
+<blockquote>
+<p>PayHelper</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PayHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WXPay wxPay;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(PayHelper.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PayHelper</span><span class="params">(PayConfig payConfig)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 真实开发时</span></span><br><span class="line">        wxPay = <span class="keyword">new</span> WXPay(payConfig);</span><br><span class="line">        <span class="comment">// 测试时</span></span><br><span class="line">        <span class="comment">// wxPay = new WXPay(payConfig, WXPayConstants.SignType.MD5, true);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">createPayUrl</span><span class="params">(Long orderId)</span> </span>&#123;</span><br><span class="line">        String key = <span class="string">"ly.pay.url."</span> + orderId;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String url = <span class="keyword">this</span>.redisTemplate.opsForValue().get(key);</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(url)) &#123;</span><br><span class="line">                <span class="keyword">return</span> url;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"查询缓存付款链接异常,订单编号：&#123;&#125;"</span>, orderId, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Map&lt;String, String&gt; data = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            <span class="comment">// 商品描述</span></span><br><span class="line">            data.put(<span class="string">"body"</span>, <span class="string">"乐优商城测试"</span>);</span><br><span class="line">            <span class="comment">// 订单号</span></span><br><span class="line">            data.put(<span class="string">"out_trade_no"</span>, orderId.toString());</span><br><span class="line">            <span class="comment">//货币</span></span><br><span class="line">            data.put(<span class="string">"fee_type"</span>, <span class="string">"CNY"</span>);</span><br><span class="line">            <span class="comment">//金额，单位是分</span></span><br><span class="line">            data.put(<span class="string">"total_fee"</span>, <span class="string">"1"</span>);</span><br><span class="line">            <span class="comment">//调用微信支付的终端IP（estore商城的IP）</span></span><br><span class="line">            data.put(<span class="string">"spbill_create_ip"</span>, <span class="string">"127.0.0.1"</span>);</span><br><span class="line">            <span class="comment">//回调地址</span></span><br><span class="line">            data.put(<span class="string">"notify_url"</span>, <span class="string">"http://test.leyou.com/wxpay/notify"</span>);</span><br><span class="line">            <span class="comment">// 交易类型为扫码支付</span></span><br><span class="line">            data.put(<span class="string">"trade_type"</span>, <span class="string">"NATIVE"</span>);</span><br><span class="line">            <span class="comment">//商品id,使用假数据</span></span><br><span class="line">            data.put(<span class="string">"product_id"</span>, <span class="string">"1234567"</span>);</span><br><span class="line"></span><br><span class="line">            Map&lt;String, String&gt; result = <span class="keyword">this</span>.wxPay.unifiedOrder(data);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"SUCCESS"</span>.equals(result.get(<span class="string">"return_code"</span>))) &#123;</span><br><span class="line">                String url = result.get(<span class="string">"code_url"</span>);</span><br><span class="line">                <span class="comment">// 将付款地址缓存，时间为10分钟</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span>.redisTemplate.opsForValue().set(key, url, <span class="number">10</span>, TimeUnit.MINUTES);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    logger.error(<span class="string">"缓存付款链接异常,订单编号：&#123;&#125;"</span>, orderId, e);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> url;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                logger.error(<span class="string">"创建预交易订单失败，错误信息：&#123;&#125;"</span>, result.get(<span class="string">"return_msg"</span>));</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"创建预交易订单异常"</span>, e);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询订单状态</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> orderId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PayState <span class="title">queryOrder</span><span class="params">(Long orderId)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; data = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">// 订单号</span></span><br><span class="line">        data.put(<span class="string">"out_trade_no"</span>, orderId.toString());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Map&lt;String, String&gt; result = <span class="keyword">this</span>.wxPay.orderQuery(data);</span><br><span class="line">            <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 未查询到结果，认为是未付款</span></span><br><span class="line">                <span class="keyword">return</span> PayState.NOT_PAY;</span><br><span class="line">            &#125;</span><br><span class="line">            String state = result.get(<span class="string">"trade_state"</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"SUCCESS"</span>.equals(state)) &#123;</span><br><span class="line">                <span class="comment">// success，则认为付款成功</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 修改订单状态</span></span><br><span class="line">                <span class="keyword">this</span>.orderService.updateStatus(orderId, <span class="number">2</span>);</span><br><span class="line">                <span class="keyword">return</span> PayState.SUCCESS;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (StringUtils.equals(<span class="string">"USERPAYING"</span>, state)</span><br><span class="line">                       || StringUtils.equals(<span class="string">"NOTPAY"</span>, state)) &#123;</span><br><span class="line">                <span class="comment">// 未付款或正在付款，都认为是未付款</span></span><br><span class="line">                <span class="keyword">return</span> PayState.NOT_PAY;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 其它状态认为是付款失败</span></span><br><span class="line">                <span class="keyword">return</span> PayState.FAIL;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"查询订单状态异常"</span>, e);</span><br><span class="line">            <span class="keyword">return</span> PayState.NOT_PAY;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>跟支付相关的其它几个类：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528796883071.png" alt="1528796883071"></p>
+<h3>1.3.6.查询支付状态</h3>
+<p>接口说明：</p>
+<ul>
+<li>请求方式： Get</li>
+<li>请求路径： /state/{id}</li>
+<li>请求参数： id，订单编号</li>
+<li>返回结果：0, 未查询到支付信息 1,支付成功 2,支付失败（查询失败，或者订单过期）</li>
+</ul>
+<h4>1.3.6.1.未付款</h4>
+<p>未付款时查询，测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534060875467.png" alt="1534060875467"></p>
+<p>结果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534061834503.png" alt="1534061834503"></p>
+<p>因为尚未付款，所以查询返回0。</p>
+<h4>1.3.6.2.付款</h4>
+<p>通过JS把链接变成二维码。</p>
+<p>找到课前资料提供的JS页面：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534061965270.png" alt="1534061965270"></p>
+<p>进入，并输入刚刚生成的地址：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534062028046.png" alt="1534062028046"></p>
+<h4>1.3.6.3.已付款</h4>
+<p>扫码支付，然后再次查询：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534062115599.png" alt="1534062115599"></p>
+<p>状态码为1，代表支付成功了！</p>
+<h1>2.订单结算页</h1>
+<h2>2.1.页面跳转</h2>
+<p>在购物车页面的最下方，有一个去结算按钮：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527990452791.png" alt="1527990452791"></p>
+<p>当点击结算，我们应该跳转到订单结算页，即：<code>getOrderInfo.html</code></p>
+<p><img src="/2019/05/26/day19-下单/assets/1534062458952.png" alt="1534062458952"></p>
+<p>查看购物车的<code>结算</code>按钮：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534063127883.png" alt="1534063127883"></p>
+<p>可以看到，地址是正确的。但是只有登录用户才可以去结算付款，因此我们不能直接跳转，而是在跳转前校验用户的登录状态，如果发现是未登录，应该重定向到登录页！</p>
+<p>我们给这个按钮绑定点击事件：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534063368728.png" alt="1534063368728"></p>
+<p>事件中判断登录状态，进行页面跳转：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">toOrderInfo() &#123;</span><br><span class="line">    <span class="comment">// 判断是否登录</span></span><br><span class="line">    ly.verifyUser().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 已登录</span></span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">"/getOrderInfo.html"</span></span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 未登录</span></span><br><span class="line">        <span class="built_in">window</span>.location.href = <span class="string">"/login.html?returnUrl="</span> + <span class="built_in">window</span>.location.href;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>登录后测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534068627040.png" alt="1534068627040"></p>
+<p>此处页面需要渲染的内容主要包含3部分：</p>
+<ul>
+<li>收货人信息</li>
+<li>支付方式</li>
+<li>商品信息</li>
+</ul>
+<h2>2.2.收货人信息（作业）</h2>
+<p><img src="/2019/05/26/day19-下单/assets/1528011713709.png" alt="1528011713709"></p>
+<p>这里的收货人信息肯定是当前登录用户的收货地址。所以需要根据当前登录用户去查询，目前我们在页面是写的假数据：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534070259673.png" alt="1534070259673"></p>
+<p>大家可以在在后台提供地址的增删改查接口，然后页面加载时根据当前登录用户查询，而后赋值给addresses即可。</p>
+<h2>2.3.支付方式</h2>
+<p>支付方式有2种：</p>
+<ul>
+<li>微信支付</li>
+<li>货到付款</li>
+</ul>
+<p>与我们订单数据中的<code>paymentType</code>关联：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528012065388.png" alt="1528012065388"></p>
+<p>所以我们可以在Vue实例中定义一个属性来记录支付方式：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534070467947.png" alt="1534070467947"></p>
+<p>然后在页面渲染时与这个变量关联：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534070743780.png" alt="1534070743780"></p>
+<h2>2.4.商品列表</h2>
+<p>效果图：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528012881735.png" alt="1528012881735"></p>
+<p>这里的送货清单，其实就是购物车中用户选择的要付款的商品</p>
+<p>因此，我们需要在购物车跳转过来的同时，携带选中的购物车的信息</p>
+<h3>2.4.1.购物车信息获取</h3>
+<p>我们修改<code>cart.html</code>中的页面跳转逻辑，把用户选中的购物车信息传递过来：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534071010391.png" alt="1534071010391"></p>
+<p>然后在<code>created</code>钩子函数中获取购物车数据，保存到本地属性，要注意的是，我们应该在获取数据前校验用户登录状态，如果发现未登录，则直接重定向到登录页：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534071493245.png" alt="1534071493245"></p>
+<p>然后重新加载页面，查看控制台：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534071647717.png" alt="1534071647717"></p>
+<h3>2.4.2.页面渲染</h3>
+<p>要修改的页面位置：每一个li就是一件商品</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534071794146.png" alt="1534071794146"></p>
+<p>我们修改为：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"send-detail"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(cart,index) in carts"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sendGoods"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"yui3-g"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"yui3-u-1-6"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"70px"</span> <span class="attr">height</span>=<span class="string">"70px"</span> <span class="attr">:src</span>=<span class="string">"cart.image"</span>/&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"yui3-u-7-12"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>&#123;&#123;cart.title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"seven"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">"(v) in JSON.parse(cart.ownSpec)"</span>&gt;</span>&#123;&#123;v + "  "&#125;&#125; <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"yui3-u-1-12"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"price"</span>&gt;</span>￥&#123;&#123;ly.formatPrice(cart.price * cart.num)&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"yui3-u-1-12"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"num"</span>&gt;</span>&#123;&#123;cart.num&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"yui3-u-1-12"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"exit"</span>&gt;</span>有货<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>2.5.总金额</h2>
+<p>另外在商品列表下面，还有一个总金额的计算：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534072483208.png" alt="1534072483208"></p>
+<p>可以看出这里主要有4个数据：</p>
+<ul>
+<li>总金额：totalPay</li>
+<li>优惠返现：discount</li>
+<li>运费：postFee</li>
+<li>实付金额：actualPay</li>
+</ul>
+<p>不过我们没有做优惠活动，另外运费需要结合物流系统来计算，暂时我们都设置为0，在order属性中写死：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534072753146.png" alt="1534072753146"></p>
+<p>我们通过计算属性来得到<code>totalPay</code>和<code>actualPay</code>值：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    totalNum()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.carts.reduce(<span class="function">(<span class="params">c1, c2</span>) =&gt;</span> c1 + c2.num, <span class="number">0</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    totalPay()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.carts.reduce(<span class="function">(<span class="params">c1, c2</span>) =&gt;</span> c1 + c2.price * c2.num, <span class="number">0</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    actualPay()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.totalPay + <span class="keyword">this</span>.order.postFee - <span class="keyword">this</span>.order.discount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>然后在页面渲染：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534073678931.png" alt="1534073678931"></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534073704731.png" alt="1534073704731"></p>
+<h2>2.6.提交订单</h2>
+<h3>2.6.1.页面提交</h3>
+<p>来看下订单接口所需要的数据：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534074122199.png" alt="1534074122199"></p>
+<p>分为3部分，分别是</p>
+<ul>
+<li>
+<p>订单本身的基本信息</p>
+<ul>
+<li>总金额</li>
+<li>实付金额</li>
+<li>付款类型</li>
+<li>买家信息就是当前用户</li>
+</ul>
+</li>
+<li>
+<p>订单详情</p>
+<ul>
+<li>就是购物车中的商品，不过购物车数据会多出一个userId，我们去除即可：</li>
+</ul>
+<p><img src="/2019/05/26/day19-下单/assets/1534074293296.png" alt="1534074293296"></p>
+</li>
+<li>
+<p>物流信息</p>
+<ul>
+<li>当前用户选中的物流地址信息</li>
+</ul>
+</li>
+</ul>
+<p>给提交按钮绑定事件：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534074374101.png" alt="1534074374101"></p>
+<p>然后编写方法，组织数据并提交：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    submit() &#123;</span><br><span class="line">        <span class="comment">// 把购物车数据处理成订单详情</span></span><br><span class="line">        <span class="keyword">const</span> orderDetails = <span class="keyword">this</span>.carts.map(<span class="function">(<span class="params">&#123;userId, ...rest&#125;</span>) =&gt;</span> rest);</span><br><span class="line">        <span class="comment">// 处理物流信息</span></span><br><span class="line">        <span class="keyword">const</span> addr = <span class="keyword">this</span>.addresses[<span class="keyword">this</span>.selectedAddress];</span><br><span class="line">        <span class="keyword">const</span> obj = &#123;</span><br><span class="line">            receiver: addr.name,</span><br><span class="line">            receiverState: addr.state,</span><br><span class="line">            receiverCity: addr.city,</span><br><span class="line">            receiverAddress: addr.address,</span><br><span class="line">            receiverDistrict: addr.district,</span><br><span class="line">            receiverMobile: addr.phone,</span><br><span class="line">            receiverZip: addr.zipCode</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 复制到订单对象</span></span><br><span class="line">        <span class="built_in">Object</span>.assign(<span class="keyword">this</span>.order, obj, &#123;</span><br><span class="line">            orderDetails,</span><br><span class="line">            totalPay: <span class="keyword">this</span>.totalPay,</span><br><span class="line">            actualPay: <span class="keyword">this</span>.actualPay,</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 提交订单</span></span><br><span class="line">        ly.http.post(<span class="string">"/order"</span>, <span class="keyword">this</span>.order).then(<span class="function">(<span class="params">&#123;data&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 在线支付，需要到付款页</span></span><br><span class="line">            <span class="built_in">window</span>.location = <span class="string">"pay.html?orderId="</span> + data;</span><br><span class="line">        &#125;).catch(<span class="function">(<span class="params">resp</span>) =&gt;</span> &#123;</span><br><span class="line">            alert(<span class="string">"订单提交失败，可能是缺货!"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3>2.6.2.精度损失问题</h3>
+<p>在页面点击提交测试：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528340102503.png" alt="1528340102503"></p>
+<p>成功生成订单！</p>
+<p>然后看页面跳转：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528340136603.png" alt="1528340136603"></p>
+<p>好像有什么不对？订单号的最后2位不正确啊！</p>
+<p>这其实是因为JS的长整数精度有限，java的Long类型数据超出了范围，所以出现了精度损失。</p>
+<p>我们后台返回的是Json的字符串，在axios内部会自动调用 JSON.parse()方法把json字符串转为JS数据，就会出现进度损失。如果不进行转换，依然当做字符串来使用，就不会有问题了。</p>
+<p>因此，我们重写axios对响应的处理回调函数：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528340413139.png" alt="1528340413139"></p>
+<p>再次测试，就OK了。</p>
+<p>接下来就轮到支付了。</p>
+<h1>3.微信支付</h1>
+<h2>3.1.介绍</h2>
+<p>微信支付官方文档：https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527848350188.png" alt="1527848350188"></p>
+<p>我们选择开发文档，而后进入选择页面：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527848358128.png" alt="1527848358128"></p>
+<p>选择扫码支付：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1527848368179.png" alt="1527848368179"></p>
+<p>此处我们使用模式二来开发：</p>
+<h2>3.2.开发流程</h2>
+<p>模式二与模式一相比，流程更为简单，不依赖设置的回调支付URL。</p>
+<p>商户后台系统先调用微信支付的统一下单接口，微信后台系统返回链接参数code_url；</p>
+<p>商户后台系统将code_url值生成二维码图片，用户使用微信客户端扫码后发起支付。</p>
+<p>注意：code_url有效期为2小时，过期后扫码不能再发起支付。</p>
+<p>流程图：</p>
+<p><img src="/2019/05/26/day19-下单/assets/chapter6_5_1.png" alt="2wa23131"></p>
+<p>这里我们把商户（我们）要做的事情总结一下：</p>
+<ul>
+<li>1、商户生成订单</li>
+<li>2、商户调用微信下单接口，获取预交易的链接</li>
+<li>3、商户将链接生成二维码图片，展示给用户；</li>
+<li>4、用户支付并确认</li>
+<li>5、支付结果通知：
+<ul>
+<li>微信异步通知商户支付结果，商户告知微信支付接收情况</li>
+<li>商户如果没有收到通知，可以调用接口，查询支付状态</li>
+</ul>
+</li>
+<li>6、如果支付成功，发货，修改订单状态</li>
+</ul>
+<p>在前面的业务中，我们已经完成了：</p>
+<ul>
+<li>1、生成订单</li>
+</ul>
+<p>接下来，我们需要做的是：</p>
+<ul>
+<li>2、调用微信接口，生成链接。</li>
+<li>3、并且生成二维码图片</li>
+</ul>
+<h2>3.3.生成二维码</h2>
+<h3>3.3.1.生成预交易链接</h3>
+<p>我们先根据订单的编号，调用后台服务，生成交易链接，而后才能根据链接生成二维码。</p>
+<p>在页面发起请求：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> payVm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#payVm"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        ly,</span><br><span class="line">        orderId:<span class="number">0</span>,<span class="comment">// 订单编号</span></span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">        <span class="comment">// 判断登录状态</span></span><br><span class="line">        ly.http.get(<span class="string">"/auth/verify"</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 获取订单编号</span></span><br><span class="line">            <span class="keyword">this</span>.orderId = ly.getUrlParam(<span class="string">"orderId"</span>);</span><br><span class="line">            <span class="comment">// 获取请求链接</span></span><br><span class="line">            ly.http.get(<span class="string">"/order/url/"</span> + <span class="keyword">this</span>.orderId)</span><br><span class="line">                .then(<span class="function"><span class="params">resp</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(resp.data);</span><br><span class="line">                &#125;)</span><br><span class="line">        &#125;.catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">			<span class="comment">// 未登录，跳转至登录页</span></span><br><span class="line">             location.href = <span class="string">"/login.html?returnUrl="</span> + location.href;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    components: &#123;</span><br><span class="line">        shortcut: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"./js/pages/shortcut.js"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>后台已经定义好生成付款地址的接口。</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362159620.png" alt="1528362159620"></p>
+<p>刷新页面查看：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362220886.png" alt="1528362220886"></p>
+<h3>3.3.2.生成二维码</h3>
+<p>这里我们使用一个生成二维码的JS插件：qrcode，官网：https://github.com/davidshimjs/qrcodejs</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534313526721.png" alt="1534313526721"></p>
+<p>我们把课这个js脚本引入到项目中：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362348399.png" alt="1528362348399"></p>
+<p>官方使用案例：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1534313925398.png" alt="1534313925398"></p>
+<p>然后在页面引用：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362377494.png" alt="1528362377494"></p>
+<p>页面定义一个div，用于展示二维码：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362023061.png" alt="1528362023061"></p>
+<p>然后获取到付款链接后，根据链接生成二维码：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362420151.png" alt="1528362420151"></p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断登录状态</span></span><br><span class="line">ly.http.get(<span class="string">"/auth/verify"</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取订单编号</span></span><br><span class="line">    <span class="keyword">this</span>.orderId = ly.getUrlParam(<span class="string">"orderId"</span>);</span><br><span class="line">    <span class="comment">// 获取请求链接</span></span><br><span class="line">    ly.http.get(<span class="string">"/order/url/"</span> + <span class="keyword">this</span>.orderId)</span><br><span class="line">        .then(<span class="function"><span class="params">resp</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> QRCode(<span class="built_in">document</span>.getElementById(<span class="string">"qrImage"</span>), &#123;</span><br><span class="line">                text: resp.data,</span><br><span class="line">                width: <span class="number">250</span>,</span><br><span class="line">                height: <span class="number">250</span>,</span><br><span class="line">                colorDark: <span class="string">"#000000"</span>,</span><br><span class="line">                colorLight: <span class="string">"#ffffff"</span>,</span><br><span class="line">                correctLevel: QRCode.CorrectLevel.H</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 未登录，跳转至登录页</span></span><br><span class="line">    location.href = <span class="string">"/login.html?returnUrl="</span> + location.href;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>刷新页面，查看效果：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528362464276.png" alt="1528362464276"></p>
+<p>此时，客户用手机扫描二维码，可以看到付款页面。</p>
+<h2>3.4.付款状态查询</h2>
+<p>跳转到支付页面后，我们等待用户付款，付款完成则跳转到付款成功页面。</p>
+<h3>3.4.1.页面循环查询支付状态</h3>
+<p>不过，因为不清楚用户何时会付款，因此这里采用循环的方式，不断请求判断是否支付成功。</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启定时任务，查询付款状态</span></span><br><span class="line"><span class="keyword">const</span> taskId = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    ly.http.get(<span class="string">"/order/state/"</span> + <span class="keyword">this</span>.orderId)</span><br><span class="line">        .then(<span class="function"><span class="params">resp</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> i = resp.data;</span><br><span class="line">        <span class="keyword">if</span> (i === <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 付款成功</span></span><br><span class="line">            clearInterval(taskId);</span><br><span class="line">            <span class="comment">// 跳转到付款成功页</span></span><br><span class="line">            location.href = <span class="string">"/paysuccess.html?orderId="</span> + <span class="keyword">this</span>.orderId;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i === <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="comment">// 付款失败</span></span><br><span class="line">            clearInterval(taskId);</span><br><span class="line">            <span class="comment">// 跳转到付款失败页</span></span><br><span class="line">            location.href = <span class="string">"/payfail.html"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+<h3>3.4.2.付款成功页面</h3>
+<p>当付款成功后，自动跳转到付款成功页面：</p>
+<p><img src="/2019/05/26/day19-下单/assets/1528376883924.png" alt="1528376883924"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day18-购物车/" rel="next" title="18.购物车">
+                <i class="fa fa-chevron-left"></i> 18.购物车
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/hexo重装系统或更换主机后的相关操作/" rel="prev" title="hexo重装系统或更换主机后的相关操作">
+                hexo重装系统或更换主机后的相关操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1.订单系统接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.导入订单服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.Swagger-UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1.什么是OpenAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2.什么是swagger？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.3.快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">1）引入依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">2）编写配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">3）接口声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">4）启动测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.测试接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1.创建订单接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2.生成ID的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.3.</span> <span class="nav-text">1.3.2.查询订单接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.4.</span> <span class="nav-text">1.3.3.更新订单状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.5.</span> <span class="nav-text">1.3.4.分页查询订单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.6.</span> <span class="nav-text">1.3.5.生成微信付款链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.6.1.</span> <span class="nav-text">微信支付工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.7.</span> <span class="nav-text">1.3.6.查询支付状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">1.3.6.1.未付款</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.7.2.</span> <span class="nav-text">1.3.6.2.付款</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.7.3.</span> <span class="nav-text">1.3.6.3.已付款</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2.订单结算页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.页面跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.收货人信息（作业）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.支付方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">2.4.商品列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.1.</span> <span class="nav-text">2.4.1.购物车信息获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.2.</span> <span class="nav-text">2.4.2.页面渲染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">2.5.总金额</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text">2.6.提交订单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.1.</span> <span class="nav-text">2.6.1.页面提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.2.</span> <span class="nav-text">2.6.2.精度损失问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">3.微信支付</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.开发流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.生成二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.1.</span> <span class="nav-text">3.3.1.生成预交易链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.3.2.生成二维码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.付款状态查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.1.</span> <span class="nav-text">3.4.1.页面循环查询支付状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.2.</span> <span class="nav-text">3.4.2.付款成功页面</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

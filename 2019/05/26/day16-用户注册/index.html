@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.学习目标  独立创建用户中心 了解面向接口开发方式 实现数据校验功能 实现短信发送功能 实现注册功能 实现根据用户名和密码查询用户功能  1.创建用户中心 用户搜索到自己心仪的商品，接下来就要去购买，但是购买必须先登录。所以接下来我们编写用户中心，实现用户的登录和注册功能。 用户中心的提供的服务：  用户的注册 用户登录 用户个人信息管理 用户地址管理 用户收藏管理 我的订单 优惠券管理  这">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="16.用户注册">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day16-用户注册/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="0.学习目标  独立创建用户中心 了解面向接口开发方式 实现数据校验功能 实现短信发送功能 实现注册功能 实现根据用户名和密码查询用户功能  1.创建用户中心 用户搜索到自己心仪的商品，接下来就要去购买，但是购买必须先登录。所以接下来我们编写用户中心，实现用户的登录和注册功能。 用户中心的提供的服务：  用户的注册 用户登录 用户个人信息管理 用户地址管理 用户收藏管理 我的订单 优惠券管理  这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532778843008.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532778910920.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532779001951.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532779042843.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532779120507.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532779166910.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532779772325.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527174356711.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532781014342.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532781696303.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532781679924.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532781726835.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532786840913.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532786877872.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527239600218.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527239658153.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527239743836.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527238127932.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527250056698.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527250218215.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527256139407.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527240486327.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527240610713.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527240770470.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527240855176.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527241936160.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527241966575.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527244265451.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527244393041.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527247334410.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527247422251.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527247492172.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527242841777.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527243288933.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1527243354160.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:33.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="16.用户注册">
+<meta name="twitter:description" content="0.学习目标  独立创建用户中心 了解面向接口开发方式 实现数据校验功能 实现短信发送功能 实现注册功能 实现根据用户名和密码查询用户功能  1.创建用户中心 用户搜索到自己心仪的商品，接下来就要去购买，但是购买必须先登录。所以接下来我们编写用户中心，实现用户的登录和注册功能。 用户中心的提供的服务：  用户的注册 用户登录 用户个人信息管理 用户地址管理 用户收藏管理 我的订单 优惠券管理  这">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day16-用户注册/assets/1532778843008.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day16-用户注册/">
+
+
+
+
+
+  <title>16.用户注册 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day16-用户注册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">16.用户注册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:33+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>0.学习目标</h1>
+<ul>
+<li>独立创建用户中心</li>
+<li>了解面向接口开发方式</li>
+<li>实现数据校验功能</li>
+<li>实现短信发送功能</li>
+<li>实现注册功能</li>
+<li>实现根据用户名和密码查询用户功能</li>
+</ul>
+<h1>1.创建用户中心</h1>
+<p>用户搜索到自己心仪的商品，接下来就要去购买，但是购买必须先登录。所以接下来我们编写用户中心，实现用户的登录和注册功能。</p>
+<p>用户中心的提供的服务：</p>
+<ul>
+<li>用户的注册</li>
+<li>用户登录</li>
+<li>用户个人信息管理</li>
+<li>用户地址管理</li>
+<li>用户收藏管理</li>
+<li>我的订单</li>
+<li>优惠券管理</li>
+</ul>
+<p>这里我们暂时先实现基本的：<code>注册和登录</code>功能，其它功能大家可以自行补充完整。</p>
+<p>因为用户中心的服务其它微服务也会调用，因此这里我们做聚合。</p>
+<p>leyou-user：父工程，包含2个子工程：</p>
+<ul>
+<li>leyou-user-interface：实体及接口</li>
+<li>leyou-user-service：业务和服务</li>
+</ul>
+<h2>1.1.创建父module</h2>
+<p>创建</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532778843008.png" alt="1532778843008"></p>
+<p>位置：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532778910920.png" alt="1532778910920"></p>
+<h2>1.2.创建leyou-user-interface</h2>
+<p>在leyou-user下，创建module：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532779001951.png" alt="1532779001951"></p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532779042843.png" alt="1532779042843"></p>
+<p>pom：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user-interface<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>1.3.创建leyou-user-service</h2>
+<p>创建module</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532779120507.png" alt="1532779120507"></p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532779166910.png" alt="1532779166910"></p>
+<p>pom</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user-service<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatis启动器 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 通用Mapper启动器 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mysql驱动 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user-interface<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>启动类</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.leyou.user.mapper"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeyouUserApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LeyouUserApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8085</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">user-service</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://127.0.0.1:3306/leyou</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    instance-id:</span> <span class="string">$&#123;eureka.instance.ip-address&#125;.$&#123;server.port&#125;</span></span><br><span class="line"><span class="attr">    lease-renewal-interval-in-seconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    lease-expiration-duration-in-seconds:</span> <span class="number">15</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line"><span class="attr">  type-aliases-package:</span> <span class="string">com.leyou.user.pojo</span></span><br></pre></td></tr></table></figure></p>
+<p>父工程leyou-user的pom：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.user<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-user<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>leyou-user-interface<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>leyou-user-service<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>1.4.添加网关路由</h2>
+<p>我们修改<code>leyou-gateway</code>，添加路由规则，对<code>leyou-user-service</code>进行路由:</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532779772325.png" alt="1532779772325"></p>
+<h1>2.后台功能准备</h1>
+<h2>2.1.接口文档</h2>
+<p>整个用户中心的开发，我们将模拟公司内面向接口的开发。</p>
+<p>现在假设项目经理已经设计好了接口文档，详见：《用户中心接口说明.md》</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527174356711.png" alt="1527174356711"></p>
+<p>我们将根据文档直接编写后台功能，不关心页面实现。</p>
+<h2>2.2.数据结构</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `tb_user` (</span><br><span class="line">  `id` bigint(20) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `username` varchar(50) NOT NULL COMMENT &apos;用户名&apos;,</span><br><span class="line">  `password` varchar(32) NOT NULL COMMENT &apos;密码，加密存储&apos;,</span><br><span class="line">  `phone` varchar(20) DEFAULT NULL COMMENT &apos;注册手机号&apos;,</span><br><span class="line">  `created` datetime NOT NULL COMMENT &apos;创建时间&apos;,</span><br><span class="line">  `salt` varchar(32) NOT NULL COMMENT &apos;密码加密的salt值&apos;,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  UNIQUE KEY `username` (`username`) USING BTREE</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT=&apos;用户表&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>数据结构比较简单，因为根据用户名查询的频率较高，所以我们给用户名创建了索引</p>
+<h2>2.3.基本代码</h2>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532781014342.png" alt="1532781014342"></p>
+<h3>2.3.1.实体类</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"tb_user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;<span class="comment">// 用户名</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="keyword">private</span> String password;<span class="comment">// 密码</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String phone;<span class="comment">// 电话</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Date created;<span class="comment">// 创建时间</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="keyword">private</span> String salt;<span class="comment">// 密码的盐值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：为了安全考虑。这里对password和salt添加了注解@JsonIgnore，这样在json序列化时，就不会把password和salt返回。</p>
+<h3>2.3.2.mapper</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">User</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.3.3.Service</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.3.4.controller</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1>3.数据验证功能</h1>
+<h2>3.1.接口说明</h2>
+<p>实现用户数据的校验，主要包括对：手机号、用户名的唯一性校验。</p>
+<p><strong>接口路径：</strong></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /check/&#123;data&#125;/&#123;type&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>参数说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>是否必须</th>
+<th>数据类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>要校验的数据</td>
+<td>是</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>type</td>
+<td>要校验的数据类型：1，用户名；2，手机；</td>
+<td>否</td>
+<td>Integer</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回结果：</strong></p>
+<p>返回布尔类型结果：</p>
+<ul>
+<li>true：可用</li>
+<li>false：不可用</li>
+</ul>
+<p>状态码：</p>
+<ul>
+<li>200：校验成功</li>
+<li>400：参数有误</li>
+<li>500：服务器内部异常</li>
+</ul>
+<h2>3.2.controller</h2>
+<p>因为有了接口，我们可以不关心页面，所有需要的东西都一清二楚：</p>
+<ul>
+<li>请求方式：GET</li>
+<li>请求路径：/check/{param}/{type}</li>
+<li>请求参数：param,type</li>
+<li>返回结果：true或false</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 校验数据是否可用</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> type</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"check/&#123;data&#125;/&#123;type&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Boolean&gt; <span class="title">checkUserData</span><span class="params">(@PathVariable(<span class="string">"data"</span>)</span> String data, @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"type"</span>, defaultValue=<span class="string">"1"</span>)</span> Integer type) </span>&#123;</span><br><span class="line">    Boolean boo = <span class="keyword">this</span>.userService.checkData(data, type);</span><br><span class="line">    <span class="keyword">if</span> (boo == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(boo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>3.3.Service</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Boolean <span class="title">checkData</span><span class="params">(String data, Integer type)</span> </span>&#123;</span><br><span class="line">    User record = <span class="keyword">new</span> User();</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            record.setUsername(data);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            record.setPhone(data);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.userMapper.selectCount(record) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>3.4.测试</h2>
+<p>我们在数据库插入一条假数据：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532781696303.png" alt="1532781696303"></p>
+<p>然后在浏览器调用接口，测试：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532781679924.png" alt="1532781679924"></p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532781726835.png" alt="1532781726835"></p>
+<h1>4.阿里大于短信服务</h1>
+<h2>4.1.demo</h2>
+<p>注册页面上有短信发送的按钮，当用户点击发送短信，我们需要生成验证码，发送给用户。我们将使用阿里提供的阿里大于来实现短信发送。</p>
+<p>参考课前资料的《阿里短信.md》学习demo入门</p>
+<h2>4.2.创建短信微服务</h2>
+<p>因为系统中不止注册一个地方需要短信发送，因此我们将短信发送抽取为微服务：<code>leyou-sms-service</code>，凡是需要的地方都可以使用。</p>
+<p>另外，因为短信发送API调用时长的不确定性，为了提高程序的响应速度，短信发送我们都将采用异步发送方式，即：</p>
+<ul>
+<li>短信服务监听MQ消息，收到消息后发送短信。</li>
+<li>其它服务要发送短信时，通过MQ通知短信微服务。</li>
+</ul>
+<h3>4.2.1.创建module</h3>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532786840913.png" alt="1532786840913"></p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1532786877872.png" alt="1532786877872"></p>
+<h3>4.2.2.pom</h3>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.sms<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-sms-service<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-java-sdk-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-java-sdk-dysmsapi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>4.2.3.编写启动类</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeyouSmsApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LeyouSmsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>4.2.4.编写application.yml</h3>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">sms-service</span></span><br><span class="line"><span class="attr">  rabbitmq:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.101</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">leyou</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">leyou</span></span><br><span class="line"><span class="attr">    virtual-host:</span> <span class="string">/leyou</span></span><br></pre></td></tr></table></figure></p>
+<h2>4.3.编写短信工具类</h2>
+<h3>4.3.1.属性抽取</h3>
+<p>我们首先把一些常量抽取到application.yml中：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leyou:</span></span><br><span class="line"><span class="attr">  sms:</span></span><br><span class="line"><span class="attr">    accessKeyId:</span> <span class="string">JWffwFJIwada</span> <span class="comment"># 你自己的accessKeyId</span></span><br><span class="line"><span class="attr">    accessKeySecret:</span> <span class="string">aySRliswq8fe7rF9gQyy1Izz4MQ</span> <span class="comment"># 你自己的AccessKeySecret</span></span><br><span class="line"><span class="attr">    signName:</span> <span class="string">乐优商城</span> <span class="comment"># 签名名称</span></span><br><span class="line"><span class="attr">    verifyCodeTemplate:</span> <span class="string">SMS_133976814</span> <span class="comment"># 模板名称</span></span><br></pre></td></tr></table></figure></p>
+<p>然后注入到属性类中：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"leyou.sms"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String accessKeyId;</span><br><span class="line"></span><br><span class="line">    String accessKeySecret;</span><br><span class="line"></span><br><span class="line">    String signName;</span><br><span class="line"></span><br><span class="line">    String verifyCodeTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAccessKeyId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accessKeyId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccessKeyId</span><span class="params">(String accessKeyId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accessKeyId = accessKeyId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAccessKeySecret</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accessKeySecret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccessKeySecret</span><span class="params">(String accessKeySecret)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accessKeySecret = accessKeySecret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSignName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> signName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSignName</span><span class="params">(String signName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.signName = signName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getVerifyCodeTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> verifyCodeTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVerifyCodeTemplate</span><span class="params">(String verifyCodeTemplate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.verifyCodeTemplate = verifyCodeTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>4.3.2.工具类</h3>
+<p>我们把阿里提供的demo进行简化和抽取，封装一个工具类：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(SmsProperties.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SmsProperties prop;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//产品名称:云通信短信API产品,开发者无需替换</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> String product = <span class="string">"Dysmsapi"</span>;</span><br><span class="line">    <span class="comment">//产品域名,开发者无需替换</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> String domain = <span class="string">"dysmsapi.aliyuncs.com"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(SmsUtils.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SendSmsResponse <span class="title">sendSms</span><span class="params">(String phone, String code, String signName, String template)</span> <span class="keyword">throws</span> ClientException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可自助调整超时时间</span></span><br><span class="line">        System.setProperty(<span class="string">"sun.net.client.defaultConnectTimeout"</span>, <span class="string">"10000"</span>);</span><br><span class="line">        System.setProperty(<span class="string">"sun.net.client.defaultReadTimeout"</span>, <span class="string">"10000"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化acsClient,暂不支持region化</span></span><br><span class="line">        IClientProfile profile = DefaultProfile.getProfile(<span class="string">"cn-hangzhou"</span>,</span><br><span class="line">                prop.getAccessKeyId(), prop.getAccessKeySecret());</span><br><span class="line">        DefaultProfile.addEndpoint(<span class="string">"cn-hangzhou"</span>, <span class="string">"cn-hangzhou"</span>, product, domain);</span><br><span class="line">        IAcsClient acsClient = <span class="keyword">new</span> DefaultAcsClient(profile);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//组装请求对象-具体描述见控制台-文档部分内容</span></span><br><span class="line">        SendSmsRequest request = <span class="keyword">new</span> SendSmsRequest();</span><br><span class="line">        request.setMethod(MethodType.POST);</span><br><span class="line">        <span class="comment">//必填:待发送手机号</span></span><br><span class="line">        request.setPhoneNumbers(phone);</span><br><span class="line">        <span class="comment">//必填:短信签名-可在短信控制台中找到</span></span><br><span class="line">        request.setSignName(signName);</span><br><span class="line">        <span class="comment">//必填:短信模板-可在短信控制台中找到</span></span><br><span class="line">        request.setTemplateCode(template);</span><br><span class="line">        <span class="comment">//可选:模板中的变量替换JSON串,如模板内容为"亲爱的$&#123;name&#125;,您的验证码为$&#123;code&#125;"时,此处的值为</span></span><br><span class="line">        request.setTemplateParam(<span class="string">"&#123;\"code\":\""</span> + code + <span class="string">"\"&#125;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//选填-上行短信扩展码(无特殊需求用户请忽略此字段)</span></span><br><span class="line">        <span class="comment">//request.setSmsUpExtendCode("90997");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者</span></span><br><span class="line">        request.setOutId(<span class="string">"123456"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//hint 此处可能会抛出异常，注意catch</span></span><br><span class="line">        SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);</span><br><span class="line"></span><br><span class="line">        logger.info(<span class="string">"发送短信状态：&#123;&#125;"</span>, sendSmsResponse.getCode());</span><br><span class="line">        logger.info(<span class="string">"发送短信消息：&#123;&#125;"</span>, sendSmsResponse.getMessage());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sendSmsResponse;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>属性加载：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"leyou.sms"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String accessKeyId;</span><br><span class="line"></span><br><span class="line">    String accessKeySecret;</span><br><span class="line"></span><br><span class="line">    String signName;</span><br><span class="line"></span><br><span class="line">    String verifyCodeTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAccessKeyId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accessKeyId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccessKeyId</span><span class="params">(String accessKeyId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accessKeyId = accessKeyId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAccessKeySecret</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accessKeySecret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccessKeySecret</span><span class="params">(String accessKeySecret)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accessKeySecret = accessKeySecret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSignName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> signName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSignName</span><span class="params">(String signName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.signName = signName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getVerifyCodeTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> verifyCodeTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVerifyCodeTemplate</span><span class="params">(String verifyCodeTemplate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.verifyCodeTemplate = verifyCodeTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>4.4.编写消息监听器</h2>
+<p>接下来，编写消息监听器，当接收到消息后，我们发送短信。</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(SmsProperties.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SmsUtils smsUtils;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SmsProperties prop;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener</span>(bindings = <span class="meta">@QueueBinding</span>(</span><br><span class="line">            value = <span class="meta">@Queue</span>(value = <span class="string">"leyou.sms.queue"</span>, durable = <span class="string">"true"</span>),</span><br><span class="line">            exchange = <span class="meta">@Exchange</span>(value = <span class="string">"leyou.sms.exchange"</span>, </span><br><span class="line">                                 ignoreDeclarationExceptions = <span class="string">"true"</span>),</span><br><span class="line">            key = &#123;<span class="string">"sms.verify.code"</span>&#125;))</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenSms</span><span class="params">(Map&lt;String, String&gt; msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (msg == <span class="keyword">null</span> || msg.size() &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 放弃处理</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String phone = msg.get(<span class="string">"phone"</span>);</span><br><span class="line">        String code = msg.get(<span class="string">"code"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(phone) || StringUtils.isBlank(code)) &#123;</span><br><span class="line">            <span class="comment">// 放弃处理</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 发送消息</span></span><br><span class="line">        SendSmsResponse resp = <span class="keyword">this</span>.smsUtils.sendSms(phone, code, </span><br><span class="line">                                                     prop.getSignName(),</span><br><span class="line">                                                     prop.getVerifyCodeTemplate());</span><br><span class="line">        <span class="comment">// 发送失败</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们注意到，消息体是一个Map，里面有两个属性：</p>
+<ul>
+<li>phone：电话号码</li>
+<li>code：短信验证码</li>
+</ul>
+<h2>4.5.启动</h2>
+<p>启动项目，然后查看RabbitMQ控制台，发现交换机已经创建：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527239600218.png" alt="1527239600218"></p>
+<p>队列也已经创建：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527239658153.png" alt="1527239658153"></p>
+<p>并且绑定：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527239743836.png" alt="1527239743836"></p>
+<h1>5.发送短信功能</h1>
+<p>短信微服务已经准备好，我们就可以继续编写用户中心接口了。</p>
+<h2>5.1.接口说明</h2>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527238127932.png" alt="1527238127932"></p>
+<p>这里的业务逻辑是这样的：</p>
+<ul>
+<li>1）我们接收页面发送来的手机号码</li>
+<li>2）生成一个随机验证码</li>
+<li>3）将验证码保存在服务端</li>
+<li>4）发送短信，将验证码发送到用户手机</li>
+</ul>
+<p>那么问题来了：验证码保存在哪里呢？</p>
+<p>验证码有一定有效期，一般是5分钟，我们可以利用Redis的过期机制来保存。</p>
+<h2>5.2.Redis</h2>
+<h3>5.2.1.安装</h3>
+<p>参考课前资料中的：《centos下的redis安装配置.md》</p>
+<h3>5.2.2.Spring Data Redis</h3>
+<p>官网：<a href="http://projects.spring.io/spring-data-redis/">http://projects.spring.io/spring-data-redis/</a></p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527250056698.png" alt="1527250056698"></p>
+<p>Spring Data Redis，是Spring Data 家族的一部分。 对Jedis客户端进行了封装，与spring进行了整合。可以非常方便的来实现redis的配置和操作。</p>
+<h3>5.2.3.RedisTemplate基本操作</h3>
+<p>Spring Data Redis 提供了一个工具类：RedisTemplate。里面封装了对于Redis的五种数据结构的各种操作，包括：</p>
+<ul>
+<li>redisTemplate.opsForValue() ：操作字符串</li>
+<li>redisTemplate.opsForHash() ：操作hash</li>
+<li>redisTemplate.opsForList()：操作list</li>
+<li>redisTemplate.opsForSet()：操作set</li>
+<li>redisTemplate.opsForZSet()：操作zset</li>
+</ul>
+<p>其它一些通用命令，如expire，可以通过redisTemplate.xx()来直接调用</p>
+<p>5种结构：</p>
+<ul>
+<li>String：等同于java中的，<code>Map&lt;String,String&gt;</code></li>
+<li>list：等同于java中的<code>Map&lt;String,List&lt;String&gt;&gt;</code></li>
+<li>set：等同于java中的<code>Map&lt;String,Set&lt;String&gt;&gt;</code></li>
+<li>sort_set：可排序的set</li>
+<li>hash：等同于java中的：`Map&lt;String,Map&lt;String,String&gt;&gt;</li>
+</ul>
+<h3>5.2.4.StringRedisTemplate</h3>
+<p>RedisTemplate在创建时，可以指定其泛型类型：</p>
+<ul>
+<li>K：代表key 的数据类型</li>
+<li>V: 代表value的数据类型</li>
+</ul>
+<p>注意：这里的类型不是Redis中存储的数据类型，而是Java中的数据类型，RedisTemplate会自动将Java类型转为Redis支持的数据类型：字符串、字节、二进制等等。</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527250218215.png" alt="1527250218215"></p>
+<p>不过RedisTemplate默认会采用JDK自带的序列化（Serialize）来对对象进行转换。生成的数据十分庞大，因此一般我们都会指定key和value为String类型，这样就由我们自己把对象序列化为json字符串来存储即可。</p>
+<p>因为大部分情况下，我们都会使用key和value都为String的RedisTemplate，因此Spring就默认提供了这样一个实现： <img src="/2019/05/26/day16-用户注册/assets/1527256139407.png" alt="1527256139407"></p>
+<h3>5.2.5.测试</h3>
+<p>我们在项目中编写一个测试案例：</p>
+<p>首先在项目中引入Redis启动器：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后在配置文件中指定Redis地址：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.101</span></span><br></pre></td></tr></table></figure></p>
+<p>然后就可以直接注入<code>StringRedisTemplate</code>对象了：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(classes = LyUserService.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRedis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储数据</span></span><br><span class="line">        <span class="keyword">this</span>.redisTemplate.opsForValue().set(<span class="string">"key1"</span>, <span class="string">"value1"</span>);</span><br><span class="line">        <span class="comment">// 获取数据</span></span><br><span class="line">        String val = <span class="keyword">this</span>.redisTemplate.opsForValue().get(<span class="string">"key1"</span>);</span><br><span class="line">        System.out.println(<span class="string">"val = "</span> + val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRedis2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储数据，并指定剩余生命时间,5小时</span></span><br><span class="line">        <span class="keyword">this</span>.redisTemplate.opsForValue().set(<span class="string">"key2"</span>, <span class="string">"value2"</span>,</span><br><span class="line">                <span class="number">5</span>, TimeUnit.HOURS);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHash</span><span class="params">()</span></span>&#123;</span><br><span class="line">        BoundHashOperations&lt;String, Object, Object&gt; hashOps =</span><br><span class="line">                <span class="keyword">this</span>.redisTemplate.boundHashOps(<span class="string">"user"</span>);</span><br><span class="line">        <span class="comment">// 操作hash数据</span></span><br><span class="line">        hashOps.put(<span class="string">"name"</span>, <span class="string">"jack"</span>);</span><br><span class="line">        hashOps.put(<span class="string">"age"</span>, <span class="string">"21"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取单个数据</span></span><br><span class="line">        Object name = hashOps.get(<span class="string">"name"</span>);</span><br><span class="line">        System.out.println(<span class="string">"name = "</span> + name);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取所有数据</span></span><br><span class="line">        Map&lt;Object, Object&gt; map = hashOps.entries();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Object, Object&gt; me : map.entrySet()) &#123;</span><br><span class="line">            System.out.println(me.getKey() + <span class="string">" : "</span> + me.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>5.3.controller</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发送手机验证码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> phone</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"code"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Void&gt; <span class="title">sendVerifyCode</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">    Boolean boo = <span class="keyword">this</span>.userService.sendVerifyCode(phone);</span><br><span class="line">    <span class="keyword">if</span> (boo == <span class="keyword">null</span> || !boo) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.CREATED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>5.4.service</h2>
+<p>这里的逻辑会稍微复杂：</p>
+<ul>
+<li>生成随机验证码</li>
+<li>将验证码保存到Redis中，用来在注册的时候验证</li>
+<li>发送验证码到<code>leyou-sms-service</code>服务，发送短信</li>
+</ul>
+<p>因此，我们需要引入Redis和AMQP：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>添加RabbitMQ和Redis配置：</p>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.101</span></span><br><span class="line"><span class="attr">  rabbitmq:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.101</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">leyou</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">leyou</span></span><br><span class="line"><span class="attr">    virtual-host:</span> <span class="string">/leyou</span></span><br><span class="line"><span class="attr">    template:</span></span><br><span class="line"><span class="attr">      retry:</span></span><br><span class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">        initial-interval:</span> <span class="number">10000</span><span class="string">ms</span></span><br><span class="line"><span class="attr">        max-interval:</span> <span class="number">210000</span><span class="string">ms</span></span><br><span class="line"><span class="attr">        multiplier:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    publisher-confirms:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>另外还要用到工具类，生成6位随机码，这个我们封装到了<code>leyou-common</code>中，因此需要引入依赖：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.common<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;leyou.latest.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>生成随机码的工具：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成指定位数的随机数字</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> len 随机数的位数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 生成的随机数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">generateCode</span><span class="params">(<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    len = Math.min(len, <span class="number">8</span>);</span><br><span class="line">    <span class="keyword">int</span> min = Double.valueOf(Math.pow(<span class="number">10</span>, len - <span class="number">1</span>)).intValue();</span><br><span class="line">    <span class="keyword">int</span> num = <span class="keyword">new</span> Random().nextInt(</span><br><span class="line">        Double.valueOf(Math.pow(<span class="number">10</span>, len + <span class="number">1</span>)).intValue() - <span class="number">1</span>) + min;</span><br><span class="line">    <span class="keyword">return</span> String.valueOf(num).substring(<span class="number">0</span>,len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Service代码：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> AmqpTemplate amqpTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> String KEY_PREFIX = <span class="string">"user:code:phone:"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(UserService.class);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Boolean <span class="title">sendVerifyCode</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 生成验证码</span></span><br><span class="line">    String code = NumberUtils.generateCode(<span class="number">6</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 发送短信</span></span><br><span class="line">        Map&lt;String, String&gt; msg = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        msg.put(<span class="string">"phone"</span>, phone);</span><br><span class="line">        msg.put(<span class="string">"code"</span>, code);</span><br><span class="line">        <span class="keyword">this</span>.amqpTemplate.convertAndSend(<span class="string">"ly.sms.exchange"</span>, <span class="string">"sms.verify.code"</span>, msg);</span><br><span class="line">        <span class="comment">// 将code存入redis</span></span><br><span class="line">        <span class="keyword">this</span>.redisTemplate.opsForValue().set(KEY_PREFIX + phone, code, <span class="number">5</span>, TimeUnit.MINUTES);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        logger.error(<span class="string">"发送短信失败。phone：&#123;&#125;， code：&#123;&#125;"</span>, phone, code);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：要设置短信验证码在Redis的缓存时间为5分钟</p>
+<h2>5.5.测试</h2>
+<p>通过RestClient发送请求试试：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527240486327.png" alt="1527240486327"></p>
+<p>查看Redis中的数据：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527240610713.png" alt="1527240610713"></p>
+<p>查看短信：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527240770470.png" alt="1527240770470"></p>
+<h1>6.注册功能</h1>
+<h2>6.1.接口说明</h2>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527240855176.png" alt="1527240855176"></p>
+<h2>6.2.controller</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 注册</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"register"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Void&gt; <span class="title">register</span><span class="params">(User user, @RequestParam(<span class="string">"code"</span>)</span> String code) </span>&#123;</span><br><span class="line">    Boolean boo = <span class="keyword">this</span>.userService.register(user, code);</span><br><span class="line">    <span class="keyword">if</span> (boo == <span class="keyword">null</span> || !boo) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.CREATED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>6.3.service</h2>
+<p>基本逻辑：</p>
+<ul>
+<li>1）校验短信验证码</li>
+<li>2）生成盐</li>
+<li>3）对密码加密</li>
+<li>4）写入数据库</li>
+<li>5）删除Redis中的验证码</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Boolean <span class="title">register</span><span class="params">(User user, String code)</span> </span>&#123;</span><br><span class="line">    String key = KEY_PREFIX + user.getPhone();</span><br><span class="line">    <span class="comment">// 从redis取出验证码</span></span><br><span class="line">    String codeCache = <span class="keyword">this</span>.redisTemplate.opsForValue().get(key);</span><br><span class="line">    <span class="comment">// 检查验证码是否正确</span></span><br><span class="line">    <span class="keyword">if</span> (!code.equals(codeCache)) &#123;</span><br><span class="line">        <span class="comment">// 不正确，返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    user.setId(<span class="keyword">null</span>);</span><br><span class="line">    user.setCreated(<span class="keyword">new</span> Date());</span><br><span class="line">    <span class="comment">// 生成盐</span></span><br><span class="line">    String salt = CodecUtils.generateSalt();</span><br><span class="line">    user.setSalt(salt);</span><br><span class="line">    <span class="comment">// 对密码进行加密</span></span><br><span class="line">    user.setPassword(CodecUtils.md5Hex(user.getPassword(), salt));</span><br><span class="line">    <span class="comment">// 写入数据库</span></span><br><span class="line">    <span class="keyword">boolean</span> boo = <span class="keyword">this</span>.userMapper.insertSelective(user) == <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果注册成功，删除redis中的code</span></span><br><span class="line">    <span class="keyword">if</span> (boo) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.redisTemplate.delete(key);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"删除缓存验证码失败，code：&#123;&#125;"</span>, code, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> boo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>6.4.测试</h2>
+<p>我们通过RestClient测试：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527241936160.png" alt="1527241936160"></p>
+<p>查看数据库：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527241966575.png" alt="1527241966575"></p>
+<h2>6.5.服务端数据校验</h2>
+<p>刚才虽然实现了注册，但是服务端并没有进行数据校验，而前端的校验是很容易被有心人绕过的。所以我们必须在后台添加数据校验功能：</p>
+<p>我们这里会使用Hibernate-Validator框架完成数据校验：</p>
+<p>而SpringBoot的web启动器中已经集成了相关依赖：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527244265451.png" alt="1527244265451"></p>
+<h3>6.5.1.什么是Hibernate Validator</h3>
+<p>Hibernate Validator是Hibernate提供的一个开源框架，使用注解方式非常方便的实现服务端的数据校验。</p>
+<p>官网：http://hibernate.org/validator/</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527244393041.png" alt="1527244393041"></p>
+<p><strong>hibernate Validator</strong> 是 Bean Validation 的参考实现 。</p>
+<p>Hibernate Validator 提供了 JSR 303 规范中所有内置 constraint（约束） 的实现，除此之外还有一些附加的 constraint。</p>
+<p>在日常开发中，Hibernate Validator经常用来验证bean的字段，基于注解，方便快捷高效。</p>
+<h3>6.5.2.Bean校验的注解</h3>
+<p>常用注解如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Constraint</strong></th>
+<th><strong>详细信息</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>@Valid</strong></td>
+<td>被注释的元素是一个对象，需要检查此对象的所有字段值</td>
+</tr>
+<tr>
+<td><strong>@Null</strong></td>
+<td>被注释的元素必须为 null</td>
+</tr>
+<tr>
+<td><strong>@NotNull</strong></td>
+<td>被注释的元素必须不为 null</td>
+</tr>
+<tr>
+<td><strong>@AssertTrue</strong></td>
+<td>被注释的元素必须为 true</td>
+</tr>
+<tr>
+<td><strong>@AssertFalse</strong></td>
+<td>被注释的元素必须为 false</td>
+</tr>
+<tr>
+<td><strong>@Min(value)</strong></td>
+<td>被注释的元素必须是一个数字，其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td><strong>@Max(value)</strong></td>
+<td>被注释的元素必须是一个数字，其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td><strong>@DecimalMin(value)</strong></td>
+<td>被注释的元素必须是一个数字，其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td><strong>@DecimalMax(value)</strong></td>
+<td>被注释的元素必须是一个数字，其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td><strong>@Size(max,   min)</strong></td>
+<td>被注释的元素的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td><strong>@Digits   (integer, fraction)</strong></td>
+<td>被注释的元素必须是一个数字，其值必须在可接受的范围内</td>
+</tr>
+<tr>
+<td><strong>@Past</strong></td>
+<td>被注释的元素必须是一个过去的日期</td>
+</tr>
+<tr>
+<td><strong>@Future</strong></td>
+<td>被注释的元素必须是一个将来的日期</td>
+</tr>
+<tr>
+<td><strong>@Pattern(value)</strong></td>
+<td>被注释的元素必须符合指定的正则表达式</td>
+</tr>
+<tr>
+<td><strong>@Email</strong></td>
+<td>被注释的元素必须是电子邮箱地址</td>
+</tr>
+<tr>
+<td><strong>@Length</strong></td>
+<td>被注释的字符串的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td><strong>@NotEmpty</strong></td>
+<td>被注释的字符串的必须非空</td>
+</tr>
+<tr>
+<td><strong>@Range</strong></td>
+<td>被注释的元素必须在合适的范围内</td>
+</tr>
+<tr>
+<td><strong>@NotBlank</strong></td>
+<td>被注释的字符串的必须非空</td>
+</tr>
+<tr>
+<td><strong>@URL(protocol=,host=,   port=,regexp=, flags=)</strong></td>
+<td>被注释的字符串必须是一个有效的url</td>
+</tr>
+<tr>
+<td><strong>@CreditCardNumber</strong></td>
+<td>被注释的字符串必须通过Luhn校验算法，银行卡，信用卡等号码一般都用Luhn计算合法性</td>
+</tr>
+</tbody>
+</table>
+<h3>6.5.3.给User添加校验</h3>
+<p>我们在<code>ly-user-interface</code>中添加Hibernate-Validator依赖：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate.validator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>我们在User对象的部分属性上添加注解：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"tb_user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="meta">@Length</span>(min = <span class="number">4</span>, max = <span class="number">30</span>, message = <span class="string">"用户名只能在4~30位之间"</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;<span class="comment">// 用户名</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="meta">@Length</span>(min = <span class="number">4</span>, max = <span class="number">30</span>, message = <span class="string">"用户名只能在4~30位之间"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;<span class="comment">// 密码</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pattern</span>(regexp = <span class="string">"^1[35678]\\d&#123;9&#125;$"</span>, message = <span class="string">"手机号格式不正确"</span>)</span><br><span class="line">    <span class="keyword">private</span> String phone;<span class="comment">// 电话</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Date created;<span class="comment">// 创建时间</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="keyword">private</span> String salt;<span class="comment">// 密码的盐值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>6.5.4.在controller上进行控制</h3>
+<p>在controller中只需要给User添加 @Valid注解即可。</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527247334410.png" alt="1527247334410"></p>
+<h3>6.5.5.测试</h3>
+<p>我们故意填错：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527247422251.png" alt="1527247422251"></p>
+<p>然后SpringMVC会自动返回错误信息：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527247492172.png" alt="1527247492172"></p>
+<h1>7.根据用户名和密码查询用户</h1>
+<h2>7.1.接口说明</h2>
+<h3>功能说明</h3>
+<p>查询功能，根据参数中的用户名和密码查询指定用户</p>
+<h3>接口路径</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /query</span><br></pre></td></tr></table></figure></p>
+<h3>参数说明：</h3>
+<p>form表单格式</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>是否必须</th>
+<th>数据类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>用户名，格式为4~30位字母、数字、下划线</td>
+<td>是</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>password</td>
+<td>用户密码，格式为4~30位字母、数字、下划线</td>
+<td>是</td>
+<td>String</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3>返回结果：</h3>
+<p>用户的json格式数据</p>
+<p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="number">6572312</span>,</span><br><span class="line">    <span class="attr">"username"</span>:<span class="string">"test"</span>,</span><br><span class="line">    <span class="attr">"phone"</span>:<span class="string">"13688886666"</span>,</span><br><span class="line">    <span class="attr">"created"</span>: <span class="number">1342432424</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>状态码：</p>
+<ul>
+<li>200：注册成功</li>
+<li>400：用户名或密码错误</li>
+<li>500：服务器内部异常，注册失败</li>
+</ul>
+<h2>7.2.controller</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据用户名和密码查询用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> username</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"query"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;User&gt; <span class="title">queryUser</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    @RequestParam(<span class="string">"username"</span>)</span> String username,</span></span><br><span class="line"><span class="function">    @<span class="title">RequestParam</span><span class="params">(<span class="string">"password"</span>)</span> String password</span></span><br><span class="line"><span class="function">    ) </span>&#123;</span><br><span class="line">        User user = <span class="keyword">this</span>.userService.queryUser(username, password);</span><br><span class="line">        <span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).build();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(user);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h2>7.3.service</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">queryUser</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 查询</span></span><br><span class="line">    User record = <span class="keyword">new</span> User();</span><br><span class="line">    record.setUsername(username);</span><br><span class="line">    User user = <span class="keyword">this</span>.userMapper.selectOne(record);</span><br><span class="line">    <span class="comment">// 校验用户名</span></span><br><span class="line">    <span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 校验密码</span></span><br><span class="line">    <span class="keyword">if</span> (!user.getPassword().equals(CodecUtils.md5Hex(password, user.getSalt()))) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 用户名密码都正确</span></span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意，查询时也要对密码进行加密后判断是否一致。</p>
+<h2>7.4.测试</h2>
+<p>我们通过RestClient测试：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527242841777.png" alt="1527242841777"></p>
+<h1>8.在注册页进行测试</h1>
+<p>在注册页填写信息：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527243288933.png" alt="1527243288933"></p>
+<p>提交发现页面自动跳转到了登录页，查看数据库：</p>
+<p><img src="/2019/05/26/day16-用户注册/assets/1527243354160.png" alt="1527243354160"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day15-rabbitmq及数据同步/" rel="next" title="15.rabbutnq及数据同步">
+                <i class="fa fa-chevron-left"></i> 15.rabbutnq及数据同步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/day17-授权中心/" rel="prev" title="17.授权中心">
+                17.授权中心 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1.创建用户中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.创建父module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.创建leyou-user-interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.创建leyou-user-service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.添加网关路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2.后台功能准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.接口文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.基本代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1.实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2.mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.3.</span> <span class="nav-text">2.3.3.Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.4.</span> <span class="nav-text">2.3.4.controller</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">3.数据验证功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.接口说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">4.阿里大于短信服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">4.1.demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">4.2.创建短信微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.1.</span> <span class="nav-text">4.2.1.创建module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.2.</span> <span class="nav-text">4.2.2.pom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.3.</span> <span class="nav-text">4.2.3.编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.4.</span> <span class="nav-text">4.2.4.编写application.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">4.3.编写短信工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1.属性抽取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2.工具类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.</span> <span class="nav-text">4.4.编写消息监听器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.5.</span> <span class="nav-text">4.5.启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">5.发送短信功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">5.1.接口说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.</span> <span class="nav-text">5.2.Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.1.</span> <span class="nav-text">5.2.1.安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.2.</span> <span class="nav-text">5.2.2.Spring Data Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.3.</span> <span class="nav-text">5.2.3.RedisTemplate基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.4.</span> <span class="nav-text">5.2.4.StringRedisTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.5.</span> <span class="nav-text">5.2.5.测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.</span> <span class="nav-text">5.3.controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.4.</span> <span class="nav-text">5.4.service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.5.</span> <span class="nav-text">5.5.测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">6.注册功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">6.1.接口说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">6.2.controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.</span> <span class="nav-text">6.3.service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.4.</span> <span class="nav-text">6.4.测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.</span> <span class="nav-text">6.5.服务端数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.1.</span> <span class="nav-text">6.5.1.什么是Hibernate Validator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.2.</span> <span class="nav-text">6.5.2.Bean校验的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.3.</span> <span class="nav-text">6.5.3.给User添加校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.4.</span> <span class="nav-text">6.5.4.在controller上进行控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.5.5.</span> <span class="nav-text">6.5.5.测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">7.根据用户名和密码查询用户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.</span> <span class="nav-text">7.1.接口说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.1.</span> <span class="nav-text">功能说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.2.</span> <span class="nav-text">接口路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.3.</span> <span class="nav-text">参数说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.4.</span> <span class="nav-text">返回结果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.</span> <span class="nav-text">7.2.controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.</span> <span class="nav-text">7.3.service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.4.</span> <span class="nav-text">7.4.测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">8.在注册页进行测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

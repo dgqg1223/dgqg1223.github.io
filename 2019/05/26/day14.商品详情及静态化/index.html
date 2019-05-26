@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.学习目标  了解Thymeleaf的基本使用 实现商品详情页的渲染 知道页面静态化的作用 实现页面静态化功能  1.商品详情 当用户搜索到商品，肯定会点击查看，就会进入商品详情页，接下来我们完成商品详情页的展示， 1.1.Thymeleaf 在商品详情页中，我们会使用到Thymeleaf来渲染页面，所以需要先了解Thymeleaf的语法。 详见课前资料中《Thymeleaf语法入门.md》 1">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14.商品详情及静态化">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="0.学习目标  了解Thymeleaf的基本使用 实现商品详情页的渲染 知道页面静态化的作用 实现页面静态化功能  1.商品详情 当用户搜索到商品，肯定会点击查看，就会进入商品详情页，接下来我们完成商品详情页的展示， 1.1.Thymeleaf 在商品详情页中，我们会使用到Thymeleaf来渲染页面，所以需要先了解Thymeleaf的语法。 详见课前资料中《Thymeleaf语法入门.md》 1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532349011199.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532349060982.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532353728660.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526955707685.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526955852490.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532354937173.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532356634734.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532356995455.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532490861851.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532496187812.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529916126099.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532499905549.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529922667759.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532509946463.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526978423084.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526979330657.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526980061592.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529923363960.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532531501925.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532531590626.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529923584730.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/H:assets/1529923658242.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529923701283.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532533192037.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532533286400.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532533340274.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532533876765.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526985783938.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526985959427.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532535748931.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1526988361312.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532536101914.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532536238386.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1529924049003.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532537802576.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532537863801.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532538150603.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532538178543.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532538249704.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532757937331.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532757980379.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532758206086.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:32.784Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14.商品详情及静态化">
+<meta name="twitter:description" content="0.学习目标  了解Thymeleaf的基本使用 实现商品详情页的渲染 知道页面静态化的作用 实现页面静态化功能  1.商品详情 当用户搜索到商品，肯定会点击查看，就会进入商品详情页，接下来我们完成商品详情页的展示， 1.1.Thymeleaf 在商品详情页中，我们会使用到Thymeleaf来渲染页面，所以需要先了解Thymeleaf的语法。 详见课前资料中《Thymeleaf语法入门.md》 1">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day14.商品详情及静态化/assets/1532349011199.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day14.商品详情及静态化/">
+
+
+
+
+
+  <title>14.商品详情及静态化 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day14.商品详情及静态化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">14.商品详情及静态化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:32+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>0.学习目标</h1>
+<ul>
+<li>了解Thymeleaf的基本使用</li>
+<li>实现商品详情页的渲染</li>
+<li>知道页面静态化的作用</li>
+<li>实现页面静态化功能</li>
+</ul>
+<h1>1.商品详情</h1>
+<p>当用户搜索到商品，肯定会点击查看，就会进入商品详情页，接下来我们完成商品详情页的展示，</p>
+<h2>1.1.Thymeleaf</h2>
+<p>在商品详情页中，我们会使用到Thymeleaf来渲染页面，所以需要先了解Thymeleaf的语法。</p>
+<p>详见课前资料中《Thymeleaf语法入门.md》</p>
+<h2>1.2.商品详情页服务</h2>
+<p>商品详情浏览量比较大，并发高，我们会独立开启一个微服务，用来展示商品详情。</p>
+<h3>1.2.1.创建module</h3>
+<p>商品的详情页服务，命名为：<code>leyou-goods-web</code></p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532349011199.png" alt="1532349011199"></p>
+<p>目录：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532349060982.png" alt="1532349060982"></p>
+<h3>1.2.2.pom依赖</h3>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.goods<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-goods-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.item<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou-item-interface<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>1.2.3.编写启动类</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeyouGoodsWebApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LeyouGoodsWebApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.2.4.application.yml文件</h3>
+<p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8084</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">goods-page</span></span><br><span class="line"><span class="attr">  thymeleaf:</span></span><br><span class="line"><span class="attr">    cache:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    lease-renewal-interval-in-seconds:</span> <span class="number">5</span> <span class="comment"># 每隔5秒发送一次心跳</span></span><br><span class="line"><span class="attr">    lease-expiration-duration-in-seconds:</span> <span class="number">10</span> <span class="comment"># 10秒不发送就过期</span></span><br><span class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    instance-id:</span> <span class="string">$&#123;spring.application.name&#125;.$&#123;server.port&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h3>1.2.5.页面模板</h3>
+<p>我们从leyou-portal中复制item.html模板到当前项目resource目录下的templates中：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532353728660.png" alt="1532353728660"></p>
+<h2>1.3.页面跳转</h2>
+<h3>1.3.1.修改页面跳转路径</h3>
+<p>首先我们需要修改搜索结果页的商品地址，目前所有商品的地址都是：http://www.leyou.com/item.html</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526955707685.png" alt="1526955707685"></p>
+<p>我们应该跳转到对应的商品的详情页才对。</p>
+<p>那么问题来了：商品详情页是一个SKU？还是多个SKU的集合？</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526955852490.png" alt="1526955852490"></p>
+<p>通过详情页的预览，我们知道它是多个SKU的集合，即SPU。</p>
+<p>所以，页面跳转时，我们应该携带SPU的id信息。</p>
+<p>例如：http://www.leyou.com/item/2314123.html</p>
+<p>这里就采用了路径占位符的方式来传递spu的id，我们打开<code>search.html</code>，修改其中的商品路径：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532354937173.png" alt="1526972476737"></p>
+<p>刷新页面后再看：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532356634734.png" alt="1532356634734"></p>
+<h3>1.3.2.nginx反向代理</h3>
+<p>接下来，我们要把这个地址指向我们刚刚创建的服务：<code>leyou-goods-web</code>，其端口为8084</p>
+<p>我们在nginx.conf中添加一段逻辑：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532356995455.png" alt="1532356995455"></p>
+<p>把以/item开头的请求，代理到我们的8084端口。</p>
+<h3>1.3.3.编写跳转controller</h3>
+<p>在<code>leyou-goods-web</code>中编写controller，接收请求，并跳转到商品详情页：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"item"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 跳转到商品详情页</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"&#123;id&#125;.html"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toItemPage</span><span class="params">(Model model, @PathVariable(<span class="string">"id"</span>)</span>Long id)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"item"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.3.4.测试</h3>
+<p>启动<code>leyou-goods-page</code>，点击搜索页面商品，看是能够正常跳转：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532490861851.png" alt="1532490861851"></p>
+<p>现在看到的依然是静态的数据。我们接下来开始页面的渲染</p>
+<h2>1.4.封装模型数据</h2>
+<p>首先我们一起来分析一下，在这个页面中需要哪些数据</p>
+<p>我们已知的条件是传递来的spu的id，我们需要根据spu的id查询到下面的数据：</p>
+<ul>
+<li>spu信息</li>
+<li>spu的详情</li>
+<li>spu下的所有sku</li>
+<li>品牌</li>
+<li>商品三级分类</li>
+<li>商品规格参数、规格参数组</li>
+</ul>
+<h3>1.4.1.商品微服务提供接口</h3>
+<h4>1.4.1.1.查询spu</h4>
+<p>以上所需数据中，查询spu的接口目前还没有，我们需要在商品微服务中提供这个接口：</p>
+<blockquote>
+<p>GoodsApi</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据spu的id查询spu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"spu/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Spu <span class="title">querySpuById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id)</span>;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>GoodsController</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"spu/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Spu&gt; <span class="title">querySpuById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id)</span>&#123;</span><br><span class="line">    Spu spu = <span class="keyword">this</span>.goodsService.querySpuById(id);</span><br><span class="line">    <span class="keyword">if</span>(spu == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(spu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>GoodsService</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Spu <span class="title">querySpuById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.spuMapper.selectByPrimaryKey(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>1.4.1.2.查询规格参数组</h4>
+<p>我们在页面展示规格时，需要按组展示：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532496187812.png" alt="1532496187812"></p>
+<p>组内有多个参数，为了方便展示。我们提供一个接口，查询规格组，同时在规格组中持有组内的所有参数。</p>
+<blockquote>
+<p>拓展<code>SpecGroup</code>类：</p>
+</blockquote>
+<p>我们在<code>SpecGroup</code>中添加一个<code>SpecParam</code>的集合，保存改组下所有规格参数</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"tb_spec_group"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpecGroup</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long cid;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transient</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;SpecParam&gt; params; <span class="comment">// 该组下的所有规格参数集合</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后提供查询接口：</p>
+<blockquote>
+<p>SpecificationAPI：</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"spec"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SpecificationApi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"groups/&#123;cid&#125;"</span>)</span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;List&lt;SpecGroup&gt;&gt; querySpecGroups(<span class="meta">@PathVariable</span>(<span class="string">"cid"</span>) Long cid);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/params"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;SpecParam&gt; <span class="title">querySpecParam</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @RequestParam(value = <span class="string">"gid"</span>, required = <span class="keyword">false</span>)</span> Long gid,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"cid"</span>, required = <span class="keyword">false</span>)</span> Long cid,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"searching"</span>, required = <span class="keyword">false</span>)</span> Boolean searching,</span></span><br><span class="line"><span class="function">            @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"generic"</span>, required = <span class="keyword">false</span>)</span> Boolean generic)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查询规格参数组，及组内参数</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"&#123;cid&#125;"</span>)</span><br><span class="line">    <span class="function">List&lt;SpecGroup&gt; <span class="title">querySpecsByCid</span><span class="params">(@PathVariable(<span class="string">"cid"</span>)</span> Long cid)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>SpecificationController</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"&#123;cid&#125;"</span>)</span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;List&lt;SpecGroup&gt;&gt; querySpecsByCid(<span class="meta">@PathVariable</span>(<span class="string">"cid"</span>) Long cid)&#123;</span><br><span class="line">    List&lt;SpecGroup&gt; list = <span class="keyword">this</span>.specificationService.querySpecsByCid(cid);</span><br><span class="line">    <span class="keyword">if</span>(list == <span class="keyword">null</span> || list.size() == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>SpecificationService</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;SpecGroup&gt; <span class="title">querySpecsByCid</span><span class="params">(Long cid)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 查询规格组</span></span><br><span class="line">    List&lt;SpecGroup&gt; groups = <span class="keyword">this</span>.querySpecGroups(cid);</span><br><span class="line">    SpecParam param = <span class="keyword">new</span> SpecParam();</span><br><span class="line">    groups.forEach(g -&gt; &#123;</span><br><span class="line">        <span class="comment">// 查询组内参数</span></span><br><span class="line">        g.setParams(<span class="keyword">this</span>.querySpecParams(g.getId(), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> groups;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在service中，我们调用之前编写过的方法，查询规格组，和规格参数，然后封装返回。</p>
+<h3>1.4.2.创建FeignClient</h3>
+<p>我们在<code>leyou-goods-web</code>服务中，创建FeignClient：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529916126099.png" alt="1529916126099"></p>
+<p>BrandClient：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(<span class="string">"item-service"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BrandClient</span> <span class="keyword">extends</span> <span class="title">BrandApi</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CategoryClient</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(<span class="string">"item-service"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CategoryClient</span> <span class="keyword">extends</span> <span class="title">CategoryApi</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>GoodsClient:</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(<span class="string">"item-service"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GoodsClient</span> <span class="keyword">extends</span> <span class="title">GoodsApi</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>SpecificationClient：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"item-service"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SpecificationClient</span> <span class="keyword">extends</span> <span class="title">SpecificationApi</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.4.3.封装数据模型</h3>
+<p>我们创建一个GoodsService，在里面来封装数据模型。</p>
+<p>这里要查询的数据：</p>
+<ul>
+<li>
+<p>SPU</p>
+</li>
+<li>
+<p>SpuDetail</p>
+</li>
+<li>
+<p>SKU集合</p>
+</li>
+<li>
+<p>商品分类</p>
+<ul>
+<li>这里值需要分类的id和name就够了，因此我们查询到以后自己需要封装数据</li>
+</ul>
+</li>
+<li>
+<p>品牌</p>
+</li>
+<li>
+<p>规格组</p>
+<ul>
+<li>查询规格组的时候，把规格组下所有的参数也一并查出，上面提供的接口中已经实现该功能，我们直接调</li>
+</ul>
+</li>
+<li>
+<p>sku的特有规格参数</p>
+<p>有了规格组，为什么这里还要查询？</p>
+<p>因为在SpuDetail中的SpecialSpec中，是以id作为规格参数id作为key，如图：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532499905549.png" alt="1532499905549"></p>
+<p>但是，在页面渲染时，需要知道参数的名称，如图：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529922667759.png" alt="1529922667759"></p>
+<p>我们就需要把id和name一一对应起来，因此需要额外查询sku的特有规格参数，然后变成一个id:name的键值对格式。也就是一个Map，方便将来根据id查找！</p>
+</li>
+</ul>
+<blockquote>
+<p>Service代码</p>
+</blockquote>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GoodsClient goodsClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BrandClient brandClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CategoryClient categoryClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SpecificationClient specificationClient;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(GoodsService.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">loadModel</span><span class="params">(Long spuId)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 查询spu</span></span><br><span class="line">            Spu spu = <span class="keyword">this</span>.goodsClient.querySpuById(spuId);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询spu详情</span></span><br><span class="line">            SpuDetail spuDetail = <span class="keyword">this</span>.goodsClient.querySpuDetailById(spuId);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询sku</span></span><br><span class="line">            List&lt;Sku&gt; skus = <span class="keyword">this</span>.goodsClient.querySkuBySpuId(spuId);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询品牌</span></span><br><span class="line">            List&lt;Brand&gt; brands = <span class="keyword">this</span>.brandClient.queryBrandByIds(Arrays.asList(spu.getBrandId()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询分类</span></span><br><span class="line">            List&lt;Category&gt; categories = getCategories(spu);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询组内参数</span></span><br><span class="line">            List&lt;SpecGroup&gt; specGroups = <span class="keyword">this</span>.specificationClient.querySpecsByCid(spu.getCid3());</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询所有特有规格参数</span></span><br><span class="line">            List&lt;SpecParam&gt; specParams = <span class="keyword">this</span>.specificationClient.querySpecParam(<span class="keyword">null</span>, spu.getCid3(), <span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 处理规格参数</span></span><br><span class="line">            Map&lt;Long, String&gt; paramMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            specParams.forEach(param-&gt;&#123;</span><br><span class="line">                paramMap.put(param.getId(), param.getName());</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            map.put(<span class="string">"spu"</span>, spu);</span><br><span class="line">            map.put(<span class="string">"spuDetail"</span>, spuDetail);</span><br><span class="line">            map.put(<span class="string">"skus"</span>, skus);</span><br><span class="line">            map.put(<span class="string">"brand"</span>, brands.get(<span class="number">0</span>));</span><br><span class="line">            map.put(<span class="string">"categories"</span>, categories);</span><br><span class="line">            map.put(<span class="string">"groups"</span>, specGroups);</span><br><span class="line">            map.put(<span class="string">"params"</span>, paramMap);</span><br><span class="line">            <span class="keyword">return</span> map;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"加载商品数据出错,spuId:&#123;&#125;"</span>, spuId, e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Category&gt; <span class="title">getCategories</span><span class="params">(Spu spu)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            List&lt;String&gt; names = <span class="keyword">this</span>.categoryClient.queryNameByIds(</span><br><span class="line">                    Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()));</span><br><span class="line">            Category c1 = <span class="keyword">new</span> Category();</span><br><span class="line">            c1.setName(names.get(<span class="number">0</span>));</span><br><span class="line">            c1.setId(spu.getCid1());</span><br><span class="line"></span><br><span class="line">            Category c2 = <span class="keyword">new</span> Category();</span><br><span class="line">            c2.setName(names.get(<span class="number">1</span>));</span><br><span class="line">            c2.setId(spu.getCid2());</span><br><span class="line"></span><br><span class="line">            Category c3 = <span class="keyword">new</span> Category();</span><br><span class="line">            c3.setName(names.get(<span class="number">2</span>));</span><br><span class="line">            c3.setId(spu.getCid3());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> Arrays.asList(c1, c2, c3);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"查询商品分类出错，spuId：&#123;&#125;"</span>, spu.getId(), e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在controller中把数据放入model：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"item"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GoodsService goodsService;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 跳转到商品详情页</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"&#123;id&#125;.html"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toItemPage</span><span class="params">(Model model, @PathVariable(<span class="string">"id"</span>)</span>Long id)</span>&#123;</span><br><span class="line">        <span class="comment">// 加载所需的数据</span></span><br><span class="line">        Map&lt;String, Object&gt; modelMap = <span class="keyword">this</span>.goodsService.loadModel(id);</span><br><span class="line">        <span class="comment">// 放入模型</span></span><br><span class="line">        model.addAllAttributes(modelMap);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"item"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.4.4.页面测试数据</h3>
+<p>我们在页面中先写一段JS，把模型中的数据取出观察，看是否成功：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:inline</span>=<span class="string">"javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> a = <span class="comment">/*[[$&#123;groups&#125;]]*/</span> [];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> b = <span class="comment">/*[[$&#123;params&#125;]]*/</span> [];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> c = <span class="comment">/*[[$&#123;categories&#125;]]*/</span> [];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> d = <span class="comment">/*[[$&#123;spu&#125;]]*/</span> &#123;&#125;;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> e = <span class="comment">/*[[$&#123;spuDetail&#125;]]*/</span> &#123;&#125;;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> f = <span class="comment">/*[[$&#123;skus&#125;]]*/</span> [];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> g = <span class="comment">/*[[$&#123;brand&#125;]]*/</span> &#123;&#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后查看页面源码：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532509946463.png" alt="1532509946463"></p>
+<p>数据都成功查到了！</p>
+<h2>1.5.渲染面包屑</h2>
+<p>在商品展示页的顶部，有一个商品分类、品牌、标题的面包屑</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526978423084.png" alt="1526978423084"></p>
+<p>其数据有3部分：</p>
+<ul>
+<li>商品分类</li>
+<li>商品品牌</li>
+<li>spu标题</li>
+</ul>
+<p>我们的模型中都有，所以直接渲染即可（页面101行开始）：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"crumb-wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"sui-breadcrumb"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">th:each</span>=<span class="string">"category : $&#123;categories&#125;"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">th:text</span>=<span class="string">"$&#123;category.name&#125;"</span>&gt;</span>手机<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">th:text</span>=<span class="string">"$&#123;brand.name&#125;"</span>&gt;</span>Apple<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"active"</span> <span class="attr">th:text</span>=<span class="string">"$&#123;spu.title&#125;"</span>&gt;</span>Apple iPhone 6s<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>1.6.渲染商品列表</h2>
+<p>先看下整体效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526979330657.png" alt="1526979330657"></p>
+<p>这个部分需要渲染的数据有5块：</p>
+<ul>
+<li>sku图片</li>
+<li>sku标题</li>
+<li>副标题</li>
+<li>sku价格</li>
+<li>特有规格属性列表</li>
+</ul>
+<p>其中，sku 的图片、标题、价格，都必须在用户选中一个具体sku后，才能渲染。而特有规格属性列表可以在spuDetail中查询到。而副标题则是在spu中，直接可以在页面渲染</p>
+<p>因此，我们先对特有规格属性列表进行渲染。等用户选择一个sku，再通过js对其它sku属性渲染</p>
+<h3>1.6.1.副标题</h3>
+<p>副标题是在spu中，所以我们直接通过Thymeleaf渲染：</p>
+<p>在第146行左右：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"news"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">th:utext</span>=<span class="string">"$&#123;spu.subTitle&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>副标题中可能会有超链接，因此这里也用<code>th:utext</code>来展示，效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526980061592.png" alt="1526980061592"></p>
+<h3>1.6.2.渲染规格属性列表</h3>
+<p>规格属性列表将来会有事件和动态效果。我们需要有js代码参与，不能使用Thymeleaf来渲染了。</p>
+<p>因此，这里我们用vue，不过需要先把数据放到js对象中，方便vue使用</p>
+<h4>初始化数据</h4>
+<p>我们在页面的<code>head</code>中，定义一个js标签，然后在里面定义变量，保存与sku相关的一些数据：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:inline</span>=<span class="string">"javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// sku集合</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> skus = <span class="comment">/*[[$&#123;skus&#125;]]*/</span> [];</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 规格参数id与name对</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">const</span> paramMap = <span class="comment">/*[[$&#123;params&#125;]]*/</span> &#123;&#125;;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 特有规格参数集合</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> specialSpec = <span class="built_in">JSON</span>.parse(<span class="comment">/*[[$&#123;spuDetail.specialSpec&#125;]]*/</span> <span class="string">""</span>);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>specialSpec：这是SpuDetail中唯一与Sku相关的数据</p>
+<p>因此我们并没有保存整个spuDetail，而是只保留了这个属性，而且需要手动转为js对象。</p>
+</li>
+<li>
+<p>paramMap：规格参数的id和name对，方便页面根据id获取参数名</p>
+</li>
+<li>
+<p>sku：特有规格参数集合</p>
+</li>
+</ul>
+<p>我们来看下页面获取的数据：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529923363960.png" alt="1529923363960"></p>
+<h4>通过Vue渲染</h4>
+<p>我们把刚才获得的几个变量保存在Vue实例中：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532531501925.png" alt="1532531501925"></p>
+<p>然后在页面中渲染：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"specification"</span> <span class="attr">class</span>=<span class="string">"summary-wrap clearfix"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dl</span> <span class="attr">v-for</span>=<span class="string">"(v,k) in specialSpec"</span> <span class="attr">:key</span>=<span class="string">"k"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dt</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl title"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">i</span>&gt;</span>&#123;&#123;paramMap[k]&#125;&#125;<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span> <span class="attr">v-for</span>=<span class="string">"(str,j) in v"</span> <span class="attr">:key</span>=<span class="string">"j"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">class</span>=<span class="string">"selected"</span>&gt;</span></span><br><span class="line">                &#123;&#123;str&#125;&#125;<span class="tag">&lt;<span class="name">span</span> <span class="attr">title</span>=<span class="string">"点击取消选择"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后刷新页面查看：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532531590626.png" alt="1532531590626"></p>
+<p>数据成功渲染了。不过我们发现所有的规格都被勾选了。这是因为现在，每一个规格都有样式：<code>selected</code>，我们应该只选中一个，让它的class样式为selected才对！</p>
+<p>那么问题来了，我们该如何确定用户选择了哪一个？</p>
+<h3>1.6.3.规格属性的筛选</h3>
+<h4>分析</h4>
+<p>规格参数的格式是这样的：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529923584730.png" alt="1529923584730"></p>
+<p>每一个规格项是数组中的一个元素，因此我们只要保存被选择的规格项的索引，就能判断哪个是用户选择的了！</p>
+<p>我们需要一个对象来保存用户选择的索引，格式如下：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"4"</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="string">"12"</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="string">"13"</span>:<span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但问题是，第一次进入页面时，用户并未选择任何参数。因此索引应该有一个默认值，我们将默认值设置为0。</p>
+<p>我们在<code>head</code>的script标签中，对索引对象进行初始化：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/H:assets/1529923658242.png" alt="1529923658242"></p>
+<p>然后在vue中保存：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529923701283.png" alt="1529923701283"></p>
+<h4>页面改造</h4>
+<p>我们在页面中，通过判断indexes的值来判断当前规格是否被选中，并且给规格绑定点击事件，点击规格项后，修改indexes中的对应值：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"specification"</span> <span class="attr">class</span>=<span class="string">"summary-wrap clearfix"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dl</span> <span class="attr">v-for</span>=<span class="string">"(v,k) in specialSpec"</span> <span class="attr">:key</span>=<span class="string">"k"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dt</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl title"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">i</span>&gt;</span>&#123;&#123;paramMap[k]&#125;&#125;<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span> <span class="attr">v-for</span>=<span class="string">"(str,j) in v"</span> <span class="attr">:key</span>=<span class="string">"j"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">:class</span>=<span class="string">"&#123;selected: j===indexes[k]&#125;"</span> @<span class="attr">click</span>=<span class="string">"indexes[k]=j"</span>&gt;</span></span><br><span class="line">                &#123;&#123;str&#125;&#125;<span class="tag">&lt;<span class="name">span</span> <span class="attr">v-if</span>=<span class="string">"j===indexes[k]"</span> <span class="attr">title</span>=<span class="string">"点击取消选择"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532533192037.png" alt="1532533192037"></p>
+<h3>1.6.4.确定SKU</h3>
+<p>在我们设计sku数据的时候，就已经添加了一个字段：indexes：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532533286400.png" alt="1532533286400"></p>
+<p>这其实就是规格参数的索引组合。</p>
+<p>而我们在页面中，用户点击选择规格后，就会把对应的索引保存起来：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532533340274.png" alt="1532533340274"></p>
+<p>因此，我们可以根据这个indexes来确定用户要选择的sku</p>
+<p>我们在vue中定义一个<strong>计算属性</strong>，来计算与索引匹配的sku：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">    sku()&#123;</span><br><span class="line">        <span class="keyword">const</span> index = <span class="built_in">Object</span>.values(<span class="keyword">this</span>.indexes).join(<span class="string">"_"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.skus.find(<span class="function"><span class="params">s</span> =&gt;</span> s.indexes = index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在浏览器工具中查看：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532533876765.png" alt="1532533876765"></p>
+<h3>1.6.5.渲染sku列表</h3>
+<p>既然已经拿到了用户选中的sku，接下来，就可以在页面渲染数据了</p>
+<h4>图片列表</h4>
+<p>商品图片是一个字符串，以<code>,</code>分割，页面展示比较麻烦，所以我们编写一个<strong>计算属性</strong>:images()，将图片字符串变成数组：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    sku()&#123;</span><br><span class="line">        <span class="keyword">const</span> index = <span class="built_in">Object</span>.values(<span class="keyword">this</span>.indexes).join(<span class="string">"_"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.skus.find(<span class="function"><span class="params">s</span>=&gt;</span>s.indexes==index);</span><br><span class="line">    &#125;,</span><br><span class="line">    images()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.sku.images ? <span class="keyword">this</span>.sku.images.split(<span class="string">","</span>) : [<span class="string">''</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>页面改造：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"zoom"</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--默认第一个预览--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"preview"</span> <span class="attr">class</span>=<span class="string">"spec-preview"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"jqzoom"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">img</span> <span class="attr">:jqimg</span>=<span class="string">"images[0]"</span> <span class="attr">:src</span>=<span class="string">"images[0]"</span> <span class="attr">width</span>=<span class="string">"400px"</span> <span class="attr">height</span>=<span class="string">"400px"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--下方的缩略图--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"spec-scroll"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"prev"</span>&gt;</span>&amp;lt;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--左右按钮--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"items"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(image, i) in images"</span> <span class="attr">:key</span>=<span class="string">"i"</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"image"</span> <span class="attr">:bimg</span>=<span class="string">"image"</span> <span class="attr">onmousemove</span>=<span class="string">"preview(this)"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"next"</span>&gt;</span>&amp;gt;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526985783938.png" alt="1526985783938"></p>
+<h4>标题和价格</h4>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526985959427.png" alt="1526985959427"></p>
+<h4>完整效果</h4>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532535748931.png" alt="1532535748931"></p>
+<h2>1.7.商品详情</h2>
+<p>商品详情页面如下图所示：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1526988361312.png" alt="1526988361312"></p>
+<p>分成上下两部分：</p>
+<ul>
+<li>上部：展示的是规格属性列表</li>
+<li>下部：展示的是商品详情</li>
+</ul>
+<h3>1.7.1.属性列表（作业）</h3>
+<p>这部分内容与规格参数部分重复，我就不带大家做了，大家可以自己完成</p>
+<h3>1.7.2.商品详情</h3>
+<p>商品详情是HTML代码，我们不能使用 <code>th:text</code>，应该使用<code>th:utext</code></p>
+<p>在页面的第444行左右：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--商品详情--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"intro-detail"</span> <span class="attr">th:utext</span>=<span class="string">"$&#123;spuDetail.description&#125;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最终展示效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532536101914.png" alt="1532536101914"></p>
+<h2>1.8.规格包装：</h2>
+<p>规格包装分成两部分：</p>
+<ul>
+<li>规格参数</li>
+<li>包装列表</li>
+</ul>
+<p>而且规格参数需要按照组来显示</p>
+<h3>1.8.1.规格参数</h3>
+<p>最终的效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532536238386.png" alt="1532536238386"></p>
+<p>我们模型中有一个groups，跟这个数据结果很像：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1529924049003.png" alt="1529924049003"></p>
+<p>分成8个组，组内都有params，里面是所有的参数。不过，这些参数都没有值！</p>
+<p>规格参数的值分为两部分：</p>
+<ul>
+<li>通用规格参数：保存在SpuDetail中的genericSpec中</li>
+<li>特有规格参数：保存在sku的ownSpec中</li>
+</ul>
+<p>我们需要把这两部分值取出来，放到groups中。</p>
+<p>从spuDetail中取出genericSpec并取出groups：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532537802576.png" alt="1532537802576"></p>
+<p>把genericSpec引入到Vue实例：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532537863801.png" alt="1532537863801"></p>
+<p>因为sku是动态的，所以我们编写一个<strong>计算属性</strong>，来进行值的组合：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">groups()&#123;</span><br><span class="line">    groups.forEach(<span class="function"><span class="params">group</span> =&gt;</span> &#123;</span><br><span class="line">        group.params.forEach(<span class="function"><span class="params">param</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(param.generic)&#123;</span><br><span class="line">                <span class="comment">// 通用属性，去spu的genericSpec中获取</span></span><br><span class="line">                param.v = <span class="keyword">this</span>.genericSpec[param.id] || <span class="string">'其它'</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 特有属性值，去SKU中获取</span></span><br><span class="line">                param.v = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.sku.ownSpec)[param.id]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> groups;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在页面渲染：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Ptable"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Ptable-item"</span> <span class="attr">v-for</span>=<span class="string">"group in groups"</span> <span class="attr">:key</span>=<span class="string">"group.name"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123;group.name&#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"p in group.params"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">dt</span>&gt;</span>&#123;&#123;p.name&#125;&#125;<span class="tag">&lt;/<span class="name">dt</span>&gt;</span><span class="tag">&lt;<span class="name">dd</span>&gt;</span>&#123;&#123;p.v + (p.unit || '')&#125;&#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3>1.8.2.包装列表</h3>
+<p>包装列表在商品详情中，我们一开始并没有赋值到Vue实例中，但是可以通过Thymeleaf来渲染</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"package-list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>包装清单<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;spuDetail.packingList&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最终效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532538150603.png" alt="1532538150603"></p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532538178543.png" alt="1532538178543"></p>
+<h2>1.9.售后服务</h2>
+<p>售后服务也可以通过Thymeleaf进行渲染：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"three"</span> <span class="attr">class</span>=<span class="string">"tab-pane"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>售后保障<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;spuDetail.afterService&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532538249704.png" alt="1532538249704"></p>
+<h1>2.页面静态化</h1>
+<h2>2.1.简介</h2>
+<h3>2.1.1.问题分析</h3>
+<p>现在，我们的页面是通过Thymeleaf模板引擎渲染后返回到客户端。在后台需要大量的数据查询，而后渲染得到HTML页面。会对数据库造成压力，并且请求的响应时间过长，并发能力不高。</p>
+<p>大家能想到什么办法来解决这个问题？</p>
+<p>首先我们能想到的就是缓存技术，比如之前学习过的Redis。不过Redis适合数据规模比较小的情况。假如数据量比较大，例如我们的商品详情页。每个页面如果10kb，100万商品，就是10GB空间，对内存占用比较大。此时就给缓存系统带来极大压力，如果缓存崩溃，接下来倒霉的就是数据库了。</p>
+<p>所以缓存并不是万能的，某些场景需要其它技术来解决，比如静态化。</p>
+<h3>2.1.2.什么是静态化</h3>
+<p>静态化是指把动态生成的HTML页面变为静态内容保存，以后用户的请求到来，直接访问静态页面，不再经过服务的渲染。</p>
+<p>而静态的HTML页面可以部署在nginx中，从而大大提高并发能力，减小tomcat压力。</p>
+<h3>2.1.3.如何实现静态化</h3>
+<p>目前，静态化页面都是通过模板引擎来生成，而后保存到nginx服务器来部署。常用的模板引擎比如：</p>
+<ul>
+<li>Freemarker</li>
+<li>Velocity</li>
+<li>Thymeleaf</li>
+</ul>
+<p>我们之前就使用的Thymeleaf，来渲染html返回给用户。Thymeleaf除了可以把渲染结果写入Response，也可以写到本地文件，从而实现静态化。</p>
+<h2>2.2.Thymeleaf实现静态化</h2>
+<h3>2.2.1.概念</h3>
+<p>先说下Thymeleaf中的几个概念：</p>
+<ul>
+<li>Context：运行上下文</li>
+<li>TemplateResolver：模板解析器</li>
+<li>TemplateEngine：模板引擎</li>
+</ul>
+<blockquote>
+<p>Context</p>
+</blockquote>
+<p>上下文： 用来保存模型数据，当模板引擎渲染时，可以从Context上下文中获取数据用于渲染。</p>
+<p>当与SpringBoot结合使用时，我们放入Model的数据就会被处理到Context，作为模板渲染的数据使用。</p>
+<blockquote>
+<p>TemplateResolver</p>
+</blockquote>
+<p>模板解析器：用来读取模板相关的配置，例如：模板存放的位置信息，模板文件名称，模板文件的类型等等。</p>
+<p>当与SpringBoot结合时，TemplateResolver已经由其创建完成，并且各种配置也都有默认值，比如模板存放位置，其默认值就是：templates。比如模板文件类型，其默认值就是html。</p>
+<blockquote>
+<p>TemplateEngine</p>
+</blockquote>
+<p>模板引擎：用来解析模板的引擎，需要使用到上下文、模板解析器。分别从两者中获取模板中需要的数据，模板文件。然后利用内置的语法规则解析，从而输出解析后的文件。来看下模板引擎进行处理的函数：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">templateEngine.process(<span class="string">"模板名"</span>, context, writer);</span><br></pre></td></tr></table></figure></p>
+<p>三个参数：</p>
+<ul>
+<li>模板名称</li>
+<li>上下文：里面包含模型数据</li>
+<li>writer：输出目的地的流</li>
+</ul>
+<p>在输出时，我们可以指定输出的目的地，如果目的地是Response的流，那就是网络响应。如果目的地是本地文件，那就实现静态化了。</p>
+<p>而在SpringBoot中已经自动配置了模板引擎，因此我们不需要关心这个。现在我们做静态化，就是把输出的目的地改成本地文件即可！</p>
+<h3>2.2.2.具体实现</h3>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532757937331.png" alt="1532757937331"></p>
+<p>Service代码：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsHtmlService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GoodsService goodsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TemplateEngine templateEngine;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(GoodsHtmlService.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建html页面</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> spuId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createHtml</span><span class="params">(Long spuId)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        PrintWriter writer = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 获取页面数据</span></span><br><span class="line">            Map&lt;String, Object&gt; spuMap = <span class="keyword">this</span>.goodsService.loadModel(spuId);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建thymeleaf上下文对象</span></span><br><span class="line">            Context context = <span class="keyword">new</span> Context();</span><br><span class="line">            <span class="comment">// 把数据放入上下文对象</span></span><br><span class="line">            context.setVariables(spuMap);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建输出流</span></span><br><span class="line">            File file = <span class="keyword">new</span> File(<span class="string">"C:\\project\\nginx-1.14.0\\html\\item\\"</span> + spuId + <span class="string">".html"</span>);</span><br><span class="line">            writer = <span class="keyword">new</span> PrintWriter(file);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行页面静态化方法</span></span><br><span class="line">            templateEngine.process(<span class="string">"item"</span>, context, writer);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            LOGGER.error(<span class="string">"页面静态化出错：&#123;&#125;，"</span>+ e, spuId);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (writer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                writer.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新建线程处理页面静态化</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> spuId</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">asyncExcute</span><span class="params">(Long spuId)</span> </span>&#123;</span><br><span class="line">        ThreadUtils.execute(()-&gt;createHtml(spuId));</span><br><span class="line">        <span class="comment">/*ThreadUtils.execute(new Runnable() &#123;</span></span><br><span class="line"><span class="comment">            @Override</span></span><br><span class="line"><span class="comment">            public void run() &#123;</span></span><br><span class="line"><span class="comment">                createHtml(spuId);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;);*/</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>线程工具类：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ExecutorService es = Executors.newFixedThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable runnable)</span> </span>&#123;</span><br><span class="line">        es.submit(runnable);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.2.3.什么时候创建静态文件</h3>
+<p>我们编写好了创建静态文件的service，那么问题来了：什么时候去调用它呢</p>
+<p>想想这样的场景：</p>
+<p>假如大部分的商品都有了静态页面。那么用户的请求都会被nginx拦截下来，根本不会到达我们的<code>leyou-goods-web</code>服务。只有那些还没有页面的请求，才可能会到达这里。</p>
+<p>因此，如果请求到达了这里，我们除了返回页面视图外，还应该创建一个静态页面，那么下次就不会再来麻烦我们了。</p>
+<p>所以，我们在GoodsController中添加逻辑，去生成静态html文件：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"&#123;id&#125;.html"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toItemPage</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Long id, Model model)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载所需的数据</span></span><br><span class="line">    Map&lt;String, Object&gt; map = <span class="keyword">this</span>.goodsService.loadModel(id);</span><br><span class="line">    <span class="comment">// 把数据放入数据模型</span></span><br><span class="line">    model.addAllAttributes(map);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 页面静态化</span></span><br><span class="line">    <span class="keyword">this</span>.goodsHtmlService.asyncExcute(id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"item"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：生成html 的代码不能对用户请求产生影响，所以这里我们使用额外的线程进行异步创建。</p>
+<h3>2.2.4.重启测试：</h3>
+<p>访问一个商品详情，然后查看nginx目录：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532757980379.png" alt="1532757980379"></p>
+<h2>2.3.nginx代理静态页面</h2>
+<p>接下来，我们修改nginx，让它对商品请求进行监听，指向本地静态页面，如果本地没找到，才进行反向代理：</p>
+<p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  www.leyou.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Server <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /item &#123;</span><br><span class="line">        <span class="comment"># 先找本地</span></span><br><span class="line">        <span class="attribute">root</span> html;</span><br><span class="line">        <span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>) &#123; <span class="comment">#请求的文件不存在，就反向代理</span></span><br><span class="line">            <span class="attribute">proxy_pass</span> http://127.0.0.1:8084;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:9002;</span><br><span class="line">        <span class="attribute">proxy_connect_timeout</span> <span class="number">600</span>;</span><br><span class="line">        <span class="attribute">proxy_read_timeout</span> <span class="number">600</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重启测试：</p>
+<p>发现请求速度得到了极大提升：</p>
+<p><img src="/2019/05/26/day14.商品详情及静态化/assets/1532758206086.png" alt="1532758206086"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day13-搜索过滤/" rel="next" title="13.搜索过滤">
+                <i class="fa fa-chevron-left"></i> 13.搜索过滤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/day15-rabbitmq及数据同步/" rel="prev" title="15.rabbutnq及数据同步">
+                15.rabbutnq及数据同步 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1.商品详情</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.Thymeleaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.商品详情页服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1.创建module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2.pom依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.3.编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.4.</span> <span class="nav-text">1.2.4.application.yml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.5.</span> <span class="nav-text">1.2.5.页面模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.页面跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1.修改页面跳转路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2.nginx反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.3.</span> <span class="nav-text">1.3.3.编写跳转controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.4.</span> <span class="nav-text">1.3.4.测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.封装模型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.4.1.商品微服务提供接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">1.4.1.1.查询spu</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">1.4.1.2.查询规格参数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.2.</span> <span class="nav-text">1.4.2.创建FeignClient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.3.</span> <span class="nav-text">1.4.3.封装数据模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.4.</span> <span class="nav-text">1.4.4.页面测试数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">1.5.渲染面包屑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.</span> <span class="nav-text">1.6.渲染商品列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.1.</span> <span class="nav-text">1.6.1.副标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.2.</span> <span class="nav-text">1.6.2.渲染规格属性列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">初始化数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.2.2.</span> <span class="nav-text">通过Vue渲染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.3.</span> <span class="nav-text">1.6.3.规格属性的筛选</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.3.2.</span> <span class="nav-text">页面改造</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.4.</span> <span class="nav-text">1.6.4.确定SKU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.5.</span> <span class="nav-text">1.6.5.渲染sku列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.5.1.</span> <span class="nav-text">图片列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.5.2.</span> <span class="nav-text">标题和价格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.5.3.</span> <span class="nav-text">完整效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.7.</span> <span class="nav-text">1.7.商品详情</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.7.1.</span> <span class="nav-text">1.7.1.属性列表（作业）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.7.2.</span> <span class="nav-text">1.7.2.商品详情</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.8.</span> <span class="nav-text">1.8.规格包装：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.8.1.</span> <span class="nav-text">1.8.1.规格参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.8.2.</span> <span class="nav-text">1.8.2.包装列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.9.</span> <span class="nav-text">1.9.售后服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2.页面静态化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1.问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.1.2.什么是静态化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.1.3.如何实现静态化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.Thymeleaf实现静态化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1.概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2.具体实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.2.3.什么时候创建静态文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.4.</span> <span class="nav-text">2.2.4.重启测试：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.nginx代理静态页面</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

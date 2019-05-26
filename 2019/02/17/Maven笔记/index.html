@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Maven,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Maven 自己理解：统一管理jar包 Maven是基于POM（工程对象模型），通过一小段描述来对项目的代码、报告、文件进管理的工具。 Maven是一个跨平台的项目管理工具，它是使用java开发的，它要依赖于jdk1.6及以上 Maven主要有两大功能：管理依赖、项目构建。 （依赖指的就是jar包） 项目构建方式（清理、编译、单元测试、报告、打包、部署） Eclipse	使用eclipse构建项目">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/17/Maven笔记/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="Maven 自己理解：统一管理jar包 Maven是基于POM（工程对象模型），通过一小段描述来对项目的代码、报告、文件进管理的工具。 Maven是一个跨平台的项目管理工具，它是使用java开发的，它要依赖于jdk1.6及以上 Maven主要有两大功能：管理依赖、项目构建。 （依赖指的就是jar包） 项目构建方式（清理、编译、单元测试、报告、打包、部署） Eclipse	使用eclipse构建项目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T07:51:29.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven笔记">
+<meta name="twitter:description" content="Maven 自己理解：统一管理jar包 Maven是基于POM（工程对象模型），通过一小段描述来对项目的代码、报告、文件进管理的工具。 Maven是一个跨平台的项目管理工具，它是使用java开发的，它要依赖于jdk1.6及以上 Maven主要有两大功能：管理依赖、项目构建。 （依赖指的就是jar包） 项目构建方式（清理、编译、单元测试、报告、打包、部署） Eclipse	使用eclipse构建项目">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/17/Maven笔记/">
+
+
+
+
+
+  <title>Maven笔记 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/Maven笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maven笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-17T15:51:32+08:00">
+                2019-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/构建工具/" itemprop="url" rel="index">
+                    <span itemprop="name">构建工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>Maven</h1>
+<p>自己理解：统一管理jar包
+Maven是基于POM（工程对象模型），通过一小段描述来对项目的代码、报告、文件进管理的工具。
+Maven是一个跨平台的项目管理工具，它是使用java开发的，它要依赖于jdk1.6及以上
+Maven主要有两大功能：管理依赖、项目构建。
+（依赖指的就是jar包）</p>
+<p>项目构建方式（清理、编译、单元测试、报告、打包、部署）
+Eclipse	使用eclipse构建项目，相对来说，步骤零散，不好操作
+Ant	专门项目构建工具。需要详细配置高诉Ant源码包、class文件、资源文件存放位置，需要了解相关Ant语法
+Maven	项目管理工具，也是项目构建工具，可以对项目进行简单快速构建。需要安装maven，按照maven规范进行代码开发（有约束）</p>
+<p>官方网站：http://maven.apache.org 本课程使用的maven的版本为3.0.5</p>
+<h2>开发中遇到的问题</h2>
+<ol>
+<li>都是同样的代码，为什么在我的机器上可以编译执行，而在他的机器上就不行？</li>
+<li>为什么在我的机器上可以正常打包，而配置管理员却打不出来?</li>
+<li>项目组加入了新的人员，我要给他说明编译环境如何设置，但是让我挠头的是，有些细节我也记不清楚了。</li>
+<li>我的项目依赖一些jar包，我应该把他们放哪里？放源码库里？</li>
+<li>这是我开发的第二个项目，还是需要上面的那些jar包，再把它们复制到我当前项目的svn库里吧</li>
+<li>现在是第三次，再复制一次吧    ----- 这样真的好吗？</li>
+<li>我写了一个数据库相关的通用类，并且推荐给了其他项目组，现在已经有五个项目组在使用它了，今天我发现了一个bug，并修正了它，我会把jar包通过邮件发给其他项目组
+-----这不是一个好的分发机制，太多的环节可能导致出现bug</li>
+<li>项目进入测试阶段，每天都要向测试服务器部署一版。每次都手动部署，太麻烦了。</li>
+</ol>
+<h2>原版maven使用步骤</h2>
+<p>1.下载 官方网站：http://maven.apache.org<br>
+2.解压添加环境变量：MAVEN_HOME,PATH(MAVEN_HOME/bin)<br>
+3.测试安装是否成功：mvn –v<br>
+4.Maven常用命令：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">compile		编译</span><br><span class="line">clean		清除target目录</span><br><span class="line">test		test目录中的源码进行编译</span><br><span class="line">package		打包命令</span><br><span class="line">install		安装命令，会将打好的包，安装到本地仓库</span><br><span class="line">clean compile	组合命令先清除再编译</span><br><span class="line">clean test		同上先清除再执行test，通常应用于测试环节</span><br><span class="line">clean package 	清理&gt;编译&gt;测试&gt;打包，通常应用于发布前</span><br></pre></td></tr></table></figure></p>
+<p>Maven 安装目录有两个配置文件,全局配置目录和用户配置目录 用户配置需要自己复制setting.xml 到~/.m2目录下 (“~”指用户目录)
+本地仓库目录地址: Maven目录下 <code>/conf/setting.xml | Default: ~/.m2/repository</code>
+&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</p>
+<h2>Maven目录结构</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Project</span><br><span class="line">	|--src（源码包）</span><br><span class="line">		|--main（正常的源码包）</span><br><span class="line">			|--java（.java文件的目录）</span><br><span class="line">			|--resources（资源文件的目录）</span><br><span class="line">		|--test（测试的源码包）</span><br><span class="line">|--java</span><br><span class="line">			|--resources</span><br><span class="line">	|--target（class文件、报告等信息存储的地方）</span><br><span class="line">	|--pom.xml（maven工程的描述文件）</span><br></pre></td></tr></table></figure></p>
+<h2>安装M2Eclipse插件（高版本eclipse、mclipse自带）</h2>
+<ol>
+<li>解压后拷贝到eclipse中的dropins目录</li>
+<li>查看eclipse中是否安装成功，eclipse&gt;windows&gt;Preferences&gt;左边菜单中出现Maven</li>
+<li>设置Maven的安装路径，eclipse&gt;windows&gt;Preferences&gt;Maven&gt;Installations&gt;add（添加目录后勾选）</li>
+<li>上步骤中Maven&gt;User Setting可设置用户Maven配置文件和本地配置文件（使用eclipse可以指定maven配置文件地址）</li>
+<li>卸载Maven删除dropins目录之前拷贝的文件即可</li>
+</ol>
+<h2>Maven的核心概念 - 坐标与依赖管理</h2>
+<h3>Maven坐标主要组成</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">		&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;optional&gt;false&lt;/scope&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;groupId&gt;com.itheima.maven&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;MavenFirst&lt;/artifactId&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure></p>
+<p>groupld：定义当前Maven组织名称<br>
+artifactld：定义项目实际名称<br>
+version：定义目的当前项版本</p>
+<h3>Maven依赖</h3>
+<p>依赖范围
+prm.xml中 &lt;scope&gt;标签用来定义依赖范围<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">comiple 对于主代码、测试代码、打包后运行时有效 例如 log4j  </span><br><span class="line">test 仅对于测试代码时有效 例如 junit  </span><br><span class="line">provided 仅对于主代码、测试代码有效 例如 servlet-api  </span><br><span class="line">runtime 仅对于打包后运行时有效 例如 JDBC Driver Implementation</span><br></pre></td></tr></table></figure></p>
+<h3>依赖传递？？？</h3>
+<p>工程A依赖工程B 工程B依赖工程C  工程A直接依赖工程B间接依赖工程C</p>
+<h3>依赖冲突</h3>
+<p>多个项目中（跨pom文件） 每个pom.xml 中相具有同包的坐标 但&lt;version&gt;版本不同 使用直接依赖 就近原则
+单个项目（同一个pom文件） pom.xml 中出现两个以上相同包的坐标但&lt;version&gt;版本不同 使用pom.xml文档中最下面坐标的jar包（从上往下解析）
+可选依赖
+&lt;Optional&gt;标签标识该依赖是否可选，默认是false，false会传递下去 true不传递。</p>
+<h3>依赖排除</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;exclusion&gt;</span><br><span class="line">	&lt;groupId&gt;com.itheima.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;MavenFirst&lt;/artifactId&gt;</span><br><span class="line">&lt;exclusion&gt;</span><br></pre></td></tr></table></figure></p>
+<p>该方法是在依赖项目中排除 实际工作中使用该方法 &lt;Optional&gt;是被依赖的pom中定义</p>
+<h2>Maven生命周期</h2>
+<p>maven每个插件（命令）是有相对应的之前步骤，这个步骤我们叫生命周期 生命周期有很多大概记住下面的这些
+pre-site 执行一些需要在生成站点文档之前完成的工作
+site 生成项目的站点文档
+post-site 执行一些需要在生成站点文档之后完成的工作，并且为部署做准备
+site-deploy 将生成的站点文档部署到特定的服务器上</p>
+<h2>插件（plugin）</h2>
+<p>插件，每个插件都能实现一个阶段的功能。Maven的核心是生命周期，但是生命周期相当于主要指定了maven命令执行的流程顺序，而没有真正实现流程的功能，功能是有插件来实现的。
+比如：compile就是一个插件实现的功能。(其实compile是个插件)</p>
+<p>编译插件
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;!-- 编译插件，指定编译用的jdk版本 --&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupld&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-comp-pllugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;configuration&gt;</span><br><span class="line">				&lt;source&gt;1.7&lt;/source&gt;</span><br><span class="line">				&lt;target&gt;1.7&lt;/target&gt;</span><br><span class="line">				&lt;encoding&gt;utf-8&lt;/encoding&gt;</span><br><span class="line">			&lt;/configuration&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;!-- maven工程可以不安装tomcat，使用tomcat插件即可,tomcat:run 插件命令默认为tomcat6--&gt;</span><br><span class="line">		&lt;!-- 若使用tomcat7来运行web工程，需要在pom中指定tomcat7 它的执行命令是：tomcat7:run --&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.tomcat.maven&lt;/groupld&gt;</span><br><span class="line">			&lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">			&lt;configuration&gt;</span><br><span class="line">				&lt;pornt&gt;80&lt;/pornt&gt;</span><br><span class="line">				&lt;pornt&gt;/&lt;/pornt&gt;</span><br><span class="line">			&lt;/configuration&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">	&lt;/plugins&gt;</span><br><span class="line">&lt;build&gt;</span><br></pre></td></tr></table></figure></p>
+<h2>7.第一个Maven工程</h2>
+<p>创建web工程时候在创建MavenProject时候packging要选择war方式<br>
+工程创建好时需要自己创建创建WEB-INF及web.xml文件<br>
+创建index.jsp文件使用tomcat:run命令测试即可</p>
+<h2>8.Maven继承</h2>
+<p>maven中的继承指的是pom文件的继承<br>
+创建父类工程在创建工程步骤中packging必须选择pom方式<br>
+创建子类工程可以在创建图形界面中选择父类pom工程<br>
+创建子类工程也可以在pom.xml文件中指定父类工程pom文件<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;artifactId&gt;父类工程名&lt;/artifactId&gt;</span><br><span class="line">	&lt;groupId&gt;com.itheima.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;version&gt;版本信息&lt;/version&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure></p>
+<h3>9.统一依赖jar包</h3>
+<p>是指父工程统一定义一些jar包子工程来选择使用 不这么做子工程会继承所有父工程指定的所有jar包（不需要的也会继承）防止冗余</p>
+<h2>10.统一管理版本号（父工程抽取版本号）</h2>
+<p>作用方便更改版本号，防止同一jar包定义多个版本号</p>
+<h2>11.聚合</h2>
+<p>在真实项目中  创建多个maven工程 发布时候合并为一个</p>
+<h2>12.maven 仓库类型</h2>
+<p>仓库的分类：
+1.本地仓库默认在~/.2/repository中，以配置文件为准
+2.中央仓库（开源jar包，不包含有版权的依赖包） http://repo1.maven.org/moven2
+私服（自建远程仓库） 访问私服 局域网通过私服下载 私服没有私服访问中央仓库下载，另外私服存储本地开发的jar包</p>
+<h3>12.1.私服安装</h3>
+<p>为所有来自中央仓库的构建安装提供本地缓存。<br>
+下载网站：http://nexus.sonatype.org/<br>
+安装版本：nexus-2.7.0-06.war<br>
+第一步：安装tomcat<br>
+第二步：将nexus的war包拷贝到tomcat的webapps下<br>
+第三步：启动tomcat</p>
+<p>访问URL: http://localhost:8080/nexus-2.7.0-06/
+默认账号:
+用户名： admin
+密码： admin123</p>
+<p>具体可参考web私服搭建文章</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maven/" rel="tag"># Maven</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/17/4.Git裸库、submodule、subtree、cherry-pick、rebase相关命令详解/" rel="next" title="Git.4.裸库、submodule、subtree、cherry-pick、rebase相关命令详解">
+                <i class="fa fa-chevron-left"></i> Git.4.裸库、submodule、subtree、cherry-pick、rebase相关命令详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/25/WebService笔记/" rel="prev" title="WebService笔记">
+                WebService笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">开发中遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">原版maven使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Maven目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">安装M2Eclipse插件（高版本eclipse、mclipse自带）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">Maven的核心概念 - 坐标与依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.1.</span> <span class="nav-text">Maven坐标主要组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.</span> <span class="nav-text">Maven依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.</span> <span class="nav-text">依赖传递？？？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.4.</span> <span class="nav-text">依赖冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.5.</span> <span class="nav-text">依赖排除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">Maven生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text">插件（plugin）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.</span> <span class="nav-text">7.第一个Maven工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.9.</span> <span class="nav-text">8.Maven继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.9.1.</span> <span class="nav-text">9.统一依赖jar包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.10.</span> <span class="nav-text">10.统一管理版本号（父工程抽取版本号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.11.</span> <span class="nav-text">11.聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.12.</span> <span class="nav-text">12.maven 仓库类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.12.1.</span> <span class="nav-text">12.1.私服安装</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

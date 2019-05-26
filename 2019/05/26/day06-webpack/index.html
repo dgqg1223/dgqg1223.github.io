@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习目标 0.学习目标  了解vue-router使用 了解webpack使用 会使用vue-cli搭建项目 独立搭建后台管理系统 了解系统基本结构  1.路由vue-router 1.1.场景模拟 现在我们来实现这样一个功能： 一个页面，包含登录和注册，点击不同按钮，实现登录和注册页切换：  1.1.1.编写父组件 为了让接下来的功能比较清晰，我们先新建一个文件夹：src:  然后新建一个HTM">
+<meta name="keywords" content="项目笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.webpack">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/day06-webpack/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="学习目标 0.学习目标  了解vue-router使用 了解webpack使用 会使用vue-cli搭建项目 独立搭建后台管理系统 了解系统基本结构  1.路由vue-router 1.1.场景模拟 现在我们来实现这样一个功能： 一个页面，包含登录和注册，点击不同按钮，实现登录和注册页切换：  1.1.1.编写父组件 为了让接下来的功能比较清晰，我们先新建一个文件夹：src:  然后新建一个HTM">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/8.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525868223969.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525868284332.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525868623712.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525868736799.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525869269916.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525869621647.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525870170532.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/8.gif">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525866284055.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525866410437.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525873000269.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525873145475.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525873343908.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525873610812.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525874002350.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/%E8%AF%BE%E5%90%8E/day05-Vue/assets/1525875474187.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525875749502.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525875792078.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525876060602.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525875932114.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525877099220.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525877313725.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525877634350.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525877746191.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525877882425.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525878015255.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525878133337.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1527390662284.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525879126478.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525879160040.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525912021845.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525912255757.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525912928592.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913049617.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913141066.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913197139.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913230564.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913263487.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913307569.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913435086.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525913687860.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525914072353.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525914618504.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525914808164.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525914871848.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525955154460.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525955615381.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525955644681.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525955709334.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525955811416.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525956016683.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525957503521.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525957604219.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525958950616.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525960652724.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525959769978.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525960312939.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525961862771.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525961875288.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525962755237.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525964023585.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525965105184.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525965779366.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525965560286.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525965585695.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/1525966180568.png">
+<meta property="og:updated_time" content="2019-05-26T07:51:29.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6.webpack">
+<meta name="twitter:description" content="学习目标 0.学习目标  了解vue-router使用 了解webpack使用 会使用vue-cli搭建项目 独立搭建后台管理系统 了解系统基本结构  1.路由vue-router 1.1.场景模拟 现在我们来实现这样一个功能： 一个页面，包含登录和注册，点击不同按钮，实现登录和注册页切换：  1.1.1.编写父组件 为了让接下来的功能比较清晰，我们先新建一个文件夹：src:  然后新建一个HTM">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/26/day06-webpack/assets/8.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/day06-webpack/">
+
+
+
+
+
+  <title>6.webpack | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/day06-webpack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">6.webpack</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-26T15:51:29+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">项目笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目笔记/商城项目/" itemprop="url" rel="index">
+                    <span itemprop="name">商城项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>学习目标</h1>
+<h1>0.学习目标</h1>
+<ul>
+<li>了解vue-router使用</li>
+<li>了解webpack使用</li>
+<li>会使用vue-cli搭建项目</li>
+<li>独立搭建后台管理系统</li>
+<li>了解系统基本结构</li>
+</ul>
+<h1>1.路由vue-router</h1>
+<h2>1.1.场景模拟</h2>
+<p>现在我们来实现这样一个功能：</p>
+<p>一个页面，包含登录和注册，点击不同按钮，实现登录和注册页切换：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/8.gif" alt="8gif"></p>
+<h3>1.1.1.编写父组件</h3>
+<p>为了让接下来的功能比较清晰，我们先新建一个文件夹：src:</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525868223969.png" alt="1525868223969"></p>
+<p>然后新建一个HTML文件，作为入口：index.html</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525868284332.png" alt="1525868284332"></p>
+<p>然后编写页面的基本结构：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        登录页/注册页</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../node_modules/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    var vm = new Vue(&#123;</span></span><br><span class="line"><span class="undefined">        el:"#app"</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525868623712.png" alt="1525868623712"></p>
+<h3>1.1.2.编写登录组件</h3>
+<p>接下来我们来实现登录组件，以前我们都是写在一个文件中，但是为了复用性，开发中都会把组件放如独立的JS文件中，我们新建一个login.js</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525868736799.png" alt="1525868736799"></p>
+<p>编写组件，这里我们只写模板，不写功能：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loginForm = &#123;</span><br><span class="line">    template:<span class="string">'\</span></span><br><span class="line"><span class="string">    &lt;div&gt;\</span></span><br><span class="line"><span class="string">    &lt;h2&gt;登录页&lt;/h2&gt; \</span></span><br><span class="line"><span class="string">    用户名：&lt;input type="text"&gt;&lt;br/&gt;\</span></span><br><span class="line"><span class="string">    密码：&lt;input type="password"&gt;&lt;br/&gt;\</span></span><br><span class="line"><span class="string">    &lt;/div&gt;\</span></span><br><span class="line"><span class="string">    '</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.1.3.编写注册组件</h3>
+<p>新建单文件组件：register.js</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525869269916.png" alt="1525869269916"></p>
+<p>编写模板：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> registerForm = &#123;</span><br><span class="line">    template:<span class="string">'\</span></span><br><span class="line"><span class="string">    &lt;div&gt;\</span></span><br><span class="line"><span class="string">    &lt;h2&gt;注册页&lt;/h2&gt; \</span></span><br><span class="line"><span class="string">    用户名：&lt;input type="text"&gt;&lt;br/&gt;\</span></span><br><span class="line"><span class="string">    密码：&lt;input type="password"&gt;&lt;br/&gt;\</span></span><br><span class="line"><span class="string">    确认密码：&lt;input type="password"&gt;&lt;br/&gt;\</span></span><br><span class="line"><span class="string">    &lt;/div&gt;\</span></span><br><span class="line"><span class="string">    '</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>1.1.4.在父组件中引用</h3>
+<p>在index.html中使用刚刚编写的两个组件</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">login-form</span>&gt;</span><span class="tag">&lt;/<span class="name">login-form</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">register-form</span>&gt;</span><span class="tag">&lt;/<span class="name">register-form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../node_modules/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/login.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/register.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el:<span class="string">"#app"</span>,</span></span><br><span class="line"><span class="javascript">        components:&#123;<span class="comment">// 引用登录和注册组件</span></span></span><br><span class="line"><span class="undefined">            loginForm,</span></span><br><span class="line"><span class="undefined">            registerForm</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525869621647.png" alt="1525869621647"></p>
+<h3>1.1.5.问题</h3>
+<p>我们期待的是，当点击登录或注册按钮，分别显示登录页或注册页，而不是一起显示。</p>
+<p>但是，如何才能动态加载组件，实现组件切换呢？</p>
+<p>虽然使用原生的Html5和JS也能实现，但是官方推荐我们使用vue-router模块。</p>
+<h2>1.2.vue-router简介和安装</h2>
+<p>使用vue-router和vue可以非常方便的实现 复杂单页应用的动态路由功能。</p>
+<p>官网：https://router.vuejs.org/zh-cn/</p>
+<p>使用npm安装：<code>npm install vue-router --save</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525870170532.png" alt="1525870170532"></p>
+<p>在index.html中引入依赖：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../node_modules/vue-router/dist/vue-router.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>1.3.快速入门</h2>
+<p>新建vue-router对象，并且指定路由规则：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建VueRouter对象</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes:[ <span class="comment">// 编写多个路由规则</span></span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">"/login"</span>, <span class="comment">// 请求路径</span></span><br><span class="line">            component:loginForm <span class="comment">// 组件名称</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;<span class="attr">path</span>:<span class="string">"/register"</span>,<span class="attr">component</span>:registerForm&#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>创建VueRouter对象，并指定路由参数</li>
+<li>routes：路由规则的数组，可以指定多个对象，每个对象是一条路由规则，包含以下属性：
+<ul>
+<li>path：路由的路径</li>
+<li>component：组件名称</li>
+</ul>
+</li>
+</ul>
+<p>在父组件中引入router对象：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    components:&#123;<span class="comment">// 引用登录和注册组件</span></span><br><span class="line">        loginForm,</span><br><span class="line">        registerForm</span><br><span class="line">    &#125;,</span><br><span class="line">    router <span class="comment">// 引用上面定义的router对象</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>页面跳转控制：</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--router-link来指定跳转的路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/login"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/register"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--vue-router的锚点--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>通过<code>&lt;router-view&gt;</code>来指定一个锚点，当路由的路径匹配时，vue-router会自动把对应组件放到锚点位置进行渲染</li>
+<li>通过<code>&lt;router-link&gt;</code>指定一个跳转链接，当点击时，会触发vue-router的路由功能，路径中的hash值会随之改变</li>
+</ul>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/8.gif" alt="a3212"></p>
+<p><strong>注意</strong>：单页应用中，页面的切换并不是页面的跳转。仅仅是地址最后的hash值变化。</p>
+<p>事实上，我们总共就一个HTML：index.html</p>
+<h2>1.4.父子组件</h2>
+<h1>2.webpack</h1>
+<h2>2.1.认识webpack</h2>
+<p>Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。</p>
+<p>中文官方网站：https://www.webpackjs.com/</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525866284055.png" alt="1525866284055"></p>
+<p>官网给出的解释：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525866410437.png" alt="1525866410437"></p>
+<p>为什么需要打包？</p>
+<ul>
+<li>将许多碎小文件打包成一个整体，减少单页面内的衍生请求次数，提高网站效率。</li>
+<li>将ES6的高级语法进行转换编译，以兼容老版本的浏览器。</li>
+<li>将代码打包的同时进行混淆，提高代码的安全性。</li>
+</ul>
+<h2>2.2.四个核心概念</h2>
+<p>学习Webpack，你需要先理解四个<strong>核心概念</strong>：</p>
+<ul>
+<li>
+<p>入口(entry)</p>
+<p>webpack打包的启点，可以有一个或多个，一般是js文件。webpack会从启点文件开始，寻找启点直接或间接依赖的其它所有的依赖，包括JS、CSS、图片资源等，作为将来打包的原始数据</p>
+</li>
+<li>
+<p>输出(output)</p>
+<p>出口一般包含两个属性：path和filename。用来告诉webpack打包的目标文件夹，以及文件的名称。目的地也可以有多个。</p>
+</li>
+<li>
+<p>加载器（loader）</p>
+<p>webpack本身只识别Js文件，如果要加载非JS文件，必须指定一些额外的加载器（loader），例如css-loader。然后将这些文件转为webpack能处理的有效模块，最后利用webpack的打包能力去处理。</p>
+</li>
+<li>
+<p>插件(plugins)</p>
+<p>插件可以扩展webpack的功能，让webpack不仅仅是完成打包，甚至各种更复杂的功能，或者是对打包功能进行优化、压缩，提高效率。</p>
+</li>
+</ul>
+<h2>2.3.安装</h2>
+<p>webpack支持全局安装和本地安装，官方推荐是本地安装，我们按照官方的来。</p>
+<p>输入命令：<code>npm install webpack webpack-cli --save-dev</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525873000269.png" alt="1525873000269"></p>
+<p>此时，我们注意下项目中文件夹下，会有一个package.json文件。（其实早就有了）</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525873145475.png" alt="1525873145475"></p>
+<p>打开文件，可以看到我们之前用npm安装过的文件都会出现在这里：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525873343908.png" alt="1525873343908"></p>
+<h2>2.4.编写webpack配置</h2>
+<p>接下来，我们编写一个webpack的配置，来指定一些打包的配置项。配置文件的名称，默认就是webpack.config.js，我们放到hello-vue的根目录：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525873610812.png" alt="1525873610812"></p>
+<p>配置文件中就是要指定上面说的四个核心概念，入口、出口、加载器、插件。</p>
+<p>不过，加载器和插件是可选的。我们先编写入口和出口</p>
+<h3>2.4.1.入口entry</h3>
+<p>webpack打包的启点，可以有一个或多个，一般是js文件。现在思考一下我们有没有一个入口？貌似没有，我们所有的东西都集中在index.html，不是一个js，那怎么办？</p>
+<p>我们新建一个js，把index.html中的部分内容进行集中，然后在index.html中引用这个js不就OK了！</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525874002350.png" alt="1525874002350"></p>
+<p>然后把原来index.html中的js代码全部移动到main.js中</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用es6的语法导入js模块</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'../node_modules/vue/dist/vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'../node_modules/vue-router/dist/vue-router'</span></span><br><span class="line"><span class="keyword">import</span> loginForm <span class="keyword">from</span> <span class="string">'./js/login'</span></span><br><span class="line"><span class="keyword">import</span> registerForm <span class="keyword">from</span> <span class="string">'./js/register'</span></span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建VueRouter对象</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes:[ <span class="comment">// 编写多个路由规则</span></span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">"/login"</span>, <span class="comment">// 请求路径</span></span><br><span class="line">            component:loginForm <span class="comment">// 组件名称</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;<span class="attr">path</span>:<span class="string">"/register"</span>,<span class="attr">component</span>:registerForm&#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    components:&#123;<span class="comment">// 引用登录和注册组件</span></span><br><span class="line">        loginForm,</span><br><span class="line">        registerForm</span><br><span class="line">    &#125;,</span><br><span class="line">    router</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>原来的index.html中引入了很多其它js，在这里我们使用es6的import语法进行导入。</p>
+<p>注意，要使用import，就需要在login.js和register.js中添加export导出语句：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loginForm = &#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt; </span></span><br><span class="line"><span class="string">    &lt;h2&gt;登录页&lt;/h2&gt; </span></span><br><span class="line"><span class="string">    用户名：&lt;input type="text"&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">    密码：&lt;input type="password"&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> loginForm;</span><br></pre></td></tr></table></figure></p>
+<p>register.js:</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> registerForm = &#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;注册页&lt;/h2&gt; </span></span><br><span class="line"><span class="string">    用户名：&lt;input type="text"&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">    密码：&lt;input type="password"&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">    确认密码：&lt;input type="password"&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> registerForm;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<ul>
+<li>vue-router使用模块话加载后，必须增加一句：Vue.use(VueRouter)</li>
+</ul>
+<p>这样，main.js就成了我们整个配置的入口了。</p>
+<p>我们在webpack.config.js中添加以下内容：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    entry:<span class="string">'./src/main.js'</span>,  <span class="comment">//指定打包的入口文件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.4.2.出口output</h3>
+<p>出口，就是输出的目的地。一般我们会用一个dist目录，作为打包输出的文件夹：</p>
+<p><img src="/2019/05/26/day06-webpack/../../%E8%AF%BE%E5%90%8E/day05-Vue/assets/1525875474187.png" alt="1525875474187"></p>
+<p>然后，编写webpack.config.js，添加出口配置：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    entry:<span class="string">'./src/main.js'</span>,  <span class="comment">//指定打包的入口文件</span></span><br><span class="line">    output:&#123;</span><br><span class="line">        <span class="comment">// path: 输出的目录，__dirname是相对于webpack.config.js配置文件的绝对路径</span></span><br><span class="line">        path : __dirname+<span class="string">'/dist'</span>,  </span><br><span class="line">        filename:<span class="string">'build.js'</span>	 <span class="comment">//输出的js文件名</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>2.5.执行打包</h2>
+<p>在控制台输入以下命令：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack --config webpack.config.js</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525875749502.png" alt="1525875749502"></p>
+<p>随后，查看dist目录：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525875792078.png" alt="1525875792078"></p>
+<p>尝试打开build.js，你根本看不懂：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525876060602.png" alt="1525876060602"></p>
+<p>所有的js合并为1个，并且对变量名进行了随机打乱，这样就起到了 压缩、混淆的作用。</p>
+<h2>2.6.测试运行</h2>
+<p>在index.html中引入刚刚生成的build.js文件，</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--router-link来指定跳转的路径--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/login"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/register"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--vue-router的锚点--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../dist/build.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后运行：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525875932114.png" alt="1525875932114"></p>
+<h2>2.7.打包CSS</h2>
+<h3>2.7.1.编写css文件</h3>
+<p>我们来编写一段CSS代码，对index的样式做一些美化：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525877099220.png" alt="1525877099220"></p>
+<p>内容：</p>
+<p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: dodgerblue;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#app</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: whitesmoke;</span><br><span class="line">    <span class="attribute">color</span>: dodgerblue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#app</span> <span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#app</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">305px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid dodgerblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.7.2.安装加载器</h3>
+<p>前面说过，webpack默认只支持js加载。要加载CSS文件，必须安装加载器：</p>
+<p>命令：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install style-loader css-loader --save-dev</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525877313725.png" alt="1525877313725"></p>
+<p>此时，在package.json中能看到新安装的：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525877634350.png" alt="1525877634350"></p>
+<h3>2.7.3.在main.js引入css文件</h3>
+<p>因为入口在main.js，因此css文件也要在这里引入。依然使用ES6 的模块语法：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./css/main.css'</span></span><br></pre></td></tr></table></figure></p>
+<h3>2.7.4.在webpack.config.js添加加载器</h3>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">'./src/main.js'</span>,  <span class="comment">//指定打包的入口文件</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname + <span class="string">'/dist'</span>, <span class="comment">// 注意：__dirname表示webpack.config.js所在目录的绝对路径</span></span><br><span class="line">        filename: <span class="string">'build.js'</span>  <span class="comment">//输出文件</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>, <span class="comment">// 通过正则表达式匹配所有以.css后缀的文件</span></span><br><span class="line">                use: [ <span class="comment">// 要使用的加载器，这两个顺序一定不要乱</span></span><br><span class="line">                    <span class="string">'style-loader'</span>,</span><br><span class="line">                    <span class="string">'css-loader'</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>2.7.5.重新打包</h3>
+<p>再次输入打包指令：<code>npx webpack --config webpack.config.js</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525877746191.png" alt="1525877746191"></p>
+<p>效果：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525877882425.png" alt="1525877882425"></p>
+<h2>2.8.script脚本</h2>
+<p>我们每次使用npm安装，都会在package.json中留下痕迹，事实上，package.json中不仅可以记录安装的内容，还可编写脚本，让我们运行命令更加快捷。</p>
+<p>我们可以把webpack的命令编入其中：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525878015255.png" alt="1525878015255"></p>
+<p>以后，如果要打包，就可以直接输入：<code>npm run build</code>即可。</p>
+<ul>
+<li><code>npm run</code> ：执行npm脚本，后面跟的是脚本的名称<code>build</code></li>
+</ul>
+<p><img src="/2019/05/26/day06-webpack/assets/1525878133337.png" alt="1525878133337"></p>
+<h2>2.9.打包HTML</h2>
+<p>之前的打包过程中，除了HTML文件外的其它文件都被打包了，当在线上部署时，我们还得自己复制HTML到dist，然后手动添加生成的js到HTML中，这非常不友好。</p>
+<p>webpack中的一个插件：html-webpack-plugin，可以解决这个问题。</p>
+<p>1）安装插件：<code>npm install --save-dev html-webpack-plugin</code></p>
+<p>需要在webpack.config.js中添加插件：</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">'./src/main.js'</span>,  <span class="comment">//指定打包的入口文件</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname + <span class="string">'/dist'</span>,  <span class="comment">// 注意：__dirname表示webpack.config.js所在目录的绝对路径</span></span><br><span class="line">        filename: <span class="string">'build.js'</span>		   <span class="comment">//输出文件</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>, <span class="comment">// 通过正则表达式匹配所有以.css后缀的文件</span></span><br><span class="line">                use: [ <span class="comment">// 要使用的加载器，这两个顺序一定不要乱</span></span><br><span class="line">                    <span class="string">'style-loader'</span>,</span><br><span class="line">                    <span class="string">'css-loader'</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins:[</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            title: <span class="string">'首页'</span>,  <span class="comment">//生成的页面标题&lt;head&gt;&lt;title&gt;首页&lt;/title&gt;&lt;/head&gt;</span></span><br><span class="line">            filename: <span class="string">'index.html'</span>, <span class="comment">// dist目录下生成的文件名</span></span><br><span class="line">            template: <span class="string">'./src/index.html'</span> <span class="comment">// 我们原来的index.html，作为模板</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2）将原来HTML中的引入js代码删除：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1527390662284.png" alt="1527390662284"></p>
+<p>3）再次打包：<code>npm run build</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525879126478.png" alt="1525879126478"></p>
+<p>4）查看dist目录：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525879160040.png" alt="1525879160040"></p>
+<p>打开index.html，发现已经自动添加了当前目录下的build.js</p>
+<p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--router-link来指定跳转的路径--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/login"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/register"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--vue-router的锚点--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"build.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2>2.10.热更新的web服务</h2>
+<p>刚才的案例中，每次修改任何js或css内容，都必须重新打包，非常麻烦。</p>
+<p>webpack给我们提供了一个插件，可以帮我们运行一个web服务，加载页面内容，并且修改js后不需要重新加载就能看到最新结果：</p>
+<p>1）安装插件：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack-dev-server --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>2）添加启动脚本</p>
+<p>在package.json中配置script</p>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --inline --hot --open --port 8080 --host 127.0.0.1"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>--inline：自动刷新</p>
+<p>--hot：热加载</p>
+<p>--port：指定端口</p>
+<p>--open：自动在默认浏览器打开</p>
+<p>--host：可以指定服务器的 ip，不指定则为127.0.0.1</p>
+<p>3）运行脚本：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525912021845.png" alt="1525912021845"></p>
+<p>4）效果：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525912255757.png" alt="1525912255757"></p>
+<h1>3.vue-cli</h1>
+<h2>3.1.介绍和安装</h2>
+<p>在开发中，需要打包的东西不止是js、css、html。还有更多的东西要处理，这些插件和加载器如果我们一一去添加就会比较麻烦。</p>
+<p>幸好，vue官方提供了一个快速搭建vue项目的脚手架：vue-cli</p>
+<p>使用它能快速的构建一个web工程模板。</p>
+<p>官网：https://github.com/vuejs/vue-cli</p>
+<p>安装命令：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-cli</span><br></pre></td></tr></table></figure></p>
+<h2>3.2.快速上手</h2>
+<p>我们新建一个module：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525912928592.png" alt="1525912928592"></p>
+<p>打开终端并进入目录：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913049617.png" alt="1525913049617"></p>
+<p>用vue-cli命令，快速搭建一个webpack的项目：<code>vue init webpack</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913141066.png" alt="1525913141066"></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913197139.png" alt="1525913197139"></p>
+<p>前面几项都走默认或yes</p>
+<p>下面这些我们选no</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913230564.png" alt="1525913230564"></p>
+<p>最后，再选yes，使用 npm安装</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913263487.png" alt="1525913263487"></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913307569.png" alt="1525913307569"></p>
+<h2>3.3.项目结构</h2>
+<p>安装好的项目结构：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913435086.png" alt="1525913435086"></p>
+<p>入口文件：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525913687860.png" alt="1525913687860"></p>
+<h2>3.4.单文件组件</h2>
+<p>需要注意的是，我们看到有一类后缀名为.vue的文件，我们称为单文件组件</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525914072353.png" alt="1525914072353"></p>
+<p>每一个.vue文件，就是一个独立的vue组件。类似于我们刚才写的loginForm.js和registerForm.js</p>
+<p>只不过，我们在js中编写 html模板和样式非常的不友好，而且没有语法提示和高亮。</p>
+<p>而单文件组件中包含三部分内容：</p>
+<ul>
+<li>template：模板，支持html语法高亮和提示</li>
+<li>script：js脚本，这里编写的就是vue的组件对象，看到上面的data(){}了吧</li>
+<li>style：样式，支持CSS语法高亮和提示</li>
+</ul>
+<p>每个组件都有自己独立的html、JS、CSS，互不干扰，真正做到可独立复用。</p>
+<h2>3.5.运行</h2>
+<p>看看生成的package.json：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525914618504.png" alt="1525914618504"></p>
+<ul>
+<li>可以看到这引入了非常多的依赖，绝大多数都是开发期依赖，比如大量的加载器。</li>
+<li>运行时依赖只有vue和vue-router</li>
+<li>脚本有三个：
+<ul>
+<li>dev：使用了webpack-dev-server命令，开发时热部署使用</li>
+<li>start：使用了npm run dev命令，与上面的dev效果完全一样</li>
+<li>build：等同于webpack的打包功能，会打包到dist目录下。</li>
+</ul>
+</li>
+</ul>
+<p>我们执行<code>npm run dev</code> 或者 <code>npm start</code> 都可以启动项目：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525914808164.png" alt="1525914808164"></p>
+<p>页面：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525914871848.png" alt="1525914871848"></p>
+<h1>4.搭建后台管理前端</h1>
+<h2>4.1.导入已有资源</h2>
+<p>后台项目相对复杂，为了有利于教学，我们不再从0搭建项目，而是直接使用课前资料中给大家准备好的源码：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525955154460.png" alt="1525955154460"></p>
+<p>我们解压缩，放到工作目录中：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525955615381.png" alt="1525955615381"></p>
+<p>然后在eclipse中导入新的工程：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525955644681.png" alt="1525955644681"></p>
+<p>选中我们的工程：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525955709334.png" alt="1525955709334"></p>
+<p>这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525955811416.png" alt="1525955811416"></p>
+<h2>4.2.安装依赖</h2>
+<p>你应该注意到，这里并没有node_modules文件夹，方便给大家下发，已经把依赖都删除了。不过package.json中依然定义了我们所需的一切依赖：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525956016683.png" alt="1525956016683"></p>
+<p>我们只需要通过命令来安装所需依赖即可。打开终端，进入项目目录，输入：<code>npm install</code></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525957503521.png" alt="1525957503521"></p>
+<p>大概需要1分钟。</p>
+<h2>4.3.运行一下看看</h2>
+<p>输入命令：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525957604219.png" alt="1525957604219"></p>
+<p>发现默认的端口是9001。访问：http://localhost:9001</p>
+<p>会自动进行跳转：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525958950616.png" alt="1525958950616"></p>
+<h1>5.Vuetify框架</h1>
+<h2>5.1.为什么要学习UI框架</h2>
+<p>Vue负责的是虽然会帮我们进行视图的渲染，但是样式是有我们自己来完成。这显然不是我们的强项，因此后端开发人员一般都喜欢使用一些现成的UI组件，拿来即用，常见的例如：</p>
+<ul>
+<li>BootStrap</li>
+<li>LayUI</li>
+<li>EasyUI</li>
+<li>ZUI</li>
+</ul>
+<p>然而这些UI组件的基因天生与Vue不合，因为他们更多的是利用DOM操作，借助于jQuery实现，而不是MVVM的思想。</p>
+<p>而目前与Vue吻合的UI框架也非常的多，国内比较知名的如：</p>
+<ul>
+<li>element-ui：饿了么出品</li>
+<li>i-view：某公司出品</li>
+</ul>
+<p>然而我们都不用，我们今天推荐的是一款国外的框架：Vuetify</p>
+<p>官方网站：https://vuetifyjs.com/zh-Hans/</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525960652724.png" alt="1525960652724"></p>
+<h2>5.2.为什么是Vuetify</h2>
+<p>有中国的为什么还要用外国的？原因如下：</p>
+<ul>
+<li>Vuetify几乎不需要任何CSS代码，而element-ui许多布局样式需要我们来编写</li>
+<li>Vuetify从底层构建起来的语义化组件。简单易学，容易记住。</li>
+<li>Vuetify基于Material Design（谷歌推出的多平台设计规范），更加美观，动画效果酷炫，且风格统一</li>
+</ul>
+<p>这是官网的说明：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525959769978.png" alt="1525959769978"></p>
+<p>缺陷：</p>
+<ul>
+<li>目前官网虽然有中文文档，但因为翻译问题，几乎不太能看。</li>
+</ul>
+<h2>5.3.怎么用？</h2>
+<p>基于官方网站的文档进行学习：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525960312939.png" alt="1525960312939"></p>
+<p>我们重点关注<code>UI components</code>即可，里面有大量的UI组件，我们要用的时候再查看，不用现在学习，先看下有什么：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525961862771.png" alt="1525961862771"></p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525961875288.png" alt="1525961875288"></p>
+<p>以后用到什么组件，就来查询即可。</p>
+<h1>6.项目结构</h1>
+<p>开始编码前，我们先了解下项目的结构：</p>
+<h2>6.1.目录结构</h2>
+<p>首先是目录结构图：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525962755237.png" alt="1525962755237"></p>
+<h2>6.2.调用关系</h2>
+<p>我们最主要理清index.html、main.js、App.vue之间的关系：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525964023585.png" alt="1525964023585"></p>
+<p>理一下：</p>
+<ul>
+<li>index.html中定义了空的<code>div</code>，其id为<code>app</code>。</li>
+<li>main.js中定义了Vue对象，并且绑定通过id选择器，绑定到index.html的div中，因此<strong>main.js的内容都将在index.html的div中显示</strong>。</li>
+<li>而main.js中只有一行内容：<code>&lt;App/&gt;</code>,这是使用了App组件，即App.vue，也就是说index.html中最终展现的是App.vue中的内容。</li>
+<li>App.vue中也没有内容，而是定义了vue-router的锚点：<code>&lt;router-view&gt;</code>,我们之前讲过，vue-router路由后的组件将会在锚点展示。</li>
+<li>最终的结论是：<strong>一切路由后的内容都将通过App.vue在index.html中显示。</strong></li>
+</ul>
+<h2>6.3.页面布局</h2>
+<p>接下来我们一起看下页面布局：</p>
+<p>Layout组件是我们的整个页面的布局组件：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525965105184.png" alt="1525965105184"></p>
+<p>一个典型的三块布局。包含左，上，中三部分：</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525965779366.png" alt="1525965779366"></p>
+<p>里面使用了Vuetify中的2个组件和一个布局元素：</p>
+<ul>
+<li>
+<p><code>v-navigation-drawer</code> ：导航抽屉，主要用于容纳应用程序中的页面的导航链接。</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525965560286.png" alt="1525965560286"></p>
+</li>
+<li>
+<p><code>v-toolbar</code>：工具栏通常是网站导航的主要途径。可以与导航抽屉一起很好地工作，动态选择是否打开导航抽屉，实现可伸缩的侧边栏。</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525965585695.png" alt="1525965585695"></p>
+</li>
+<li>
+<p><code>v-content</code>：并不是一个组件，而是标记页面布局的元素。可以根据您指定的<strong>app</strong>组件的结构动态调整大小，使得您可以创建高度可定制的组件。</p>
+</li>
+</ul>
+<p>那么问题来了：<code>v-content</code>中的内容来自哪里？</p>
+<p><img src="/2019/05/26/day06-webpack/assets/1525966180568.png" alt="1525966180568"></p>
+<ul>
+<li>Layout映射的路径是<code>/</code></li>
+<li>除了Login以为的所有组件，都是定义在Layout的children属性，并且路径都是<code>/</code>的下面</li>
+<li>因此当路由到子组件时，会在Layout中定义的锚点中显示。</li>
+<li>并且Layout中的其它部分不会变化，这就实现了布局的共享。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目笔记/" rel="tag"># 项目笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/day05-vue入门/" rel="next" title="5.vue入门">
+                <i class="fa fa-chevron-left"></i> 5.vue入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/day06/" rel="prev" title="6.后台搭建">
+                6.后台搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">1.路由vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1.1.场景模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1.1.编写父组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.1.2.编写登录组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.3.</span> <span class="nav-text">1.1.3.编写注册组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.4.</span> <span class="nav-text">1.1.4.在父组件中引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.5.</span> <span class="nav-text">1.1.5.问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">1.2.vue-router简介和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">1.3.快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">1.4.父子组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">2.webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">2.1.认识webpack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">2.2.四个核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">2.3.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">2.4.编写webpack配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.1.</span> <span class="nav-text">2.4.1.入口entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.2.</span> <span class="nav-text">2.4.2.出口output</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.</span> <span class="nav-text">2.5.执行打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.</span> <span class="nav-text">2.6.测试运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.</span> <span class="nav-text">2.7.打包CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.1.</span> <span class="nav-text">2.7.1.编写css文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.2.</span> <span class="nav-text">2.7.2.安装加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.3.</span> <span class="nav-text">2.7.3.在main.js引入css文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.4.</span> <span class="nav-text">2.7.4.在webpack.config.js添加加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.5.</span> <span class="nav-text">2.7.5.重新打包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.8.</span> <span class="nav-text">2.8.script脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.9.</span> <span class="nav-text">2.9.打包HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.10.</span> <span class="nav-text">2.10.热更新的web服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">3.vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">3.1.介绍和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">3.2.快速上手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">3.3.项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.</span> <span class="nav-text">3.4.单文件组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.5.</span> <span class="nav-text">3.5.运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">4.搭建后台管理前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">4.1.导入已有资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.</span> <span class="nav-text">4.2.安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.3.</span> <span class="nav-text">4.3.运行一下看看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">5.Vuetify框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">5.1.为什么要学习UI框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">5.2.为什么是Vuetify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.</span> <span class="nav-text">5.3.怎么用？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">6.项目结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.</span> <span class="nav-text">6.1.目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.</span> <span class="nav-text">6.2.调用关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.</span> <span class="nav-text">6.3.页面布局</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

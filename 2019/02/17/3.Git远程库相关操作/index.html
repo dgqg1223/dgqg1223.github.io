@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Git远程与GitHub push 推送 pull 拉取 pull == fetch + merge git push 的两种方式 git config --global push.default simple 使用SSH密钥与GitHub仓库关联（推荐） 123456789git remote add origin git@github.com:dgqg1223/dgqg1223.github.">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git.3.远程库相关操作">
+<meta property="og:url" content="http://yoursite.com/2019/02/17/3.Git远程库相关操作/index.html">
+<meta property="og:site_name" content="dgqg1223的博客">
+<meta property="og:description" content="Git远程与GitHub push 推送 pull 拉取 pull == fetch + merge git push 的两种方式 git config --global push.default simple 使用SSH密钥与GitHub仓库关联（推荐） 123456789git remote add origin git@github.com:dgqg1223/dgqg1223.github.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T07:51:29.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git.3.远程库相关操作">
+<meta name="twitter:description" content="Git远程与GitHub push 推送 pull 拉取 pull == fetch + merge git push 的两种方式 git config --global push.default simple 使用SSH密钥与GitHub仓库关联（推荐） 123456789git remote add origin git@github.com:dgqg1223/dgqg1223.github.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/17/3.Git远程库相关操作/">
+
+
+
+
+
+  <title>Git.3.远程库相关操作 | dgqg1223的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dgqg1223的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个程序小白的学习笔记。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/3.Git远程库相关操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dgqg1223">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dgqg1223的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git.3.远程库相关操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-17T15:03:32+08:00">
+                2019-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/版本控制工具/" itemprop="url" rel="index">
+                    <span itemprop="name">版本控制工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2>Git远程与GitHub</h2>
+<p>push 推送
+pull 拉取
+pull == fetch + merge</p>
+<h2>git push 的两种方式</h2>
+<p>git config --global push.default simple</p>
+<h2>使用SSH密钥与GitHub仓库关联（推荐）</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:dgqg1223/dgqg1223.github.io.git</span><br><span class="line">git remote show origin</span><br><span class="line">which ssh-keygen    #需要ssh环境</span><br><span class="line">shh-keygen          #需要ssh环境</span><br><span class="line">ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;  #windows下</span><br><span class="line">~/.shh/id_ras #私钥文件 </span><br><span class="line">~/.shh/id_rsa.put #公钥文件 </span><br><span class="line">在github仓库界面 选择Settings下的Deploy keys &gt;&gt; Add depoloy key 添加id_ras中生成的私钥 &gt;&gt; 勾选Allow write access(push权限) &gt;&gt; Add key</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
+<h2>使用https与GitHub仓库关联（传输不加密，每次需要输入用户名密码）</h2>
+<p>git remote add origin https://github.com/dgqg1223/dgqg1223.github.io.git
+git remote show origin
+git push -u origin master</p>
+<p>git remote show 列出所有与此项目关联的远程仓库
+git remote show &lt;origin&gt; 列出远程仓库的详细信息
+git push</p>
+<h2>git管理模型</h2>
+<ol>
+<li>Gitflow 参考</li>
+<li>基于Git分支的开发模型
+develop分支 开发人员写作开发使用 （频繁变化的一个分支）
+test分支 供测试与产品等人员使用的一个分支（变化不是特别频繁）
+master分支 生产发布分支（变化非常不频繁的分支）
+bugfix或hotfix 分支 生产当中出现了紧急的BUG，用于紧急修复分支</li>
+</ol>
+<h2>git协作</h2>
+<p>git原理 实际会建立个 origin/master 远程分支来对应远程版本库中的 master分支， origin/master 会追踪远程版本库中的 master分支，指向最新的ciommit。
+查看远程分支 origin/master
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -a</span><br><span class="line">* master</span><br><span class="line">  remotes/origin/master</span><br><span class="line">$ git branch -av    #显示远程分支和最近一次commit id。</span><br></pre></td></tr></table></figure></p>
+<p>模拟练习2个人操作远程版本库</p>
+<p>远程仓库克隆到本地
+git clone &lt;ssh or https git path&gt; [new branch name]</p>
+<p>gitk与git gui
+在git仓库下 敲入gitk 调出界面</p>
+<p>使用stack overflow 搜索问题
+使用云梯vpn
+monaco字体</p>
+<p>git 合并原则 三方合并原则</p>
+<h2>git 别名</h2>
+<p>git config --goloba alias.br branch   #定义别名 br 实际定义到.gitconfig 文件中了
+git br  等同于 git bran ch
+git config --goloba alias.ui '!gitk'  #当定义的是外部命令时，要在命令前加 !</p>
+<h2>Git refspec</h2>
+<p>远程分支镜像和远程分支操作
+推送新建的分支 当远程没有这个分支时候使用git put会报错，需要使用下面命令<br>
+方法一（推荐，可对应不同分支名  ）：<br>
+git push --set-upstream origin srcBranch<br>
+git push --set-upstream origin srcBranch:destBrabcg</p>
+<p>方法二：
+git push -u origin srcBranch</p>
+<p>当我门执行 git pull 时候当本地没有远程存在的分支时 我们需要新建分支并建立和远程分支的对应关系<br>
+方法一（可对应不同分支名）：<br>
+git checkout -b srcBranch destBrabcg<br>
+方法二：<br>
+git checkout --track destBrabcg</p>
+<p>解决新建分支后 push 报错的情况
+git push orgin HEAD:destBrabcg
+git push origin srcBranch:destBrabcg</p>
+<p>删除远程分支
+方法一：利用空分支推送到远程分支上
+git push origin :srcBranch
+方法二：
+git push origin --delete srcBranch</p>
+<p>重命名远程分支思路
+先删除要重命名的远程分支 重命名本地分支 之后推送到远程</p>
+<h2>Git refspec 与远程标签</h2>
+<h3>refspec</h3>
+<p>refspec 指本地标签和远程标签映射关系
+git push、git pull的完整命令
+git push origin srcBranch:destBrabcg
+git pull origin srcBranch:destBrabcg</p>
+<p>commit ：当我门执行commit时候git会为我们创建一个commit对象，会将这个commit对象的parent值(指针) 设置为之前HEAD引用所指向的SHA-1值
+git reflog 会记录所有对于的HEAD记录</p>
+<p>cat git.HEAD</p>
+<p>实际上我们可以通过底层命令 symbolic-ref 来实现对HEAD文件内容的修改(不会记录到reflog)</p>
+<p>git symbolic-ref HEAD
+git symbolic-ref HEAD refs/heads/master</p>
+<p>.git/HEAD ：HEAD标记文件是一个指向你当前所在分支的引用标识符，该文件内部并不包含SHA-1值，包含的是指向另外一个引用的指针
+.git/ORIG_HEAD : 存储远程最新commit id
+.git/FETCH_head : 本地从远程pull时候会记录commit id 和message
+.git/config : 存储远程分支和本地分支相关对应信息
+.git/refs/
+.git/refs/heads : 本地分支目录，每个分支文件中存放着该分支指向的提交点
+.git/refs/remotes ： 远程分支目录，每个分支文件中存放着该分支指向的提交点
+.git/refs/tag : 存放标签目录
+.git/padked-refs ： 执行 git gc 后会将压缩后的标签移动到这个目录
+.git/objects : 存放压缩后的项目文件</p>
+<h3>远程标签</h3>
+<p>标签 分为轻量级标签和带有注释的标签，下面v1.0 会生成指针 ，带有注释的标签会创建tag对象 在tag对象中指向所对应commitID</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br><span class="line">git tag -a v2.0 -m &apos;v2.0 released&apos;</span><br><span class="line">git show v1.0</span><br><span class="line">git show v2.0 </span><br><span class="line">tig lag -l &apos;?2*&apos;</span><br><span class="line">git push origin v1.0</span><br><span class="line">git push origin --tags</span><br><span class="line"></span><br><span class="line">git pull </span><br><span class="line">git push origin :refs/tags/v1.0</span><br><span class="line">git push origin --delete tag v5.0</span><br><span class="line"></span><br><span class="line">git pull </span><br><span class="line">git tag v3.0</span><br><span class="line">git push origin refs/tags/v3.0:refs/tags/v3.0</span><br><span class="line">git fetch origin tag v3.0</span><br></pre></td></tr></table></figure></p>
+<h3>远程分支删除本地分支如何同步</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote show origin</span><br><span class="line">git remote prune origin</span><br></pre></td></tr></table></figure></p>
+<h3>查看远程分支log记录</h3>
+<p>在缺省情况下，refspec会被git remote add 命令所自动生成，Git会获取远程库上.get/refs/heads下所有的引用文件，并写入到本地库.get/refs/remotes/origin/ ，所以如果远端上有一个master分支，在本地就可以通过下面几种方式来访问他门的历史记录。（该操作文件可以在.git/config中查看）</p>
+<p>git log origin/master #查看远程分支log记录<br>
+git log remotes/origin/master<br>
+git log refs/remotes/origin/master</p>
+<h3>.get/config 观察练习</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin master：refs/remotes/origin/mymaster</span><br><span class="line">git branch </span><br><span class="line">git branch -av</span><br><span class="line">git remote show origin #可以看到mymaster没有对应关系</span><br><span class="line">git checkout --track origin/mymaster #手动创建对应关系</span><br><span class="line">git remote show origin #仍然提示没有追踪，因为.git/config 没有相应对应关系，命令行只是一次执行</span><br><span class="line">git remote prune origin 删除origin/mymaster</span><br><span class="line">git branch </span><br><span class="line">git branch -av</span><br><span class="line">git branch --unset-upstream </span><br><span class="line">git branch -d mymaster</span><br><span class="line">git branch </span><br><span class="line">git branch -av</span><br></pre></td></tr></table></figure></p>
+<h2>Git gc</h2>
+<blockquote>
+<p>git gc</p>
+</blockquote>
+<p>执行该命令后会将refs中的文件打包 移动到 .git/padked-refs</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/17/2.Git分支相关操作/" rel="next" title="Git.2.分支相关操作">
+                <i class="fa fa-chevron-left"></i> Git.2.分支相关操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/17/4.Git裸库、submodule、subtree、cherry-pick、rebase相关命令详解/" rel="prev" title="Git.4.裸库、submodule、subtree、cherry-pick、rebase相关命令详解">
+                Git.4.裸库、submodule、subtree、cherry-pick、rebase相关命令详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dgqg1223</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Git远程与GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">git push 的两种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">使用SSH密钥与GitHub仓库关联（推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">使用https与GitHub仓库关联（传输不加密，每次需要输入用户名密码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">git管理模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">git协作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">git 别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Git refspec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">Git refspec 与远程标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.1.</span> <span class="nav-text">refspec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.2.</span> <span class="nav-text">远程标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.3.</span> <span class="nav-text">远程分支删除本地分支如何同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.4.</span> <span class="nav-text">查看远程分支log记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.5.</span> <span class="nav-text">.get/config 观察练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">Git gc</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dgqg1223</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
