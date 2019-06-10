@@ -1,0 +1,103 @@
+1.上传到/usr/local/tmp
+2.解压压缩包
+tar zxvf jdk-7u80-linux-x64.tar.gz
+3.删除tar包
+4.解压后的文件夹复制到 /usr/local/jdk7
+5.配置环境变量
+cd /etc/
+vim profile
+```
+#export PATH User LOGNAME MAIL HOSTNAME HISTSIZE HISTICONTROL
+export JAVA_HOME=/usr/local/jdk7
+export PATH=$JAVA_HOME/bin:$PATH
+#1.7版本可以不配CLASSPATH
+#export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+```
+6.使配置生效（解析配置文件，重启操作系统也可以）
+source profile
+7.写helloword测试jdk是否生效
+
+
+tomcat
+```
+#export PATH User LOGNAME MAIL HOSTNAME HISTSIZE HISTICONTROL
+export TOMCAT_HOME=/usr/local/tomcat
+export CATALINA_HOME=/usr/local/tomcat
+```
+进入tomcat目录,启动tomcat
+./startup.sh
+./startup.sh & tailf /usr/local/tomcat/logs/catalina.out
+
+修改防火墙开放8080端口
+vim /etc/sysconfig/iptables
+复制22端口配置 将22修改为8080（8080:9000 这种写法是8080-9000端口全部放行）
+
+在/etc/sysconfig下的都是linux中系统的服务
+重启防火墙服务
+service iptables restart 
+
+
+
+mysql
+mysql 需要有对文件夹操作的权限，所以我们为mysql创建用户组和用户
+创建linux用户组 命名为mysql
+groupadd mysql
+创建用户并指定所属用户组为mysql
+useradd -r -g mysql mysql
+为mysql用户组设置操作文件夹的权限(在/usr/local/mysql路径下，表示该目录下的操作权限)
+chgrp -R mysql .
+为mysql用户设置具有操作本级目录的权限
+chown -R mysql .
+上面两个命令合并
+chown -R mysql:mysql ./
+
+删除默认自带的mysql全局配置文件（/etc/my.cnf 为mysql全局配置文件）
+ls /etc/my.cnf
+rm /etc/my.cnf
+ls /etc/my.cnf
+
+解压版需要配置linux的mysql服务
+初始化数据库（执行初始化脚本 --user=之前建立的用户名）
+./scripts/mysql_install_db --user=mysql
+
+复制my.cnf 文件
+cp support-files/my-default.cnf /etc/my.cnf
+
+复制启动文件到linux自启动文件夹中
+cp support-files/mysql.server /etc/rc.d/init.d/mysql
+
+解决安装后无法使用mysql 登录命令 添加软链接
+ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
+
+mysql忘记root密码
+进入/etc/my.cnf 在[mysql]下添加skip-grant-tables 启动安全模式
+命令：vi /etc/my.cnf
+重启服务：
+命令：service mysql restart
+登录mysql，输入密码时直接回车
+命令:  mysql -u root -p
+进入到mysql后，先使用mysql数据库
+命令：use mysql
+修改密码
+命令： update user set password= passworD ("smallming") where user='root';
+刷新权限
+命令： flush privileges;
+退出MySql编辑模式
+命令：exit
+
+
+
+设置用户具有远程登陆访问的权限
+进入mysql命令行
+# mysql -u root -p
+执行权限赋予命令
+#GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'smallming' WITH GRANT OPTION;?
+刷新权限
+flush privileges;
+退出
+# quit
+
+
+在mysql 中 可以使用source 运行.sql文件
+source /usr/loacl/tmp/demo.sql
+

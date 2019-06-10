@@ -1,0 +1,140 @@
+环境：
+CentOS-6.5-x86_64
+nginx_1.10.0
+
+
+#查看是否安装nginx
+ps -ef | grep nginx
+
+#新增用户
+useradd leyou
+
+#修改leyou密码（可选）
+passwd leyou
+
+#切换leyou用户创建时生成的home文件夹
+cd /home/leyou/
+
+#上传nginx 安装包到/home/leyou/
+
+#解压 
+tar xvf nginx-1.10.0.tar.gz
+
+#删除  nginx-1.10.0.tar.gz
+rm -rf nginx-1.10.0.tar.gz
+
+#进入解压后的文件夹
+cd nginx-1.10.0/
+
+#配置安装目录 指定安装在/opt/nginx 目录下 prefix文件目录 sbin二进制脚本文件
+./configure --prefix=/opt/nginx --sbin-path=/usr/bin/nginx
+
+#安装相关依赖
+yum install -y gcc gcc-c++
+yum install -y pcre pcre-devel
+yum install -y zlib zlib-devel
+yum install -y openssl openssl-devel
+yum install -y pcre-devel zlib-devel openssl-devel 
+参考：https://blog.csdn.net/j080624/article/details/79240685
+
+
+#编译与安装
+make && make install
+
+#启动 nginx
+nginx
+
+#查看是否启动（查看进程）
+ps - ef | grep nginx
+
+#关闭防火墙（设置开机不启动，需要重启）
+chkconfig iptables off
+
+#关闭防火墙（临时关闭）
+service iptables stop
+
+#此时客户机通过浏览器访问ip地址可以看到nginx欢迎界面（界面文件位置/opt/nginx/html/index.html）
+
+#反向代理设置
+修改/opt/nginx/conf/nginx.conf
+```
+    server {
+        listen       80;
+        server_name  manage.leyou.com;
+
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        location / {
+			proxy_pass http://192.168.228.1:9001;
+			proxy_connect_timeout 600;
+			proxy_read_timeout 600;
+        }
+    }
+    server {
+        listen       80;
+        server_name  api.leyou.com;
+
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        location / {
+			proxy_pass http://192.168.228.1:10010;
+			proxy_connect_timeout 600;
+			proxy_read_timeout 600;
+        }
+    }
+```
+#重新加载配置文件
+nginx -s reload
+如提示错误检查conf 格式是否配置正确
+
+
+
+#vue 修改配置文件 config/index.js host 地址为0.0.0.0
+#vue 修改配置文件 buid/webpack.dev.conf.js
+```
+// these devServer options should be customized in /config/index.js
+  devServer: {
+    clientLogLevel: 'warning',
+    historyApiFallback: {
+      rewrites: [
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+      ],
+    },
+    hot: true,
+    contentBase: false, // since we use CopyWebpackPlugin.
+    compress: true,
+    host: HOST || config.dev.host,
+    port: PORT || config.dev.port,
+    open: config.dev.autoOpenBrowser,
+    overlay: config.dev.errorOverlay
+      ? { warnings: false, errors: true }
+      : false,
+    publicPath: config.dev.assetsPublicPath,
+    proxy: config.dev.proxyTable,
+    quiet: true, // necessary for FriendlyErrorsPlugin
+    watchOptions: {
+      poll: config.dev.poll,
+    },
+    disableHostCheck: true
+  },
+```
+#重新运行vue
+npm run dev
+
+测试
+# linux 下测试(相当于发送浏览器请求)
+curl -XGET http://10.80.5.120:9001
+
+#修改hosts文件 解析域名
+
+#若不成功关闭客户机防火墙
+
+
+
+
+
+

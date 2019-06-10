@@ -1,0 +1,33 @@
+touch 创建空文件
+touch Demo.java
+
+cat 查看文件内容(全部)
+cat Demo.java
+
+head 查看文件内容（默认前10行）
+#查看前2行
+head -2 Demo.java
+#查看前10行
+head Demo.java
+
+tail 查看文件内容（默认后10行）
+#查看后两行
+tail -2 Deml.java
+
+tailf 动态查看文件内容（默认后10行）
+#常用于显示日志tomcat文件功能
+tailf Demo.xml
+
+cp 复制文件
+cp -r 复制文件夹
+
+rm -rf 删除文件夹并且不 确认提示
+
+tar zxvf
+x : 从 tar 包中把文件提取出来
+z : 表示 tar 包是被 gzip 压缩过的，所以解压时需要用 gunzip 解压
+v : 显示详细信息
+f xxx.tar.gz : 指定被处理的文件是 xxx.tar.gz
+
+clear
+ifconfig
